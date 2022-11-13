@@ -1,0 +1,1023 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-03-02T21:19:25+0200">
+<meta name="keywords" content="iocla,laboratoare,laborator-01">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-01">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01">
+<link rel="stylesheet" type="text/css" href="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-01","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_01reprezentarea_numerelor_operatii_pe_biti_si_lucru_cu_memoria">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</h1>
+<div class="level1">
+
+<p>
+Pentru reprezentarea informațiilor (instrucțiuni și date), 
+calculatoarele folosesc sistemul binar (baza 2). În cazul scrierii 
+programelor în limbaj de asamblare este preferat sistemul hexazecimal 
+(baza 16), pentru că scutește programatorul de scrierea șirurilor lungi 
+de 1 și 0, iar conversia din/în binar se poate face mult mai ușor decât 
+în cazul sistemului zecimal (baza 10).
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="sistemele_binar_si_hexazecimal">Sistemele binar și hexazecimal</h2>
+<div class="level2">
+
+<p>
+Înainte de a începe lucrul cu limbajul de asamblare, este necesar să ne 
+familiarizăm cu sistemele binar și hexazecimal și cu modalitățile de 
+conversie între ele.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru reprezentarea numerelor în binar vom folosi prefixul 0b, iar pentru cele în hexazecimal vom folosi 0x. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit3" id="sistemul_binar">Sistemul binar</h3>
+<div class="level3">
+
+<p>
+În <strong>sistemul binar</strong> (baza 2), valorile sunt reprezentate 
+ca un șir de 0 și 1. Fiecare cifră din șir reprezintă un bit, iar un 
+grup de 8 biți formează un octet (byte). Un grup de 4 biți poartă 
+denumirea de <strong>nibble</strong>, sau <strong>half-byte</strong>.
+</p>
+
+</div>
+
+<h4 id="operatii_cu_valori_reprezentate_in_binar">Operații cu valori reprezentate în binar</h4>
+<div class="level4">
+
+</div>
+
+<h5 id="operatii_aritmetice">Operații aritmetice</h5>
+<div class="level5">
+
+<p>
+<a href="https://www.tutorialspoint.com/computer_logical_organization/binary_arithmetic.htm" class="urlextern" title="https://www.tutorialspoint.com/computer_logical_organization/binary_arithmetic.htm" rel="nofollow">Ghid pentru operații aritmetice.</a>
+</p>
+
+</div>
+
+<h4 id="operatii_logice">Operații logice</h4>
+<div class="level4">
+
+</div>
+
+<h5 id="operatori_pe_valori_binare">Operatori pe valori binare</h5>
+<div class="level5">
+<ol>
+<li class="level1"><div class="li"> <strong>Inversare (NOT)</strong>: se inversează fiecare bit. Exemplu: INV(0b10011010) = 0b01100101</div>
+</li>
+<li class="level1"><div class="li"> <strong>Și logic (AND)</strong>: se efectuează operația 'și' între biții de pe aceleași poziții din operanzi. Exemplu: 0b1001 AND 0b0111 = 0b0001</div>
+</li>
+<li class="level1"><div class="li"> <strong>Sau logic (OR)</strong>: se efectuează operația 'sau' între biții de pe aceleași poziții din operanzi. Exemplu: 0b1001 OR 0b0111 = 0b1111</div>
+</li>
+<li class="level1"><div class="li"> <strong>Sau exclusiv (XOR)</strong>:
+ dacă biții de pe aceleași poziții din operanzi au valori egale, bitul 
+rezultat are valoarea 0, altfel are valoarea 1. Exemplu: 0b1001 XOR 
+0b0111 = 0b1110</div>
+</li>
+</ol>
+
+</div>
+
+<h5 id="deplasari_shifts">Deplasări (Shifts)</h5>
+<div class="level5">
+
+<p>
+<strong>Deplasări logice</strong>
+</p>
+
+<p>
+Deplasările logice dreapta/stânga presupun mutarea cu o poziție a 
+fiecărui bit. Cum rezultatul trebuie să fie pe același număr de biți ca 
+valoarea inițială, primul bit este pierdut, iar spațiul gol este 
+completat cu bitul 0.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/_detail/iocla/laboratoare/left-logical-shift.png?id=iocla%3Alaboratoare%3Alaborator-01" class="media" title="iocla:laboratoare:left-logical-shift.png"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/left-logical-shift.png" class="media" title="Deplasare logică la stânga" alt="Deplasare logică la stânga"></a>
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/_detail/iocla/laboratoare/right-logical-shift.png?id=iocla%3Alaboratoare%3Alaborator-01" class="media" title="iocla:laboratoare:right-logical-shift.png"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/right-logical-shift.png" class="media" title="Deplasare logică la dreapta" alt="Deplasare logică la dreapta"></a>
+</p>
+
+<p>
+Pentru explicații legate de operațiile pe biți în C urmăriți ghidul de la adresa <a href="https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/" class="urlextern" title="https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/" rel="nofollow">Operații pe biți în C</a>.
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="sistemul_hexazecimal">Sistemul hexazecimal</h3>
+<div class="level3">
+
+<p>
+În <strong>sistemul hexazecimal</strong> (baza 16), valorile sunt 
+reprezentate sub forma unui șir de caractere din intervalul '0'-'9' sau 
+'a'-'f'. Un octet este format din două astfel de caractere, deci fiecare
+ caracter corespunde unui grup de 4 biți (un nibble).
+</p>
+
+</div>
+
+<h4 id="conversia_din_zecimal_in_binarhexazecimal">Conversia din zecimal în binar/hexazecimal</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"> Se împarte succesiv numărul la numărul bazei (2 sau 16) și se rețin resturile</div>
+</li>
+<li class="level1"><div class="li"> Când câtul împărțirii devine 0, se scriu resturile în ordine inversă.</div>
+</li>
+<li class="level1"><div class="li"> În cazul bazei 16, atunci când restul este mai mare decât 9 se folosesc literele a-f (10=a, 15=f)</div>
+</li>
+</ul>
+
+</div>
+
+<h5 id="exempluconversia_numarului_0xd9b1_in_zecimal">Exemplu: conversia numărului 0xD9B1 în zecimal</h5>
+<div class="level5">
+
+<p>
+0xD9B1 = 1 * 16 ^ 0 + 11 * 16 ^ 1 + 9 * 16 ^ 2 + 13 * 16 ^ 3 = 55729
+</p>
+
+</div>
+
+<h4 id="conversia_intre_binar_si_hexazecimal">Conversia intre binar și hexazecimal</h4>
+<div class="level4">
+
+<p>
+După cum am precizat anterior, o cifră din cadrul unui număr în 
+hexazecimal corespunde unui grup de 4 biți (un nibble). Astfel, pentru a
+ converti un număr din hexazecimal în binar este suficient să 
+transformăm fiecare cifră în grupul de 4 biți echivalent.
+</p>
+
+</div>
+
+<h5 id="exempluconversia_numarului_0xd9b1_in_binar">Exemplu: Conversia numărului 0xD9B1 în binar</h5>
+<div class="level5">
+<ul>
+<li class="level1"><div class="li"> 0x1 = 0b0001</div>
+</li>
+<li class="level1"><div class="li"> 0xB = 0b1011</div>
+</li>
+<li class="level1"><div class="li"> 0x9 = 0b1001</div>
+</li>
+<li class="level1"><div class="li"> 0xD = 0b1101</div>
+</li>
+</ul>
+
+<p>
+Astfel, numărul obținut în binar este <strong>0b1101100110110001</strong>.
+</p>
+
+<p>
+Operația inversă, conversia din binar în hexazecimal se poate face 
+convertind fiecare grup de 4 biți în cifra corespunzătoare în 
+hexazecimal.
+</p>
+
+</div>
+
+<h4 id="la_ce_utilizam_reprezentarea_in_baza_16">La ce utilizăm reprezentarea în baza 16?</h4>
+<div class="level4">
+
+<p>
+Sistemul hexazecimal este utilizat pentru a reprezenta adresele la care 
+se află datele în memorie și pentru a vizualiza aceste date într-un mod 
+mai ușor de interpretat decât o secvență compusă doar din 0 și 1. 
+Imaginea de mai jos oferă un exemplu în acest sens:
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/_detail/iocla/laboratoare/hex-view.png?id=iocla%3Alaboratoare%3Alaborator-01" class="media" title="iocla:laboratoare:hex-view.png"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/hex-view.png" class="media" title="Hartă memorie" alt="Hartă memorie" width="700" height="350"></a>
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="reprezentarea_tipurilor_de_date">Reprezentarea tipurilor de date</h3>
+<div class="level3">
+
+<p>
+În memoria unui calculator o valoare este memorată pe un număr fix de 
+biți. În funcție de arhitectură fiecare procesor poate accesa un număr 
+maxim de biți în cadrul unei operații, acest număr de biți reprezintă 
+dimensiunea cuvântului (<strong>word size</strong>).
+</p>
+
+<p>
+Dimensiunile tipurilor de date uzuale folosite în C sunt dependente atât
+ de procesor, cât și de platforma cu ajutorul căreia a fost compilat 
+programul (sistem de operare, compilator). În tabelul de mai jos sunt 
+prezentate dimensiunile tipurilor de date pe un procesor cu dimensiunea 
+cuvântului arhitecturii de 32 de biți, în cazul în care programul este 
+compilat folosind gcc, sub Linux.
+</p>
+
+<p>
+În partea stângă avem adresele din memorie unde se află date. La adresa <strong>0x0009FA08</strong> primii 4 octeți începând cu offset-ul <strong>0x02</strong> sunt <strong>0x01</strong>, <strong>0x00</strong>, <strong>0xFF</strong>, <strong>0xFF</strong>.
+ Aceștia pot reprezenta un întreg pe 4 octeți, 4 caractere, 2 întregi pe
+ 2 octeți. Folosind baza 16 putem să interpretăm datele reușind astfel 
+să intuim ce ar putea să reprezinte acestea.
+</p>
+<div class="table sectionedit6"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0">Tip de date</th><th class="col1">Număr biți</th><th class="col2">Număr octeți</th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign">char       </td><td class="col1 leftalign">8         </td><td class="col2 leftalign">1           </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign">short      </td><td class="col1 leftalign">16        </td><td class="col2 leftalign">2           </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign">int        </td><td class="col1 leftalign">32        </td><td class="col2 leftalign">4           </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign">long       </td><td class="col1 leftalign">32        </td><td class="col2 leftalign">4           </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0 leftalign">long long  </td><td class="col1 leftalign">64        </td><td class="col2 leftalign">8           </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0 leftalign">pointer    </td><td class="col1 leftalign">32        </td><td class="col2 leftalign">4           </td>
+	</tr>
+</tbody></table></div>
+
+</div>
+
+<h3 class="sectionedit7" id="ordinea_de_reprezentare_a_numerelor_mai_mari_de_un_octet_little-endian_vs_big-endian">Ordinea de reprezentare a numerelor mai mari de un octet (Little-Endian vs Big-Endian)</h3>
+<div class="level3">
+
+<p>
+Pentru reprezentarea valorilor mai mari de un octet există două metode posibile, ambele folosite în practică:
+</p>
+<ul>
+<li class="level1"><div class="li"> Little-Endian: cel mai puțin 
+semnificativ octet este memorat primul(octeții sunt memorați în ordine 
+inversă). Acest model este folosit de familia de procesoare Intel x86.</div>
+</li>
+<li class="level1"><div class="li"> Big-Endian: cel mai semnificativ octet este memorat primul.</div>
+</li>
+</ul>
+
+<p>
+<strong>Exemplu</strong>: Dorim să stocăm valoarea 0x4a912480 în memorie pe 32 de biți (4 octeți), începând cu adresa 0x100, folosind cele două metode:
+</p>
+<div class="table sectionedit8"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0 leftalign">Metoda       </th><th class="col1">Adresa 0x100</th><th class="col2">Adresa 0x101</th><th class="col3">Adresa 0x102</th><th class="col4">Adresa 0x103</th>
+	</tr>
+	<tr class="row1">
+		<td class="col0">Little-Endian</td><td class="col1 leftalign">0x80        </td><td class="col2 leftalign">0x24        </td><td class="col3 leftalign">0x91        </td><td class="col4 leftalign">0x4a        </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign">Big-Endian   </td><td class="col1 leftalign">0x4a        </td><td class="col2 leftalign">0x91        </td><td class="col3 leftalign">0x24        </td><td class="col4 leftalign">0x80        </td>
+	</tr>
+</tbody></table></div>
+
+</div>
+
+<h2 class="sectionedit9" id="pointeri_in_c">Pointeri în C</h2>
+<div class="level2">
+
+<p>
+În limbajul C un pointer este o variabilă a cărei valoare este adresa 
+unei alte variabile. Ne putem gândi la un pointer ca un intermediar, și 
+anume o variabilă care indică către o locație finală sau către un alt 
+intermediar după cum se poate vedea în imaginea și codul de mai jos.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/_detail/iocla/laboratoare/cpluspointer020.png?id=iocla%3Alaboratoare%3Alaborator-01" class="media" title="iocla:laboratoare:cpluspointer020.png"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/cpluspointer020.png" class="media" title="Simple and double pointer" alt="Simple and double pointer"></a>
+</p>
+<pre class="code cpp"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw4">int</span> v<span class="sy4">;</span>
+    <span class="kw4">int</span> <span class="sy2">*</span>p<span class="sy4">;</span>  <span class="coMULTI">/* pointer la un întreg pe 32 biți */</span>
+    <span class="kw4">int</span> <span class="sy2">**</span>pp<span class="sy4">;</span>  <span class="coMULTI">/* pointer la un pointer care conține conține adresa unui întreg pe 32 biți */</span>
+&nbsp;
+    <span class="coMULTI">/* Pentru a accesa adresa unei variabile în C se folosește operatorul &amp;(referențiere) */</span>
+    p <span class="sy1">=</span> <span class="sy3">&amp;</span>v<span class="sy4">;</span>  <span class="coMULTI">/* p conține adresa valorii v */</span>
+    pp <span class="sy1">=</span> <span class="sy3">&amp;</span>p<span class="sy4">;</span>  <span class="coMULTI">/* pp conține adresa adresei valorii v */</span>
+&nbsp;
+    v <span class="sy1">=</span> <span class="nu0">69</span><span class="sy4">;</span>
+    <span class="coMULTI">/* Pentru a accesa valoarea de la adresa memorată de un pointer se folosește operatorul *(dereferențiere) */</span>
+    <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"v(%d) - *p(%d) - **pp(%d)<span class="es1">\n</span>"</span>, v, <span class="sy2">*</span>p, <span class="sy2">*</span><span class="br0">(</span><span class="sy2">*</span>pp<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>  <span class="coMULTI">/* se va afișa v(69) - *p(69) - **pp(69) */</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">}</span></pre>
+
+</div>
+
+<h3 class="sectionedit10" id="avantaje_pointeri">Avantaje pointeri</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> pointerii sunt folosiți la crearea 
+de structuri de date complexe precum liste înlănțuite, arbori, grafuri, 
+tabele de dispersie, etc.</div>
+</li>
+<li class="level1"><div class="li"> pointerii se folosesc pentru a 
+transfera informații între funcții diferite sau apeluri recursive fără a
+ folosi variabile globale</div>
+</li>
+<li class="level1"><div class="li"> folosind pointeri putem să (re)alocăm memorie dinamic</div>
+</li>
+<li class="level1"><div class="li"> putem să avem ca parametri pentru funcții alte funcții, șiruri de caractere, structuri de date complexe</div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit11" id="dezavantaje_pointeri">Dezavantaje pointeri</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> un pointer care nu este inițializat, dar este folosit într-un program duce la <strong>segmentation fault</strong> prin accesarea unei zone de memorie restricționate</div>
+</li>
+<li class="level1"><div class="li"> eliberarea memoriei alocate dinamic se face manual de către programator</div>
+</li>
+<li class="level1"><div class="li"> pentru a accesa o valoare este nevoie de dereferențiere, operație care este mai lentă decât accesarea directă a valorii</div>
+</li>
+</ul>
+
+<p>
+În C se poate defini un pointer către oricare dintre tipurile de date care există în limbaj cât și pentru <strong>void</strong>. Un void pointer diferă de un pointer către un tip de date explicit prin faptul că un void pointer <strong>NU</strong>
+ poate fi folosit în operații cu pointeri, void neavând o dimensiune 
+clară. Un exemplu de bază unde se folosesc pointerii și operațiile cu 
+pointeri este alocarea și parcurgerea unui tablou de valori:
+</p>
+<pre class="code cpp"><span class="co2">#include &lt;stdio.h&gt;</span>
+<span class="co2">#include &lt;stdlib.h&gt;</span>
+&nbsp;
+<span class="co2">#define ARR_LENGTH 5</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+   <span class="kw4">int</span> <span class="sy2">*</span>arr, i<span class="sy4">;</span>
+&nbsp;
+   arr <span class="sy1">=</span> <span class="br0">(</span><span class="kw4">int</span> <span class="sy2">*</span><span class="br0">)</span><span class="kw3">malloc</span><span class="br0">(</span><span class="kw3">sizeof</span><span class="br0">(</span><span class="kw4">int</span><span class="br0">)</span> <span class="sy2">*</span> ARR_LENGTH<span class="br0">)</span><span class="sy4">;</span>
+   <span class="co1">// arr = (int *)calloc(ARR_LENGTH, sizeof(int));</span>
+&nbsp;
+   <span class="kw1">for</span> <span class="br0">(</span>i <span class="sy1">=</span> <span class="nu0">0</span><span class="sy4">;</span> i <span class="sy1">&lt;</span> ARR_LENGTH<span class="sy4">;</span> <span class="sy2">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+       <span class="coMULTI">/*
+        * arr + i iterează prin adresele fiecărui element din tablou însă adresa arr + i nu crește cu i ci cu i * sizeof(int), arr fiind un pointer la int
+        * în C nu se vede și nu este necesară această operație dar mai târziu în limbajul de asamblare va fi necesar 
+        */</span>
+       <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"arr[%d] = %d: "</span>, i, <span class="sy2">*</span><span class="br0">(</span>arr <span class="sy2">+</span> i<span class="br0">)</span><span class="br0">)</span><span class="sy4">;</span>
+   <span class="br0">}</span>
+&nbsp;
+   <span class="kw3">free</span><span class="br0">(</span>arr<span class="br0">)</span><span class="sy4">;</span>
+   <span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Pointerii oferă o flexibilitate mare în ce privește accesul la memorie. 
+Mai jos este un exemplu în acest sens care verifică dacă un sistem este 
+little sau big endian, folosind cast între diverse tipuri de pointeri.
+</p>
+<pre class="code cpp"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span>
+<span class="br0">{</span>
+    <span class="kw4">int</span> v <span class="sy1">=</span> <span class="nu12">0x00000001</span><span class="sy4">;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">char</span> <span class="sy2">*</span>first_byte <span class="sy1">=</span> <span class="br0">(</span><span class="kw4">unsigned</span> <span class="kw4">char</span> <span class="sy2">*</span><span class="br0">)</span><span class="sy3">&amp;</span>v<span class="sy4">;</span>
+&nbsp;
+    <span class="kw1">if</span> <span class="br0">(</span><span class="sy2">*</span>first_byte <span class="sy1">==</span> <span class="nu12">0x01</span><span class="br0">)</span>
+        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"little-endian<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy4">;</span>
+    <span class="kw1">else</span>
+        <span class="kw3">printf</span><span class="br0">(</span><span class="st0">"big-endian<span class="es1">\n</span>"</span><span class="br0">)</span><span class="sy4">;</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy4">;</span>
+<span class="br0">}</span></pre>
+
+</div>
+
+<h2 class="sectionedit12" id="exercitii">Exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant">
+În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - (<a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>). Repository-ul este clonat pe desktop-ul <a href="https://ocw.cs.pub.ro/courses/iocla/utile#masina_virtuala_de_linux" class="urlextern" title="https://ocw.cs.pub.ro/courses/iocla/utile#masina_virtuala_de_linux" rel="nofollow">mașinii virtuale</a>. Pentru a-l actualiza, folosiți comanda <code>git pull origin master</code>
+ din interiorul directorului în care se află repository-ul 
+(~/Desktop/iocla).Recomandarea este să îl actualizați cât mai frecvent, 
+înainte să începeți lucrul, pentru a vă asigura că aveți versiunea cea 
+mai recentă. Dacă doriți să descărcați repository-ul în altă locație, 
+folosiți comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>. Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com" rel="nofollow">Git Immersion</a>.
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit13" id="conversii">1. Conversii</h3>
+<div class="level3">
+
+<p>
+Efectuați următoarele conversii între sisteme de numerație:
+</p>
+
+<p>
+a. Din decimal în binar și hexazecimal:
+</p>
+<ul>
+<li class="level1"><div class="li"> 121</div>
+</li>
+<li class="level1"><div class="li"> 18446</div>
+</li>
+</ul>
+
+<p>
+b. Convertiți în zecimal:
+</p>
+<ul>
+<li class="level1"><div class="li"> 0b1100010111010010</div>
+</li>
+<li class="level1"><div class="li"> 0xBB29</div>
+</li>
+</ul>
+
+<p>
+c. Din hexazecimal în binar:
+</p>
+<ul>
+<li class="level1"><div class="li"> 0x5E</div>
+</li>
+<li class="level1"><div class="li"> 0x4A01</div>
+</li>
+</ul>
+
+<p>
+d. Din binar în hexazecimal:
+</p>
+<ul>
+<li class="level1"><div class="li"> 0b01111101</div>
+</li>
+<li class="level1"><div class="li"> 0b1000110000011111</div>
+</li>
+</ul>
+
+<p>
+</p><p></p><div class="notetip"> În rezolvarea exercițiilor următoare NU
+ aveți voie să modificați semnătura funcțiilor pe care trebuie să le 
+implementați. Veți porni de la un fișier inițial și puteți adăuga 
+oricâte funcții și fișiere auxiliare considerați, dar aveți în vedere că
+ dacă adăugați fișiere noi va trebui să modificați Makefile-ul, să 
+creați un nou Makefile sau să compilați manual. Recomandarea este să 
+utilizați fișierul pus deja la dispoziția voastră fără a adăuga altele 
+noi.
+Pentru compilare și execuție puteți folosi:
+make build
+make run
+make clean(opțional, pentru a șterge fișierele obiect și executabilul) 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit14" id="lungime_si_egalitate_cu_operatii_pe_biti">2. Lungime și egalitate cu operații pe biți</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>len_xor.c</strong> aflat în directorul <strong>2-len_xor</strong>.
+</p>
+
+<p>
+Pentru un șir de caractere dat, să se afișeze:
+</p>
+<ul>
+<li class="level1"><div class="li"> lungimea șirului de caractere</div>
+</li>
+<li class="level1"><div class="li"> adresa fiecărui caracter de pe 
+poziția i care este egal cu caracterul de poziția i + 2^i (dacă i + 2^i 
+depășește dimensiunea șirului de caractere se va folosi operația modulo)</div>
+</li>
+</ul>
+
+<p>
+Folosiți cât de mult posibil operații cu pointeri și operații pe biți!
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Nu folosiți în rezolvare funcții 
+precum strlen, sizeof, pow, si nu verificați egalitatea folosind ==. De 
+asemenea, nu accesați elementele șirului sub forma s[i]. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Pentru șirul de caractere “aac”:
+<p></p>
+
+<p>
+length = 3
+Address of a: 0x564c364482a0
+Address of a: 0x564c364482a1
+</p>
+
+<p>
+Pentru șirul de caractere “ababababacccbacbacbacbacbabc”:
+</p>
+
+<p>
+length = 28
+Address of b: 0x563f0da6f2a1
+Address of a: 0x563f0da6f2a2
+Address of c: 0x563f0da6f2a9
+Address of a: 0x563f0da6f2b0
+Address of b: 0x563f0da6f2b2
+Address of b: 0x563f0da6f2b5
+Address of c: 0x563f0da6f2b7
+Address of a: 0x563f0da6f2b9
+</p>
+
+<p>
+<strong>Adresele de mai sus sunt orientative!</strong> 
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit15" id="oglindirea_unui_sir_de_caractere">3. Oglindirea unui șir de caractere</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>mirror.c</strong> aflat în directorul <strong>3-mirror</strong>.
+</p>
+
+<p>
+Folosind operații cu pointeri implementați un program în C care inversează un șir de caractere. Funcția <code>mirror</code> trebuie să realizeze rotirea datelor din șirul de caractere <strong>in-place</strong> (la ieșirea din funcție, șirul dat ca intrare va conține șirul inversat).
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Nu accesați elementele șirului sub forma s[i]. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip">
+mirror(“AnaAreMere”) = “ereMerAanA”
+<p></p>
+
+<p>
+mirror(“asdfghjl”) = “ljhgfdsa”
+</p>
+
+<p>
+mirror(“qwerty”) = “ytrewq” 
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit16" id="rotatii">4. Rotații</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul rotations.c aflat în directorul 4-rotations.
+</p>
+
+<p>
+Implementați în C rotație stânga și rotație dreapta pentru numere întregi pe 32 de biți.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Operația de rotire (numită și deplasare
+ circulară) este similară cu cea de deplasare, singura diferență fiind 
+aceea că spațiul gol generat de deplasare este înlocuit cu bitul 
+eliminat.
+<p></p>
+
+<p>
+Exemplu rotație <strong>stânga</strong> cu <strong>un</strong> bit:
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/_detail/iocla/laboratoare/left-logical-rotation.png?id=iocla%3Alaboratoare%3Alaborator-01" class="media" title="iocla:laboratoare:left-logical-rotation.png"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/left-logical-rotation.png" class="media" title="Rotație logică la stânga" alt="Rotație logică la stânga"></a>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+rotate_left(0x80000000, 1) = 1
+rotate_right(0x00000001, 16) = 65536 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit17" id="par_binar_si_impar_hexa">5. Par binar și impar hexa</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul odd_even.c aflat în directorul 5-odd_even.
+</p>
+
+<p>
+Să se parcurgă un vector de întregi pe 32 de biți folosind operații cu 
+pointeri și să se afișeze în binar numerele pare și în hexazecimal 
+numerele impare.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+În rezolvare folosiți operații pe biți oriunde este posibil!
+
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Pentru vectorul: 214, 71, 84, 134, 86, programul va afișa:
+<p></p>
+<pre class="code">0b11010110
+0x00000047
+0b01010100
+0b10000110
+0b01010110</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit18" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-01-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-01-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_100243065262b0bf443684c" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_75262942762b0bf443a6a3" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_01reprezentarea_numerelor_operatii_pe_biti_si_lucru_cu_memoria">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#sistemele_binar_si_hexazecimal">Sistemele binar și hexazecimal</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#sistemul_binar">Sistemul binar</a></div>
+<ul class="toc">
+<li class="level4"><div class="li"><a href="#operatii_cu_valori_reprezentate_in_binar">Operații cu valori reprezentate în binar</a></div></li>
+<li class="level4"><div class="li"><a href="#operatii_logice">Operații logice</a></div></li>
+</ul>
+</li>
+<li class="level3"><div class="li"><a href="#sistemul_hexazecimal">Sistemul hexazecimal</a></div>
+<ul class="toc">
+<li class="level4"><div class="li"><a href="#conversia_din_zecimal_in_binarhexazecimal">Conversia din zecimal în binar/hexazecimal</a></div></li>
+<li class="level4"><div class="li"><a href="#conversia_intre_binar_si_hexazecimal">Conversia intre binar și hexazecimal</a></div></li>
+<li class="level4"><div class="li"><a href="#la_ce_utilizam_reprezentarea_in_baza_16">La ce utilizăm reprezentarea în baza 16?</a></div></li>
+</ul>
+</li>
+<li class="level3"><div class="li"><a href="#reprezentarea_tipurilor_de_date">Reprezentarea tipurilor de date</a></div></li>
+<li class="level3"><div class="li"><a href="#ordinea_de_reprezentare_a_numerelor_mai_mari_de_un_octet_little-endian_vs_big-endian">Ordinea de reprezentare a numerelor mai mari de un octet (Little-Endian vs Big-Endian)</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#pointeri_in_c">Pointeri în C</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#avantaje_pointeri">Avantaje pointeri</a></div></li>
+<li class="level3"><div class="li"><a href="#dezavantaje_pointeri">Dezavantaje pointeri</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#exercitii">Exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#conversii">1. Conversii</a></div></li>
+<li class="level3"><div class="li"><a href="#lungime_si_egalitate_cu_operatii_pe_biti">2. Lungime și egalitate cu operații pe biți</a></div></li>
+<li class="level3"><div class="li"><a href="#oglindirea_unui_sir_de_caractere">3. Oglindirea unui șir de caractere</a></div></li>
+<li class="level3"><div class="li"><a href="#rotatii">4. Rotații</a></div></li>
+<li class="level3"><div class="li"><a href="#par_binar_si_impar_hexa">5. Par binar și impar hexa</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-01.txt · Last modified: 2022/03/02 21:19 by teodor_stefan.dutu          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2001%20Reprezentarea%20numerelor,%20opera%C8%9Bii%20pe%20bi%C8%9Bi%20%C8%99i%20lucru%20cu%20memoria%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

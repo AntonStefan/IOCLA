@@ -1,0 +1,1080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 11: Gestiunea bufferelor. Buffer overflow    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-05-20T15:40:28+0300">
+<meta name="keywords" content="iocla,laboratoare,laborator-11">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-11">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11">
+<link rel="stylesheet" type="text/css" href="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-11","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_11gestiunea_bufferelor_buffer_overflow">Laborator 11: Gestiunea bufferelor. Buffer overflow</h1>
+<div class="level1">
+
+<p>
+Acest laborator își propune prezentarea conceptului de buffere în C și 
+limbaj de asamblare împreună cu operațiile specifice acestora,
+dar și vulnerabilitățile pe care acestea le au și cum pot ele să fie 
+exploatate de un potențial atacator prin folosirea unui program
+cu scopul de a ataca un sistem sau de a obține informații la care în mod
+ normal nu ar avea acces.
+</p>
+
+<p>
+Obiective:
+</p>
+<ul>
+<li class="level1"><div class="li"> Prezentarea conceptelor de buffer și buffer overflow</div>
+</li>
+<li class="level1"><div class="li"> Exemple de atacuri de tip buffer overflow</div>
+</li>
+<li class="level1"><div class="li"> Prezentarea unor modalități de securizare a programelor pentru evitarea atacurilor de tip buffer overflow</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit2" id="buffer_buffer_overflow">Buffer. Buffer overflow</h2>
+<div class="level2">
+
+</div>
+
+<h3 class="sectionedit3" id="ce_este_un_buffer">Ce este un buffer?</h3>
+<div class="level3">
+
+<p>
+Un buffer este o zonă de memorie definită printr-o adresă de start și o dimensiune. Fie N dimensiunea bufferului,
+adică numărul de elemente. Dimensiunea totală a bufferului este N x dimensiunea unui element.
+Un șir de caractere (<em>string</em>) este un caz particular de buffer.
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="ce_este_un_buffer_overflow">Ce este un buffer overflow?</h3>
+<div class="level3">
+
+<p>
+Un buffer overflow este un eveniment care se produce atunci când în parcurgerea unui buffer se depășește limita superioară,
+adică poziția ultimului element (v[N - 1]). Un buffer overflow este un caz particular de <em>index out of bounds</em>,
+în care vectorul poate fi accesat folosind și indecși negativi. Multe 
+funcții din C nu verifică dimensiunea bufferelor cu care lucrează,
+acestea cauzând erori de tip buffer overflow atunci când sunt apelate. 
+Câteva exemple de astfel de funcții sunt:
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="http://www.cplusplus.com/reference/cstring/memcpy/" class="urlextern" title="http://www.cplusplus.com/reference/cstring/memcpy/" rel="nofollow">memcpy</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://www.cplusplus.com/reference/cstring/strcpy/" class="urlextern" title="https://www.cplusplus.com/reference/cstring/strcpy/" rel="nofollow">strcpy</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://www.cplusplus.com/reference/cstdio/fgets/" class="urlextern" title="http://www.cplusplus.com/reference/cstdio/fgets/" rel="nofollow">fgets</a></div>
+</li>
+</ul>
+
+<p>
+Un exemplu clasic de buffer overflow este dat de următorul cod:
+</p>
+<pre class="code">char buffer[32];
+fgets(buffer, 64, stdin);
+</pre>
+
+<p>
+În urma execuției acestui cod vom obține un buffer overflow care ar putea conduce chiar la o eroare de tip <em>Segmentation Fault</em>,
+însă acest lucru nu este garantat. Totul depinde de poziția bufferului 
+pe stivă și de ceea ce se va suprascrie prin cei 32 de octeți
+ce depășesc dimensiunea bufferului. Mai multe detalii despre ceea ce se 
+va suprascrie,
+dar și modalitatea prin care se va face acest lucru veți descoperi în 
+timpul rezolvării exercițiilor.
+</p>
+
+</div>
+
+<h2 class="sectionedit5" id="atacuri_de_tip_buffer_overflow">Atacuri de tip buffer overflow</h2>
+<div class="level2">
+
+</div>
+
+<h3 class="sectionedit6" id="cum_este_folosit_buffer_overflow">Cum este folosit buffer overflow?</h3>
+<div class="level3">
+
+<p>
+Buffer overflow poate fi exploatat de un potențial atacator pentru a suprascrie anumite date din cadrul unui program,
+afectând fluxul de execuție și oferind anumite beneficii atacatorului.
+Cel mai adesea, un atacator inițiază un atac de tip buffer overflow cu scopul de a obține acces la date confidențiale,
+la care, în mod normal, un utilizator obișnuit nu ar avea acces.
+</p>
+
+<p>
+Atacurile de tip buffer overflow sunt folosite în general pe buffere 
+statice, stocate la nivel de stivă.
+Acest lucru se datorează faptului că pe stivă, pe lângă datele 
+programului, se stochează și adrese de retur în urma apelurilor de 
+funcții (vezi laboratorul 7).
+Aceste adrese pot fi suprascrise printr-un atac de tip buffer overflow, 
+caz în care poate fi alterat fluxul de execuție a programului.
+Prin suprascrierea adresei de retur, odată cu încheierea execuției 
+funcției curente nu se va mai reveni la execuția funcției apelante,
+ci se va „sări” la o altă adresă din cadrul executabilului de unde se va
+ continua execuția.
+Acest eveniment poate conduce la comportament nedefinit al programului (<em>undefined behaviour</em>) dacă adresa la care se „sare” nu a fost calculată corect.
+</p>
+
+<p>
+Scopul unui atacator este acela de a prelua controlul unui sistem prin 
+obținerea accesului la un shell din care să poată rula comenzi.
+Acest lucru se poate realiza prin suprascrierea adresei de retur, 
+folosind un apel de sistem prin intermediul căruia se poate deschide
+un shell pe sistemul pe care executabilul rulează (mai multe detalii la 
+cursul de SO).
+</p>
+
+</div>
+
+<h3 class="sectionedit7" id="cum_ne_protejam_de_atacuri_de_tip_buffer_overflow">Cum ne protejăm de atacuri de tip buffer overflow?</h3>
+<div class="level3">
+
+<p>
+Există multe modalități de a proteja un executabil de acest tip de 
+atacuri. Pe majoritatea le veți studia în amănunt la cursul de SO anul 
+viitor.
+O bună practică împotriva acestui tip de atac este de a evita folosirea 
+unor funcții nesigure, precum cele prezentate mai sus.
+Mai multe detalii despre bune practici împotriva atacurilor de tip 
+buffer overflow puteți găsi <a href="https://security.web.cern.ch/recommendations/en/codetools/c.shtml" class="urlextern" title="https://security.web.cern.ch/recommendations/en/codetools/c.shtml" rel="nofollow">aici</a>.
+</p>
+
+<p>
+De multe ori, bunele practici se dovedesc a fi insuficiente în „lupta” împotriva atacatorilor,
+motiv pentru care au fost inventate mai multe mecanisme de protecție a executabilelor prin manipularea codului
+și a poziției acestuia în cadrul executabilului (<em>Position Independent Code</em> - <a href="https://en.wikipedia.org/wiki/Position-independent_code" class="urlextern" title="https://en.wikipedia.org/wiki/Position-independent_code" rel="nofollow">PIC</a>),
+prin randomizarea adreselor (<em>Address Space Layout Randomization</em> - <a href="https://en.wikipedia.org/wiki/Address_space_layout_randomization" class="urlextern" title="https://en.wikipedia.org/wiki/Address_space_layout_randomization" rel="nofollow">ASLR</a>)
+sau prin introducerea unor verificări suplimentare în cod pentru a detecta eventuale atacuri.
+Aceste verificări se realizează prin introducerea unor valori speciale, numite <strong>canary</strong>
+ pe stivă,
+între buffer și adresa de retur a funcției. Aceste valori sunt generate 
+și plasate în cadrul executabilului de către compilator
+și diferă la fiecare rulare a executabilului. În momentul în care un 
+atacator vrea să suprascrie adresa de retur se va suprascrie
+și valoarea canary și înainte de a se părăsi apelul funcției curente se 
+va verifica dacă acea valoare a fost modificată sau nu.
+Dacă a fost modificată înseamnă că a avut loc un buffer overflow și 
+execuția programului va fi întreruptă.
+Acest mecanism se numește <strong>Stack Smashing Protection</strong> sau <strong>Stack Guard</strong>. Mai multe detalii despre Stack Guard,
+dar și despre atacuri de tip buffer overflow puteți găsi <a href="https://en.wikipedia.org/wiki/Buffer_overflow" class="urlextern" title="https://en.wikipedia.org/wiki/Buffer_overflow" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+<h2 class="sectionedit8" id="feedback">Feedback</h2>
+<div class="level2">
+
+<p>
+Pentru a îmbunătăți cursul de IOCLA, componentele sale și modul de 
+desfășurare, ne sunt foarte utile opiniile voastre. Pentru aceasta, vă 
+rugăm să accesați și completați formularul de feedback de pe site-ul <a href="https://curs.upb.ro/" class="urlextern" title="https://curs.upb.ro/" rel="nofollow">curs.upb.ro</a>. Trebuie să fiți autentificați și înrolați în cadrul cursului.
+</p>
+
+<p>
+Formularul este anonim și este activ în perioada 21 mai 2022 - 03 iunie 
+2022. Rezultatele vor fi vizibile în cadrul echipei cursului doar după 
+încheierea sesiunii. Puteți accesa formularul de feedback începând cu 21
+ mai 2022. Este accesibil la link-ul “Formular feedback” a paginii 
+principale a cursului de IOCLA al seriei voastre. Nu este în meta-cursul
+ disponibil tuturor seriilor.
+</p>
+
+<p>
+Vă invităm să evaluați activitatea echipei de IOCLA și să precizați 
+punctele tari și punctele slabe și sugestiile voastre de îmbunătățire a 
+disciplinei. Feedback-ul vostru ne ajută să creștem calitatea materiei 
+în anii următori și să îmbunătățim disciplinele pe care le veți face în 
+continuare.
+</p>
+
+<p>
+Vom publica la începutul semestrului viitor analiza feedback-ului vostru.
+</p>
+
+<p>
+Ne interesează în special:
+</p>
+<ol>
+<li class="level1"><div class="li"> Ce nu v-a plăcut și ce credeți că nu a mers bine?</div>
+</li>
+<li class="level2"><div class="li"> De ce nu v-a plăcut și de ce credeți că nu a mers bine?</div>
+</li>
+<li class="level2"><div class="li"> Ce ar trebui să facem ca lucrurile să fie plăcute și să meargă bine?</div>
+</li>
+</ol>
+
+</div>
+
+<h2 class="sectionedit9" id="pregatire_infrastructura">Pregătire infrastructură</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant"> În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>.
+Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda git pull origin master din
+interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>). Recomandarea este să îl actualizați cât mai frecvent,
+înainte să începeți lucrul, pentru a vă asigura că aveți versiunea cea mai recentă.
+Dacă doriți să descărcați repository-ul în altă locație, folosiți comanda <code>git clone [[https://github.com/systems-cs-pub-ro/iocla|https://github.com/systems-cs-pub-ro/iocla]] ${target}</code>.
+Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a>. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip">
+În acest semestru am avut parte de o participare redusă la cursurile 
+PCLP2. Ne dorim să înțelegem care sunt motivele pentru această situație,
+ așa că vă rugăm să completați <a href="https://docs.google.com/forms/d/1kesynY60tv8pduYFdCzB3tfLhj1uYDbVIRHCCgsa9jE" class="urlextern" title="https://docs.google.com/forms/d/1kesynY60tv8pduYFdCzB3tfLhj1uYDbVIRHCCgsa9jE" rel="nofollow">acest formular de feedback</a>.
+ Formularul este anonim și necesită aproximativ 30 de secunde pentru 
+completare. Rezultatele acestuia ne vor ajuta să vă înțelegem mai bine 
+perspectiva și să ne adaptăm nevoilor voastre.
+
+</div><p></p>
+<p></p>
+
+<p>
+Pentru desfășurarea acestui laborator vom folosi interfața în linia de comandă.
+</p>
+
+<p>
+Pe parcursul laboratorului, în linia de comandă, vom folosi:
+</p>
+<ul>
+<li class="level1"><div class="li"> asamblorul <code>nasm</code></div>
+</li>
+<li class="level1"><div class="li"> comanda <code>gcc</code> pe post de linker</div>
+</li>
+<li class="level1"><div class="li"> <code>objdump</code> și <code>ghidra</code> pentru dezasamblarea fișierelor obiect și executabile</div>
+</li>
+<li class="level1"><div class="li"> <code>gdb</code> pentru analiza dinamică, investigație și debugging</div>
+</li>
+</ul>
+
+<p>
+În general nu va fi nevoie să dați comenzi de compilare. Fiecare director cuprinde un Makefile pe care îl puteți rula
+pentru a compila în mod automat fișierele cod sursă limbaj de asamblare sau C.
+</p>
+
+<p>
+Înainte de a începe laboratorul, alocați-vă 1-2 minute să reparcurgeți 
+diagrama de mai jos ce arată structura stivei în cazul unui apel de 
+funcție.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=be24d2&amp;media=https%3A%2F%2Focw.cs.pub.ro%2Fcourses%2F_media%2Fiocla%2Flaboratoare%2Fstack-in-function-call.png" class="media" title="https://ocw.cs.pub.ro/courses/_media/iocla/laboratoare/stack-in-function-call.png"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/fetch.png" class="media" title="Image" alt="Image" width="750"></a>
+</p>
+
+</div>
+
+<h2 class="sectionedit10" id="stay_a_while_and_listen">0. Stay a while and listen</h2>
+<div class="level2">
+
+<p>
+Ați sărit direct la exerciții? Știm cum este. Totuși, vă rugăm să ne 
+oferiți feedback și să ne ajutați să îmbunătățim materia. Mergeți la 
+secțiunea <a href="#feedback" title="iocla:laboratoare:laborator-11 ↵" class="wikilink1">feedback</a> pentru detalii.
+</p>
+
+</div>
+
+<h2 class="sectionedit11" id="tutorialfolosirea_unui_buffer_in_zona_de_date">1. Tutorial: Folosirea unui buffer în zona de date</h2>
+<div class="level2">
+
+<p>
+Accesați, în linia de comandă, directorul <code>1-data-buffer/</code> din arhiva de resurse a laboratorului și consultați fișierul <code>data_buffer.asm</code>.
+În acest fișier se găsește un program care populează un buffer cu informații și apoi le afișează.
+</p>
+
+<p>
+Consultați cu atenție programul, apoi compilați-l folosind comanda:
+</p>
+<pre class="code">make
+</pre>
+
+<p>
+Observați că în urma comenzii de compilare de mai sus au rezultat un 
+fișier obiect și un fișier executabil, prin rularea comenzii:
+</p>
+<pre class="code">ls
+</pre>
+
+<p>
+Rulați programul prin intermediul fișierului executabil, adică folosind comanda:
+</p>
+<pre class="code">./data_buffer
+</pre>
+
+<p>
+Observați comportamentul programului în funcție de codul său.
+</p>
+
+</div>
+
+<h2 class="sectionedit12" id="tutorialfolosirea_unui_buffer_pe_stiva">2. Tutorial: Folosirea unui buffer pe stivă</h2>
+<div class="level2">
+
+<p>
+Accesați directorul <code>2-3-4-stack-buffer/</code> din arhiva de resurse a laboratorului și consultați fișierul <code>stack_buffer.asm</code>.
+În acest fișier se găsește un program care populează un buffer cu informații și apoi le afișează.
+Este similar celui de mai sus doar că acum buffer-ul este alocat pe stivă.
+</p>
+
+<p>
+Consultați cu atenție programul, apoi compilați-l folosind comanda:
+</p>
+<pre class="code">make
+</pre>
+
+<p>
+apoi rulați-l folosind comanda:
+</p>
+<pre class="code">./stack_buffer
+</pre>
+
+<p>
+Observați comportamentul programului în funcție de codul său.
+</p>
+
+<p>
+Pe lângă buffer am mai alocat o variabilă locală pe 4 octeți, accesibilă la adresa <code>ebp-4</code>.
+Este inițializată la valoarea <code>0xCAFEBABE</code>. Această variabilă va fi importantă mai târziu.
+Ce este relevant acum este să știm că această variabilă este în memorie <strong>imediat după buffer</strong>: când se trece de limita buffer-ului se ajunge la această variabilă.
+</p>
+
+<p>
+Care este diferenta intre cele 2 programe inspectate pana acum?
+</p>
+
+</div>
+
+<h2 class="sectionedit13" id="citirea_de_date_dincolo_de_dimensiunea_buffer-ului">3. Citirea de date dincolo de dimensiunea buffer-ului</h2>
+<div class="level2">
+
+<p>
+Acum că am văzut cum arată buffer-ul în memorie și unde este plasată variabila,
+actualizați programul <code>stack_buffer.asm</code> pentru ca secvența de afișare a buffer-ului
+(cea din jurul etichetei <code>print_byte</code>) să ducă și la afișarea octeților variabilei.
+Adică trebuie să citiți date dincolo de dimensiunea buffer-ului (și să le afișați).
+Este un caz de buffer overflow de citire, cu obiectiv de <strong>information leak</strong>: aflarea de informații din memorie.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Nu e ceva complicat, trebuie doar să “instruiți” secvența de afișare să folosească altă limită pentru afișare,
+nu limita curentă de 64 de octeți. 
+</div><p></p>
+<p></p>
+
+<p>
+Afișați și alte informații dincolo chiar de variabila locală.
+Ce informație vine pe stivă după variabila locală (următorii 4 octeți)? Dar următorii 4 octeți după?
+</p>
+
+</div>
+
+<h2 class="sectionedit14" id="scrierea_de_date_dincolo_de_dimensiunea_buffer-ului">4. Scrierea de date dincolo de dimensiunea buffer-ului</h2>
+<div class="level2">
+
+<p>
+Pe baza experienței de mai sus, realizați modificări pentru ca valoarea variabilei să fie <code>0xDEADBEEF</code>
+(în loc de <code>0xCAFEBABE</code> cum este la început) fără a modifica însă explicit valoarea variabilei.
+Folosiți-vă de modificarea buffer-ului și de registrul <code>ebx</code> în care am stocat adresa de început a buffer-ului.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Din nou, nu este ceva complicat. Trebuie să vă folosiți de valoarea <code>ebx</code> și un offset ca să scrieți valoarea <code>0xDEADBEEF</code> la acea adresă.
+Adică folosiți o construcție de forma:
+<p></p>
+<pre class="code">mov byte [ebx+TODO], TODO
+</pre>
+
+<p>
+Realizați acest lucru după secvența de inițializare a buffer-ului (după instrucțiunea <code>jl fill_byte</code>).
+
+</p></div><p></p>
+La o rezolvare corectă a acestui exercițiu, programul va afișa valoarea <code>0xDEADBEEF</code> pentru variabila locală.
+<p></p>
+
+</div>
+
+<h2 class="sectionedit15" id="tutorialcitirea_de_date_de_la_intrarea_standard">5. Tutorial: Citirea de date de la intrarea standard</h2>
+<div class="level2">
+
+<p>
+Accesați directorul <code>5-6-read-stdin/</code> din arhiva de resurse a laboratorului și consultați fișierul <code>read_stdin.asm</code>.
+În acest fișier se găsește un program care folosește apelul <code>gets</code>
+ ca să citească informații de la intrarea standard
+într-un buffer de pe stivă. La fel ca în cazul precedent am alocat o 
+variabilă locală pe 4 octeți imediat după buffer-ul de pe stivă.
+</p>
+
+<p>
+Consultați cu atenție programul, apoi compilați-l folosind comanda:
+</p>
+<pre class="code">make
+</pre>
+
+<p>
+apoi rulați-l folosind comanda:
+</p>
+<pre class="code">./read_stdin
+</pre>
+
+<p>
+Observați comportamentul programului funcție de input-ul primit.
+</p>
+
+</div>
+
+<h2 class="sectionedit16" id="buffer_overflow_cu_date_de_la_intrarea_standard">6. Buffer overflow cu date de la intrarea standard</h2>
+<div class="level2">
+
+<p>
+Funcția <a href="https://man7.org/linux/man-pages/man3/gets.3.html" class="urlextern" title="https://man7.org/linux/man-pages/man3/gets.3.html" rel="nofollow">gets</a> este o funcție care este practic interzisă în programele C
+din cauza vulnerabilității mari a acesteia: nu verifică limitele buffer-ului în care se face citirea,
+putând fi ușor folosită pentru buffer overflow.
+</p>
+
+<p>
+Pentru aceasta transmiteți șirul de intrare corespunzător pentru ca valoarea afișată pentru variabila locală să nu mai fie
+<code>0xCAFEBABE</code>, ci să fie <code>0x574F4C46</code> (valorile <abbr title="American Standard Code for Information Interchange">ASCII</abbr> în hexazecimal pentru <code>FLOW</code>).
+</p>
+
+<p>
+</p><p></p><div class="noteimportant"> Nu modificați codul în limbaj de 
+asamblare.
+Transmiteți șirul de intrare în format corespunzător la intrarea 
+standard pentru a genera un buffer overflow și pentru a obține 
+rezultatul cerut. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notewarning"> Nu scrieți șirul <code>"574F4C46"</code>. Acesta e un șir care ocupă <code>8</code> octeți.
+Trebuie să scrieți reprezentarea <abbr title="American Standard Code for Information Interchange">ASCII</abbr> a numărului <code>0x574F4C46</code> adică <code>FLOW</code>:
+<code>0x57</code> este <code>W</code>, <code>0x4F</code> este <code>O</code>, <code>0x4C</code> este <code>L</code> iar <code>0x46</code> este <code>F</code>. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> x86 este o arhitectură little endian. Adică șirul <code>"FLOW"</code>, având corespondența caracter-cod <abbr title="American Standard Code for Information Interchange">ASCII</abbr>
+<code>F</code>: <code>0x46</code>, <code>L</code>: <code>0x4C</code>, <code>O</code>: <code>0x4F</code>, <code>W</code>: <code>0x57</code> va fi stocat în memorie pe <code>4</code> octeți ca <code>0x574F4C46</code>.
+<strong>Ce trebuie să faceți</strong>: Va trebui ca, în cadrul buffer overflow-ului, să obțineți valoarea în memorie <code>0x574F4C46</code>.
+Obțineți șirul <abbr title="American Standard Code for Information Interchange">ASCII</abbr> corespondent valorii în memorie <code>0x574F4C46</code> pe care trebuie să îl furnizați la intrarea standard a programului vulnerabil. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Ca să transmiteți șirul de intrare, e 
+recomandat să-l scrieți într-un fișier și apoi să redirectați acel 
+fișier către comanda aferentă programului.
+Puteți folosi un editor precum <code>gedit</code> sau <code>vim</code> pentru editarea fișierului.
+Avantajul acestora este că vă afișează și coloana pe care vă aflați și puteți să știți câte caractere ați scris în fișier.
+Alternativ, puteți folosi python pentru a vă genera mai ușor payload-ul.
+De exemplu, pentru a genera un payload care să suprascrie o valoare în cod cu valoarea <code>0xDEADBEEF</code>, puteți executa următoarea comandă:
+<p></p>
+<pre class="code python">python -c <span class="st0">'print "A"*32 + "<span class="es0">\x</span>EF<span class="es0">\x</span>BE<span class="es0">\x</span>AD<span class="es0">\x</span>DE"'</span> <span class="sy0">&gt;</span> payload</pre>
+
+<p>
+E recomandat să numiți fișierul <code>payload</code>. Redirectarea fișierului <code>payload</code> către program se face folosind o comandă precum:
+</p>
+<pre class="code">./read_stdin &lt; payload
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit17" id="buffer_overflow_cu_date_de_la_intrarea_standard_si_fgets">7. Buffer overflow cu date de la intrarea standard și fgets()</h2>
+<div class="level2">
+
+<p>
+Așa cum am precizat mai sus, funcția <code>gets</code> este interzisă în programele curente.
+În locul acesteia se poate folosi funcția <a href="https://man7.org/linux/man-pages/man3/fgets.3.html" class="urlextern" title="https://man7.org/linux/man-pages/man3/fgets.3.html" rel="nofollow">fgets</a>.
+Creați o copie a fișierului cod sursă <code>read_stdin.asm</code> din subdirectorul <code>5-6-read-stdin/</code> într-un fișier
+cod sursă <code>read_stdin_fgets.asm</code> în subdirectorul <code>7-read-stdin-fgets/</code>.
+În fișierul cod sursă <code>read_stdin_fgets.asm</code> schimbați apelul funcției <code>gets()</code> cu apelul funcției <code>fgets</code>.
+</p>
+
+<p>
+Pentru apelul <code>fgets()</code> citiți de la intrarea standard. Ca argument pentru al treilea parametru al <code>fgets()</code>
+(de tipul <code>FILE *</code>) veți folosi intrarea standard. Pentru a specifica intrarea standard folosiți stream-ul <a href="https://linux.die.net/man/3/stdin" class="urlextern" title="https://linux.die.net/man/3/stdin" rel="nofollow">stdin</a>.
+Va trebui să îl marcați ca extern folosind, la începutul fișierului în limbaj de asamblare, construcția:
+</p>
+<pre class="code">extern stdin
+</pre>
+
+<p>
+<code>stdin</code> este o adresă; pentru a apela <code>fgets()</code> cu intrarea standard,
+este suficient să transmitem pe stivă valoarea de la adresa <code>stdin</code>, adică folosind construcția:
+</p>
+<pre class="code">push dword [stdin]
+</pre>
+
+<p>
+</p><p></p><div class="notetip"> Urmăriți pagina de manual a funcției <a href="https://man7.org/linux/man-pages/man3/fgets.3.html" class="urlextern" title="https://man7.org/linux/man-pages/man3/fgets.3.html" rel="nofollow">fgets</a> pentru a afla ce parametri primește. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Pentru apelul funcției <code>fgets()</code> folosiți construcția:
+<p></p>
+<pre class="code">call fgets
+</pre>
+
+<p>
+De asemenea, marcați simbolul ca fiind extern folosind construcția:
+</p>
+<pre class="code">extern fgets
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p><div class="notetip"> Întrucât funcția <code>fgets()</code> are 3 parametri (care ocupă <code>3×4=12</code> octeți) va trebui ca după apelul funcției,
+în restaurarea stivei, să folosiți <code>add esp, 12</code> (în loc de <code>add esp, 4</code> ca în cazul programul de mai sus care folosea <code>gets()</code>). 
+</div><p></p>
+<p></p>
+
+<p>
+Să păstrați posibilitatea unui buffer overflow și să demonstrați acest lucru prin afișarea valorii <code>0x574F4C46</code>
+pentru variabila locală. Adică să folosiți ca al doilea argument pentru <code>fgets()</code> (dimensiunea)
+o valoare suficient de mare cât să permită realizarea unui buffer overflow.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> La fel ca mai sus, ca să transmiteți șirul de intrare pentru program, e recomandat să-l scrieți într-un fișier
+și apoi să redirectați acel fișier către comanda aferentă programului.
+Redirectarea fișierului <code>payload</code> către program se face folosind o comandă precum:
+<p></p>
+<pre class="code">./read_stdin_fgets &lt; payload
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p><div class="noteimportant"> Nu modificați codul în limbaj de asamblare. Transmiteți șirul de intrare în format corespunzător la intrarea standard
+pentru a genera un buffer overflow și pentru a obține rezultatul cerut. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit18" id="buffer_overflow_pentru_program_scris_in_cod_c">8. Buffer overflow pentru program scris în cod C</h2>
+<div class="level2">
+
+<p>
+De cele mai multe ori vom identifica vulnerabilități de tip buffer overflow în programe scrise în C.
+Acolo trebuie să vedem ce buffere sunt și care este distanța de la buffer la variabila dorită pentru a putea face suprascrierea.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant"> Este important de avut în vedere că distanța între un buffer și o altă variabilă în C poate nu corespunde cu cea “din teren”;
+compilatorul poate face actualizări, reordonări, poate lăsa spații libere între variabile etc. 
+</div><p></p>
+<p></p>
+
+<p>
+Pentru exercițiul curent, accesați directorul <code>8-c-buffer-overflow/</code> din arhiva de resurse a laboratorului
+și observați codul sursă aferent în C. Pentru cazul în care doriți să nu mai compilați voi codul aveți în arhivă
+și fișierul limbaj de asamblare echivalent și fișierul în cod obiect și fișierul executabil.
+</p>
+
+<p>
+Descoperiți diferența între adresa buffer-ului și adresa variabilei, creați un fișier de intrare (numit și <code>payload</code>)
+cu care să declanșați overflow-ul și faceți în așa fel încât să fie afișat mesajul <em>Full of win!</em>.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Ca să vedeți realitatea “din teren”, 
+adică să aflați care este diferența dintre buffer și variabila pe care 
+dorim să o suprascriem,
+consultați fișierul în limbaj de asamblare echivalent (<code>do_overflow.asm</code>), obținut prin asamblarea codului C.
+În acest fișier puteți afla adresa relativă a buffer-ului față de <code>ebp</code> și a variabilei față de <code>ebp</code>;
+urmăriți secvența cuprinsă între liniile <code>32</code> și <code>41</code>; aveți o mapare între numele variabilei și offset-ul relativ față de <code>ebp</code>.
+Cu aceste informații puteți crea șirul pe care să îl transmiteți ca payload către intrarea standard a programului. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Dacă doriți să recompilați fișierele rulați:
+<p></p>
+<pre class="code">make clean &amp;&amp; make
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p><div class="notetip"> La fel ca mai sus, ca să transmiteți șirul de intrare pentru program, e recomandat să-l scrieți într-un fișier
+și apoi să redirectați acel fișier către comanda aferentă &gt; programului.
+Redirectarea fișierului payload către program se face folosind o comandă precum:
+<p></p>
+<pre class="code">./do_overflow &lt; payload
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit19" id="bonusstack_canary">9. Bonus: Stack canary</h2>
+<div class="level2">
+
+<p>
+Pornind de la resursele exercițiului anterior din directorul <code>8-9-c-buffer-overflow</code> inspectați fișierul <code>Makefile</code>.
+</p>
+<pre class="code">cat Makefile
+</pre>
+
+<p>
+Analizați atent opțiunile de compilare. Ce observați?
+</p>
+
+<p>
+Așa cum ați observat în cadrul exercițiului anterior, deși am depășit dimensiunea buffer-ului
+și am suprascris o altă variabilă din program, acesta și-a încheiat execuția în mod normal.
+Acest lucru este nedorit atunci când lucrăm cu buffere, deoarece sunt o sursă de la care poate porni foarte ușor un atac.
+Folosind <code>objdump</code> inspectați funcția <code>main</code> a executabilului.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Pentru a inspecta sursa, folosiți următoarea comandă:
+<p></p>
+<pre class="code">objdump -M intel -d do_overflow
+</pre>
+
+<p>
+
+</p></div><p></p>
+Acum intrați în fișierul <code>Makefile</code> și modificați parametrii <code>CFLAGS</code> înlocuind <code>-fno-stack-protector</code> cu <code>-fstack-protector</code>.
+Recompilați programul și rulați-l. Ce observați?
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Prin opțiunea sau flag-ul <code>-fstack-protector</code> i-am cerut compilatorului să activeze opțiunea de
+<em>Stack Smashing Protection</em> pentru executabilul nostru. Astfel, orice atac de tip buffer overflow
+va fi detectat în cod și execuția programului se va încheia cu eroare. 
+</div><p></p>
+<p></p>
+
+<p>
+Inspectați din nou executabilul recompilat cu noul flag folosind <code>objdump</code>. Ce s-a schimbat?
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Compilatorul a introdus pe stivă o valoare generată aleator, numită <strong>canary</strong>,
+pe care o verifică înainte de a părăsi execuția funcției curente. Prin buffer overflow,
+aceasta a fost suprascrisă odată cu depășirea dimensiunii buffer-ului,
+ceea ce a determinat o neconcordanță între valoarea inițială a canary-ului și cea de la finalul execuției funcției. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit20" id="bonusbuffer_overflow_pentru_binar">10. Bonus: Buffer overflow pentru binar</h2>
+<div class="level2">
+
+<p>
+De multe ori nu avem șansa accesului la codul sursă și vrem să descoperim vulnerabilități în fișiere executabile.
+În directorul <code>10-overflow-in-binary</code> din arhiva de resurse a laboratorului, găsiți un fișier executabil.
+Folosind <code>ghidra</code> sau <code>gdb</code> pentru investigație descoperiți cum puteți exploata vulnerabilitatea de tip buffer overflow,
+pentru ca programul să afișeze mesajul <em>Great success!</em>.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant"> Pentru a rula <code>ghidra</code> pe fișierul executabil <code>overflow_in_binary</code>
+ trebuie să vă creați un proiect nou în care să importați fișierul 
+executabil.
+Ghidra va detecta automat formatul fișierului. Rulați analiza 
+executabilului după care căutați în Symbol Tree după funcția main. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Identificați în codul dezasamblat cum se transmite intrarea către program.
+Identificați unde este buffer overflow-ul. Identificați condiția de comparație pe care doriți să o declanșați.
+Apoi construiți payload-ul corespunzător și transmiteți-l în forma adecvată programului. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit21" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-11-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-11-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+<h2 class="sectionedit22" id="resurse">Resurse</h2>
+<div class="level2">
+
+<p>
+Dacă laboratorul v-a impresionat într-un mod plăcut, puteți afla mai 
+multe despre acest tip de atac, dar și despre securitate cibernetică în 
+general, de pe acest <a href="https://www.youtube.com/c/LiveOverflow" class="urlextern" title="https://www.youtube.com/c/LiveOverflow" rel="nofollow">canal</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_9531895062b0bf5ca403b" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_8176341862b0bf5ca6f60" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_11gestiunea_bufferelor_buffer_overflow">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#buffer_buffer_overflow">Buffer. Buffer overflow</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#ce_este_un_buffer">Ce este un buffer?</a></div></li>
+<li class="level3"><div class="li"><a href="#ce_este_un_buffer_overflow">Ce este un buffer overflow?</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#atacuri_de_tip_buffer_overflow">Atacuri de tip buffer overflow</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#cum_este_folosit_buffer_overflow">Cum este folosit buffer overflow?</a></div></li>
+<li class="level3"><div class="li"><a href="#cum_ne_protejam_de_atacuri_de_tip_buffer_overflow">Cum ne protejăm de atacuri de tip buffer overflow?</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#feedback">Feedback</a></div></li>
+<li class="level2"><div class="li"><a href="#pregatire_infrastructura">Pregătire infrastructură</a></div></li>
+<li class="level2"><div class="li"><a href="#stay_a_while_and_listen">0. Stay a while and listen</a></div></li>
+<li class="level2"><div class="li"><a href="#tutorialfolosirea_unui_buffer_in_zona_de_date">1. Tutorial: Folosirea unui buffer în zona de date</a></div></li>
+<li class="level2"><div class="li"><a href="#tutorialfolosirea_unui_buffer_pe_stiva">2. Tutorial: Folosirea unui buffer pe stivă</a></div></li>
+<li class="level2"><div class="li"><a href="#citirea_de_date_dincolo_de_dimensiunea_buffer-ului">3. Citirea de date dincolo de dimensiunea buffer-ului</a></div></li>
+<li class="level2"><div class="li"><a href="#scrierea_de_date_dincolo_de_dimensiunea_buffer-ului">4. Scrierea de date dincolo de dimensiunea buffer-ului</a></div></li>
+<li class="level2"><div class="li"><a href="#tutorialcitirea_de_date_de_la_intrarea_standard">5. Tutorial: Citirea de date de la intrarea standard</a></div></li>
+<li class="level2"><div class="li"><a href="#buffer_overflow_cu_date_de_la_intrarea_standard">6. Buffer overflow cu date de la intrarea standard</a></div></li>
+<li class="level2"><div class="li"><a href="#buffer_overflow_cu_date_de_la_intrarea_standard_si_fgets">7. Buffer overflow cu date de la intrarea standard și fgets()</a></div></li>
+<li class="level2"><div class="li"><a href="#buffer_overflow_pentru_program_scris_in_cod_c">8. Buffer overflow pentru program scris în cod C</a></div></li>
+<li class="level2"><div class="li"><a href="#bonusstack_canary">9. Bonus: Stack canary</a></div></li>
+<li class="level2"><div class="li"><a href="#bonusbuffer_overflow_pentru_binar">10. Bonus: Buffer overflow pentru binar</a></div></li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+<li class="level2"><div class="li"><a href="#resurse">Resurse</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-11.txt · Last modified: 2022/05/20 15:40 by darius.mihai          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2011%20Gestiunea%20bufferelor.%20Buffer%20overflow%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

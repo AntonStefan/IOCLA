@@ -1,0 +1,16 @@
+0x0a0b0c0d
+Argument is 0x0a0b0c0d
+Number is 0x0a0b0c0d
+10.11.12.13
+
+$ ./file
+0x8d55e076
+Argument is 0x8d55e076
+Number is 0x8d55e076
+141.85.224.118
+
+$ ./file
+0x01020304
+Argument is 0x01020304
+Number is 0x01020304
+1.2.3.4

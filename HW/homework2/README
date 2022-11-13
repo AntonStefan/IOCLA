@@ -1,0 +1,25 @@
+311CC Anton Stefan
+
+Task1
+Am implementat un loop in care verific fiecare byte in parte. 
+In primul rand verificam daca acel byte cu numarul de iteratii
+specificat depaseste cele 26 de caractere, astfel incat daca 
+depaseste, vom realiza o scadere, iar daca nu vom adauga 
+normal, urmand sa incrementam si pozitia pe care plasam. 
+
+Task2
+\\points-distance.asm//
+
+Avem 2 registrii in care punem primul x din primul punct si in
+cel de-al doliea al doilea x, si verificam daca acestia sunt 
+egali. Daca sunt egali vom lua y-csii si ii vom compara pentru
+a afla distanta. Daca nu sunt egali ii vom compara primul x cu
+cel de-al doilea si vom vedea care este mai mare, pentru
+a calcula distanta.
+
+\\road.asm//
+Se bazeaza in principiu pe 2 dar a trebuit implementata pentru
+un vector de structuri de n puncte date.
+ 
+
+

@@ -1,0 +1,1069 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 06: Rolul registrelor, adresare directă și bazată    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2021-11-11T23:57:11+0200">
+<meta name="keywords" content="iocla,laboratoare,laborator-06">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-06">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06">
+<link rel="stylesheet" type="text/css" href="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-06","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_06rolul_registrelor_adresare_directa_si_bazata">Laborator 06: Rolul registrelor, adresare directă și bazată</h1>
+<div class="level1">
+
+<p>
+În acest laborator vom aprofunda lucrul cu registre și modul în care se 
+utilizează memoria atunci când programăm assembly pe un sistem x86 de 32
+ biți.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="registre">Registre</h2>
+<div class="level2">
+
+<p>
+Registrele sunt principalele “unelte” cu care se scriu programele în 
+limbaj de asamblare. Acestea sunt precum variabile construite în 
+procesor. Utilizarea registrelor în locul adresării directe a memoriei 
+face ca dezvoltarea și citirea programelor scrise în assembly să fie mai
+ rapidă și mai ușoara. Singurul dezavantaj al programării în limbaj de 
+asamblare x86 este acela că sunt puține registre.
+</p>
+
+<p>
+Procesoarele x86 moderne dispun de 8 registre cu scop general a căror 
+dimensiune este de 32 de biți. Numele registrelor sunt de natură 
+istorică (spre exemplu: EAX era numit registru acumulator din cauza 
+faptului că este folosit de o serie de instrucțiuni aritmetice, cum ar 
+fi <a href="https://www.felixcloutier.com/x86/idiv" class="urlextern" title="https://www.felixcloutier.com/x86/idiv" rel="nofollow">idiv</a>).
+ In timp ce majoritatea registrelor și-au pierdut scopul special, 
+devenind “general purpose” în ISA-ul modern(EAX, EBX, ECX, EDX, ESI, 
+EDI), prin convenție, 2 și-au pastrat scopul inițial: ESP (stack 
+pointer) și EBP (base pointer).
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="subsectiuni_ale_registrelor">Subsecțiuni ale registrelor</h3>
+<div class="level3">
+
+<p>
+În anumite cazuri dorim să modificăm valori ce sunt reprezentate pe mai 
+puțin de 4 octeți (spre exemplu, lucrul cu șiruri de caractere). Pentru 
+aceste situații, procesoarele x86 ne oferă posibilitatea de a lucra cu 
+subsectiuni de 1, respectiv 2 octeți ale registrelor EAX, EBX, ECX, EDX.
+</p>
+
+<p>
+În imaginea de mai jos sunt reprezentate registrele, subregistrele și dimensiunile lor.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=d858de&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Frolul-registrelor-adresare%2Fimages%2Fregisters.png" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/rolul-registrelor-adresare/images/registers.png"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/fetch.png" class="media" title="Registre x86_32" alt="Registre x86_32"></a>
+</p>
+
+<p>
+</p><p></p><div class="notewarning"> Subregistrele fac parte din 
+registre, ceea ce înseamnă că dacă modificăm un registru, în mod 
+implicit modificăm și valoarea subregistrului. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Subregistrele se folosesc în mod identic cu registrele, doar că dimensiunea valorii reținute este diferită. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pe lângă registrele de bază mai 
+există și șase registre segment corespunzătoare unor anumite zone după 
+cum se observă în imagine:
+<p></p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=b6055a&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Frolul-registrelor-adresare%2Fimages%2Fsegments.png" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/rolul-registrelor-adresare/images/segments.png"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/fetch_002.png" class="media" title="Registre Segment" alt="Registre Segment"></a> 
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit4" id="declarari_statice_de_regiuni_de_memorie">Declarări statice de regiuni de memorie</h3>
+<div class="level3">
+
+<p>
+Declarările statice de memorie (analoage declarării variabilelor 
+globale), în lumea x86, se fac prin intermediul unor directive de 
+asamblare speciale. Aceste declarări se fac în secțiunea de date 
+(regiunea .DATA). Porțiunilor de memorie declarate le pot fi atașate un 
+nume prin intermediul unui label pentru a putea fi referite ușor mai 
+târziu în program. Urmăriți exemplul de mai jos:
+</p>
+<pre class="code">.DATA
+    var        DB 64    ; Declară un octet conținând valoarea 64. Etichetează
+                        ; locația de memorie cu "var".
+    var2       DB ?     ; Declară un octet neinițializat etichetat cu "var2".
+               DB 10    ; Declară un octet neetichetat, inițializat cu 10. Acest
+                        ; octet va fi plasat la adresa (var2 + 1).
+    X          DW ?     ; Declară un cuvânt(2 octeți) neinițializat, etichetat cu "X".
+    Y          DD 3000  ; Declară un cuvânt dublu (4 octeți) cu eticheta "Y",
+                        ; inițializat cu valoarea 3000.
+    Z          DD 1,2,3 ; Declară 3 cuvinte duble (a câte 4 octeți fiecare)
+                        ; incepând cu adresa "Z" și inițializate cu 1, 2, respectiv 3.
+                        ; De exemplu, 3 va fi plasat la adresa (Z + 8).
+</pre>
+
+<p>
+</p><p></p><div class="noteclassic">
+DB, DW, DD sunt directive folosite pentru a specifica dimensiunea porțiunii:
+<p></p>
+<div class="table sectionedit5"><table class="inline">
+	<tbody><tr class="row0">
+		<td class="col0"> Directivă </td><td class="col1"> Rol </td><td class="col2"> Dimensiune </td>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> DB </td><td class="col1"> Define Byte </td><td class="col2"> 1 octet (8 biți) </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> DW </td><td class="col1"> Define Word </td><td class="col2"> 2 octeți (16 biți) </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> DD </td><td class="col1"> Define Double Word </td><td class="col2"> 4 octeți (32 biți) </td>
+	</tr>
+</tbody></table></div>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Sunt mai multe tipuri de regiuni de memorie după cum se poate observa și în imaginea de mai jos:
+<p></p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=8a0a6f&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Frolul-registrelor-adresare%2Fimages%2Fsections.jpg" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/rolul-registrelor-adresare/images/sections.jpg"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/fetch.jpeg" class="media" title="Sectiuni de memorie" alt="Sectiuni de memorie" width="600"></a>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+Ultima declarare din exemplul de mai sus reprezintă declararea unui 
+vector. Spre deosebire de limbajele de nivel mai înalt, unde vectorii 
+pot avea multiple dimensiuni, iar elementele lor sunt accesate prin 
+indici, în limbajul de asamblare vectorii sunt reprezentați ca un număr 
+de celule ce se află intr-o zonă contiguă de memorie.
+</p>
+
+</div>
+
+<h2 class="sectionedit6" id="adresarea_memoriei">Adresarea Memoriei</h2>
+<div class="level2">
+
+<p>
+Procesoarele x86 moderne pot adresa pana la 2^32 bytes de memorie, ceea 
+ce înseamnă că adresele de memorie sunt reprezentate pe 32 de biți. 
+Pentru a adresa memoria, procesorul folosește adrese (implicit, fiecare 
+label este translatat într-o adresa de memorie corespunzătoare). Pe 
+lângă label-uri mai există și alte forme de a adresa memoria:
+</p>
+<pre class="code">mov eax, [0xcafebab3]         ; directă (deplasament)
+mov eax, [esi]                ; indirectă (bază)
+mov eax, [ebp-8]              ; bazată (bază + deplasament)
+mov eax, [ebx*4 + 0xdeadbeef] ; indexată (index * scală + deplasament)
+mov eax, [edx + ebx + 12]     ; bazată și indexată fără scală (bază + index + deplasament)
+mov eax, [edx + ebx*4 + 42]   ; bazată și indexată cu scală (bază + index * scală + deplasament)
+</pre>
+
+<p>
+</p><p></p><div class="notewarning">
+<p></p>
+
+<p>
+Următoarele adresări sunt invalide:
+</p>
+<pre class="code">mov eax, [ebx-ecx]     ; Registrele pot fi doar adunate
+mov [eax+esi+edi], ebx ; Calculul adresei poate conține cel mult 2 registre</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit7" id="directive_de_dimensiune">Directive de dimensiune</h3>
+<div class="level3">
+
+<p>
+În general, dimensiunea pe care este reprezentată o valoare ce este 
+adusă din memorie poate fi inferată (dedusă) din codul instrucțiunii 
+folosite. Spre exemplu, în cazul adresărilor de mai sus, dimensiunea 
+valorilor putea fi inferată din dimensiunea registrului destinație, însă
+ în anumite cazuri acest lucru nu este atât de evident. Să urmarim 
+urmatoarea instrucțiune:
+</p>
+<pre class="code">mov [ebx], 2
+</pre>
+
+<p>
+Dupa cum se observă, se dorește stocarea valorii 2 la adresa conținută 
+de registrul ebx. Dimensiunea registrului este de 4 bytes. Valoarea 2 
+poate fi reprezentată atât pe 1 cât și pe 4 bytes. În acest caz, din 
+moment ce ambele interpretări sunt valide, procesorul are nevoie de 
+informații suplimentare despre cum să trateze această valoare. Acest 
+lucru se poate face prin directivele de dimensiune:
+</p>
+<pre class="code">mov byte [ebx], 2  ; Mută valoarea 2 în octetul de la adresa conținută în EBX.
+mov word [ebx], 2  ; Mută întregul 2 reprezentat pe 16 biți în cei 2 octeți
+                   ; începând de la adresa conținută în EBX
+mov dword [ebx], 2 ; Mută întregul 2 reprezentat pe 32 de biți în cei 4 octeți
+                   ; începând de la adresa conținută în EBX
+</pre>
+
+</div>
+
+<h3 class="sectionedit8" id="instructiunea_loop">Instrucțiunea loop</h3>
+<div class="level3">
+
+<p>
+Instrucțiunea loop se folosește pentru bucle cu un număr de iterații 
+prestabilit, încărcat în registrul ECX. Sintaxa ei este urmatoarea:
+</p>
+<pre class="code">mov ecx, 10 ; Inițializează ECX cu numărul de iterații
+label:
+; conținutul buclei
+loop label
+</pre>
+
+<p>
+La fiecare iterație, se decrementează registrul ECX și se verifică dacă 
+este diferit de 0. În acest caz, se sare la eticheta precizată. Există 
+și alte forme ale instrucțiunii care verifică, în plus, flagul ZF:
+</p>
+<div class="table sectionedit9"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0 leftalign">Mnemonică          </th><th class="col1 leftalign">Descriere                                                         </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign">LOOPE/LOOPZ label  </td><td class="col1">Decrementează ECX; sari la eticheta label dacă ECX != 0 și ZF == 1</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">LOOPNE/LOOPNZ label</td><td class="col1">Decrementează ECX; sari la eticheta label dacă ECX != 0 și ZF != 1</td>
+	</tr>
+</tbody></table></div>
+
+<p>
+</p><p></p><div class="noteclassic">
+<p></p>
+
+<p>
+Ceea ce trebuie să aveți în vedere atunci când utilizați salturi într-un
+ program scris în limbaj de asamblare este diferența dintre short 
+jump(near jump) și long jump(far jump).
+</p>
+<div class="table sectionedit10"><table class="inline">
+	<tbody><tr class="row0">
+		<td class="col0"> Tip și exemplu </td><td class="col1"> Dimensiune și semnificație </td><td class="col2"> Descriere </td>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> Short Jump (loop) </td><td class="col1"> 2 octeți (un octet pentru opcode(Operation Code) și un octet pentru adresă) </td><td class="col2">
+ adresa relativă a instrucțiunii către care se dorește să se facă 
+jump-ul trebuie să nu fie la distanță mai mare de 128 octeți față de 
+adresa instrucțiunii curente </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> Long Jump (jmp) </td><td class="col1"> 3 octeți (un octet pentru opcode(Operation Code) și doi octeți pentru adresă) </td><td class="col2">
+ adresa relativă a instrucțiunii către care se dorește să se facă 
+jump-ul trebuie să nu fie la distanță mai mare de 32768 octeți față de 
+adresa instrucțiunii curente </td>
+	</tr>
+</tbody></table></div>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit11" id="tutoriale_si_exercitii">Tutoriale și exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteclassic">
+<p></p>
+
+<p>
+În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>.
+ Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl 
+actualiza, folosiți comanda git pull origin master din interiorul 
+directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai 
+recentă.Dacă doriți să descărcați repository-ul în altă locație, 
+folosiți comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>.Pentru mai multe informații despre folosirea utilitarului git, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a>.
+</p>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit12" id="recapitularedescompunerea_unui_numar_in_puteri_ale_lui_2">0. Recapitulare: Descompunerea unui număr în puteri ale lui 2</h3>
+<div class="level3">
+
+<p>
+Pornind de la fișierul sursă <code>power-2.asm</code>, realizați un program care descompune un număr în puteri ale lui 2. Numărul va fi pasat prin registrul <code>eax</code>.
+</p>
+
+<p>
+De exemplu, pentru <code>eax = 211</code>, programul vostru va afișa:
+</p>
+<pre class="code">1
+2
+16
+64
+128
+</pre>
+
+<p>
+</p><p></p><div class="notetip"> Încercați să vă aduceți aminte ce face instrucțiunea test. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit13" id="tutorialinmultirea_a_doua_numere_reprezentate_pe_un_octet">1. Tutorial: Înmulțirea a două numere reprezentate pe un octet</h3>
+<div class="level3">
+
+<p>
+Parcurgeți, rulați și testați codul din fișierul <code>multiply.asm</code>. În cadrul programului înmulțim două numere definite ca octeți. Pentru a le putea accesa folosim o construcție de tipul <code>byte [register]</code>.
+</p>
+
+<p>
+Atunci cănd facem înmulțire procesul este următorul, așa cum este descris și <a href="https://en.wikibooks.org/wiki/X86_Assembly/Arithmetic" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Assembly/Arithmetic" rel="nofollow">aici</a>:
+</p>
+<ol>
+<li class="level1"><div class="li"> Plasăm deînmulțitul în registrul de deînmulțit, adică:</div>
+<ul>
+<li class="level2"><div class="li"> dacă facem operații pe un byte (8 biți, un octet), plasăm deînmulțitul în registrul <code>AL</code>;</div>
+</li>
+<li class="level2"><div class="li"> dacă facem operații pe un cuvânt (16 biți, 2 octeți, plasăm deînmulțitul în registrul <code>AX</code>;</div>
+</li>
+<li class="level2"><div class="li"> dacă facem operații pe un dublu cuvânt (32 de biți, 4 octeți), plasăm deînmulțitul în registrul <code>EAX</code>.</div>
+</li>
+</ul>
+</li>
+<li class="level1"><div class="li"> Înmulțitorul este transmis ca argument mnemonicii <code>mul</code>. Înmulțitorul trebuie să aibă aceeași dimensiune ca deînmulțitul.</div>
+</li>
+<li class="level1"><div class="li"> Rezultatul este plasat în două registre (partea high și partea low).</div>
+</li>
+</ol>
+
+<p>
+Testați programul. Încercați alte valori pentru num1 și num2.
+</p>
+
+</div>
+
+<h3 class="sectionedit14" id="inmultirea_a_doua_numere">2. Înmulțirea a două numere</h3>
+<div class="level3">
+
+<p>
+Actualizați zona marcată cu <code>TODO</code> în fișierul <code>multiply.asm</code> pentru a permite înmulțirea și a numelor de tip <code>word</code> și <code>dword</code>, adică <code>num1_dw</code> cu <code>num2_dw</code>, respectiv <code>num1_dd</code> și <code>num2_dd</code>.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru înmulțirea numerelor de tip word (pe 16 biți), componentele sunt dispuse astfel:
+<p></p>
+<ul>
+<li class="level1"><div class="li"> În registrul <code>AX</code> se plasează deînmulțitul.</div>
+</li>
+<li class="level1"><div class="li"> Argumentul instrucțiunii, înmulțitorul, <code>mul</code> (posibil un alt registru) este pe 16 biți (fie valoare fie un registru precum <code>BX</code>, <code>CX</code>, <code>DX</code>).</div>
+</li>
+<li class="level1"><div class="li"> Rezultatul înmulțirii este dispus în perechea <code>DX:AX</code>, adică partea “high” a <code>rezultatului în registrul DX, iar partea “low” a rezultatului în registrul AX</code>.</div>
+</li>
+</ul>
+
+<p>
+Pentru înmulțirea numerelor de tip <code>dword</code> (pe 32 biți), componentele sunt dispuse astfel:
+</p>
+<ul>
+<li class="level1"><div class="li"> În registrul <code>EAX</code> se plasează deînmulțitul.</div>
+</li>
+<li class="level1"><div class="li"> Argumentul instrucțiunii, înmulțitorul, mul (posibil un alt registru) este pe 32 biți (fie valoare fie un registru precum <code>EBX</code>, <code>ECX</code>, <code>EDX</code>).</div>
+</li>
+<li class="level1"><div class="li"> Rezultatul înmulțirii este dispus în perechea <code>EDX:EAX</code>, adică partea “high” a rezultatului în registrul <code>EDX</code>, iar partea “low” a rezultatului în registrul <code>EAX</code>.</div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p><div class="noteclassic">
+La afișarea rezultatului folosiți macro-ul <code>PRINTF32</code> pentru a afișa cele două registre care conțin rezultatul:
+<p></p>
+<ul>
+<li class="level1"><div class="li"> Registrele <code>DX</code> și <code>AX</code> pentru înmulțirea numerelor de tip word.</div>
+</li>
+<li class="level1"><div class="li"> Registrele <code>EDX</code> și <code>EAX</code> pentru înmulțirea numerelor de tip dword.</div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit15" id="tutorialsuma_primelor_n_numere_naturale">3. Tutorial: Suma primelor N numere naturale</h3>
+<div class="level3">
+
+<p>
+În programul <code>sum_n.asm</code> este calculată suma primelor num numere naturale.
+</p>
+
+<p>
+Urmăriți codul, observați construcțiile și registrele specifice pentru lucru cu bytes. Rulați codul.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant"> Treceți la următorul pas doar 
+după ce ați înțeles foarte bine ce face codul. Vă va fi greu să faceți 
+următorul exercițiu dacă aveți dificultăți în înțelegerea exercițiului 
+curent. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit16" id="suma_patratelor_primelor_n_numere_naturale">4. Suma pătratelor primelor N numere naturale</h3>
+<div class="level3">
+
+<p>
+Porniți de la programul <code>sum_n.asm</code> și creați un program <code>sum_n_square.asm</code> care să calculeze suma pătratelor primelor num numere naturale (num &lt; = 100).
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Registrele <code>eax</code> și <code>edx</code> le veți folosi la înmulțirea pentru ridicarea la putere (în instrucțiunea <code>mul</code>). Astfel că nu veți mai putea folosi (ușor) registrul <code>eax</code> pentru stocarea sumei pătratelor. Pentru a reține suma pătratelor aveți două variante:
+<p></p>
+<ol>
+<li class="level1"><div class="li"> (mai simplu) Folosiți registrul <code>ebx</code> pentru a reține suma pătratelor.</div>
+</li>
+<li class="level1"><div class="li"> (mai complicat) Înainte de a opera registrul <code>eax</code> salvați valoarea sa pe stivă (folosind instrucțiunea <code>push</code>), apoi faceți operațiile necesare și apoi restaurați valoarea salvată (folosind instrucțiunea <code>pop</code>).</div>
+</li>
+</ol>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru verificare, suma pătratelor primelor 100 de numere naturale este <code>338350</code>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit17" id="tutorialsuma_elementelor_dintr-un_vector_reprezentate_pe_un_octet">5. Tutorial: Suma elementelor dintr-un vector reprezentate pe un octet</h3>
+<div class="level3">
+
+<p>
+În programul <code>sum_array.asm</code> este calculată suma elementelor unui vector (array) de octeți (bytes, reprezentare pe 8 biți).
+</p>
+
+<p>
+Urmăriți codul, observați construcțiile și registrele specifice pentru lucru cu bytes. Rulați codul.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant"> Treceți la următorul pas doar 
+după ce ați înțeles foarte bine ce face codul. Vă va fi greu să faceți 
+exercițiile următoare dacă aveți dificultăți în înțelegerea exercițiului
+ curent. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit18" id="suma_elementelor_dintr-un_vector">6. Suma elementelor dintr-un vector</h3>
+<div class="level3">
+
+<p>
+În zona marcată cu TODO din fișierul <code>sum_array.asm</code> 
+completați codul pentru a realiza suma vectorilor cu elemente de tip 
+word (16 biți) și de tip dword (32 de biți); este vorba de vectorii <code>word_array</code> și <code>dword_array</code>.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Când veți calcula adresa unui element din array, veți folosi construcție de forma:
+<p></p>
+
+<p>
+<code>base + size * index</code>
+</p>
+
+<p>
+În construcția de mai sus:
+</p>
+<ul>
+<li class="level1"><div class="li"> base este adresa vectorului (adică word_array sau <code>dword_array</code>)</div>
+</li>
+<li class="level1"><div class="li"> size este lungimea elementului 
+vectorului (adică 2 pentru vector de word (16 biți, 2 octeți) și 4 
+pentru vector de dword (32 de biți, 4 octeți)</div>
+</li>
+<li class="level1"><div class="li"> index este indexul curent în cadrul vectorului</div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Suma elementelor celor trei vectori trebuie să fie:
+<p></p>
+<ul>
+<li class="level1"><div class="li"> <code>sum(byte_array): 575</code></div>
+</li>
+<li class="level1"><div class="li"> <code>sum(word_array): 65799</code></div>
+</li>
+<li class="level1"><div class="li"> <code>sum(dword_array): 74758117</code></div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit19" id="suma_patratelor_elementelor_dintr-un_vector">7. Suma pătratelor elementelor dintr-un vector</h3>
+<div class="level3">
+
+<p>
+Pornind de la programul de la exercițiul anterior, calculați suma pătratelor elementelor dintr-un vector.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Puteți folosi vectorul <code>dword_array</code>, având însă grijă ca suma pătratelor elementelor conținute să poată fi reprezentată pe 32 de biți. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Dacă folosiți construcția de mai jos (vector cu 10 elemente)
+<p></p>
+<pre class="code">dword_array dd 1392, 12544, 7992, 6992, 7202, 27187, 28789, 17897, 12988, 17992
+</pre>
+
+<p>
+suma pătratelor va fi 2704560839.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit20" id="impartirea_a_doua_numere">8. Împărțirea a două numere</h3>
+<div class="level3">
+
+<p>
+În programul <code>divide.asm</code> sunt calculate câtul și restul a două numere reprezentate pe un octet. Actualizați zona marcată cu <code>TODO</code> pentru a realiza împărțirile <code>dividend2 / divisor2</code> (împărțitor de tip word) și <code>dividend3 / divisor3</code> (împărțitor de tip dword).
+</p>
+
+<p>
+În mod similar instrucțiunii <code>mul</code>, regiștrii în care este 
+plasat deîmpărțitul variază în funcție de dimensiunea de reprezentare a 
+împărțitorului. Împărțitorul este transmis ca argument mnemonicii <code>div</code>.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Dacă împărțitorul este de tip <code>byte</code> (8 biți), componentele sunt dispuse astfel:
+<p></p>
+<ul>
+<li class="level1"><div class="li"> deîmpărțitul este plasat în registrul <code>AX</code></div>
+</li>
+<li class="level1"><div class="li"> argumentul instrucțiunii <code>div</code> are 8 biți și poate fi reprezentat de un registru sau de o valoare imediată</div>
+</li>
+<li class="level1"><div class="li"> câtul este dispus în <code>AL</code></div>
+</li>
+<li class="level1"><div class="li"> restul este dispus în <code>AH</code></div>
+</li>
+</ul>
+
+<p>
+Dacă împărțitorul este de tip <code>word</code> (16 biți), componentele sunt dispuse astfel:
+</p>
+<ul>
+<li class="level1"><div class="li"> deîmpărțitul este dispus în perechea <code>DX:AX</code>, adică partea sa <code>high</code> în registrul <code>DX</code>, iar partea <code>low</code> în <code>AX</code></div>
+</li>
+<li class="level1"><div class="li"> argumentul instrucțiunii <code>div</code> are 16 biți și poate fi reprezentat de un registru sau de o valoare imediată</div>
+</li>
+<li class="level1"><div class="li"> câtul este dispus în <code>AX</code></div>
+</li>
+<li class="level1"><div class="li"> restul este dispus în <code>DX</code></div>
+</li>
+</ul>
+
+<p>
+Dacă împărțitorul este de tip <code>dword</code> (32 de biți), componentele sunt dispuse astfel:
+</p>
+<ul>
+<li class="level1"><div class="li"> deîmpărțitul este dispus în perechea <code>EDX:EAX</code>, adică partea sa <code>high</code> în registrul <code>EDX</code>, iar partea <code>low</code> în <code>EAX</code></div>
+</li>
+<li class="level1"><div class="li"> argumentul instrucțiunii <code>div</code> are 32 de biți și poate fi reprezentat de un registru sau de o valoare imediată</div>
+</li>
+<li class="level1"><div class="li"> câtul este dispus în <code>EAX</code></div>
+</li>
+<li class="level1"><div class="li"> restul este dispus în <code>EDX</code></div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Dacă programul vă dă “SIGFPE. 
+Arithmetic exception”, cel mai probabil aţi uitat să iniţializaţi partea
+ superioară a deîmpărţitului (AH, DX sau EDX). 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit21" id="bonusnumarul_de_numere_negative_si_pozitive_dintr-un_vector">9. Bonus: Numărul de numere negative și pozitive dintr-un vector</h3>
+<div class="level3">
+
+<p>
+Creați un program care afișează numărul de numere negative, respectiv numărul de numere pozitive dintr-un vector.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Definiți un vector care să conțină atât numere negative cât și numare pozitive. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Folosiți intrucțiunea <code>cmp</code> și mnemonici de salt condițional. Urmăriți detalii aici. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Intrucțiunea <code>inc</code> urmată de un registru incrementează cu 1 valoarea stocată în acel registru. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit22" id="bonusnumarul_de_numere_pare_si_impare_dintr-un_vector">10. Bonus: Numărul de numere pare și impare dintr-un vector</h3>
+<div class="level3">
+
+<p>
+Creați un program care afișează numărul de numere pare, respectiv numărul de numere impare dintr-un vector.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Puteți folosi instrucțiunea <code>div</code> pentru a împărți un număr la 2 și pentru a compara apoi restul împărțirii cu 0. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru testare folosiți un vector 
+doar cu numere pozitive. Pentru numere negative trebuie să faceți 
+extensie de semn; ar merge și fără pentru că ne interesează doar restul,
+ dar nu am fi riguroși <img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/icon_smile.gif" class="icon" alt=":-)"> 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit23" id="links">Links</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="https://www.felixcloutier.com/x86/index.html" class="urlextern" title="https://www.felixcloutier.com/x86/index.html" rel="nofollow">X86 Instruction reference</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html" class="urlextern" title="https://www.cs.virginia.edu/~evans/cs216/guides/x86.html" rel="nofollow">Alte cursuri de assembler</a></div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit24" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-06-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-06-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_25612279862b0bf811665d" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_211987763462b0bf8119544" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_06rolul_registrelor_adresare_directa_si_bazata">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#registre">Registre</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#subsectiuni_ale_registrelor">Subsecțiuni ale registrelor</a></div></li>
+<li class="level3"><div class="li"><a href="#declarari_statice_de_regiuni_de_memorie">Declarări statice de regiuni de memorie</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#adresarea_memoriei">Adresarea Memoriei</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#directive_de_dimensiune">Directive de dimensiune</a></div></li>
+<li class="level3"><div class="li"><a href="#instructiunea_loop">Instrucțiunea loop</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#tutoriale_si_exercitii">Tutoriale și exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#recapitularedescompunerea_unui_numar_in_puteri_ale_lui_2">0. Recapitulare: Descompunerea unui număr în puteri ale lui 2</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorialinmultirea_a_doua_numere_reprezentate_pe_un_octet">1. Tutorial: Înmulțirea a două numere reprezentate pe un octet</a></div></li>
+<li class="level3"><div class="li"><a href="#inmultirea_a_doua_numere">2. Înmulțirea a două numere</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorialsuma_primelor_n_numere_naturale">3. Tutorial: Suma primelor N numere naturale</a></div></li>
+<li class="level3"><div class="li"><a href="#suma_patratelor_primelor_n_numere_naturale">4. Suma pătratelor primelor N numere naturale</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorialsuma_elementelor_dintr-un_vector_reprezentate_pe_un_octet">5. Tutorial: Suma elementelor dintr-un vector reprezentate pe un octet</a></div></li>
+<li class="level3"><div class="li"><a href="#suma_elementelor_dintr-un_vector">6. Suma elementelor dintr-un vector</a></div></li>
+<li class="level3"><div class="li"><a href="#suma_patratelor_elementelor_dintr-un_vector">7. Suma pătratelor elementelor dintr-un vector</a></div></li>
+<li class="level3"><div class="li"><a href="#impartirea_a_doua_numere">8. Împărțirea a două numere</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusnumarul_de_numere_negative_si_pozitive_dintr-un_vector">9. Bonus: Numărul de numere negative și pozitive dintr-un vector</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusnumarul_de_numere_pare_si_impare_dintr-un_vector">10. Bonus: Numărul de numere pare și impare dintr-un vector</a></div></li>
+<li class="level3"><div class="li"><a href="#links">Links</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-06.txt · Last modified: 2021/11/11 23:57 by andrei.albisoru          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2006%20Rolul%20registrelor,%20adresare%20direct%C4%83%20%C8%99i%20bazat%C4%83%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

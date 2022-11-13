@@ -1,0 +1,814 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 08: Lucrul cu stiva    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-05-01T22:46:34+0300">
+<meta name="keywords" content="iocla,laboratoare,laborator-08">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-08">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08">
+<link rel="stylesheet" type="text/css" href="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-08","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_08lucrul_cu_stiva">Laborator 08: Lucrul cu stiva</h1>
+<div class="level1">
+
+<p>
+În acest laborator vom învăța cum este reprezentată stiva in limbajul de
+ asamblare, care este utilitatea ei si cum se programeaza cu ajutorul 
+acesteia.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="terminologie">Terminologie</h2>
+<div class="level2">
+
+<p>
+In lumea algoritmicii, stiva este o structura de date abstracta prin 
+intermediul careia se poate reprezenta informatie ce respecta regula 
+“primul venit, ultimul servit”.
+</p>
+
+<p>
+In lumea programarii assembly, stiva este o zona rezervata de memorie 
+folosita pentru a tine evidenta operatiilor interne ale unui program: 
+functii, adrese de retur, parametrii pasati, etc. Astfel, stiva poate fi
+ vazuta ca o implementare la nivel hardware a stivei abstracte.
+</p>
+
+</div>
+
+<h2 class="sectionedit3" id="utilitatea_stivei">Utilitatea stivei</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <strong>Apeluri de functii.</strong>
+ Fiecare apel de functie necesita, printre altele, memorarea adresei de 
+retur. Imaginati-va ca aveti un numar de functii N ce se apeleaza 
+succesiv : prima functie o apeleaza pe a 2-a, a 2-a pe a 3-a si asa mai 
+departe; cand functia N a fost apelata si si-a terminat executia, 
+programul trebuie sa continue in contextul in care a avut loc apelul. 
+Daca retinem adresele de retur intr-o stiva, ordinea apelurilor se 
+pastreaza in mod natural.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Salvarea registrelor</strong>.
+ De asemenea, de fiecare data cand se apeleaza o functie, exista riscul 
+ca registrele sa fie folosite de functia apelata. Prin urmare, valorile 
+acestora se pierd si flow-ul programului se strica. Pentru a evita acest
+ comportament, valorile registrelor se pot salva temporar, pana la 
+sfarsitul apelului functiei, pe stiva. Acest lucru se poate face in doua
+ moduri:</div>
+<ol>
+<li class="level2"><div class="li"> Se salveaza independent fiecare registru ce poate fi suprascris in apel cu ajutorul instructiunii <code>push</code>. Problema apare din cauza ca apelantul nu poate cunoaste in prealabil ce registre se pot strica.</div>
+</li>
+<li class="level2"><div class="li"> Se salveaza toate registrele cu ajutorul instructiunii <code>pusha</code>.
+ Aici dezavantajul apare cauzat de faptul ca operatia se face 
+considerabil mai lent. In acelasi timp, vom vedea in laboratorul urmator
+ ca functiile cu tip <strong>returneaza</strong> cu ajutorul registrului <code>eax</code> rezultatul. La folosirea instructiunii <code>popa</code>, responsabila pentru restaurarea registrelor, valoare lui <code>eax</code> va fi pierduta.</div>
+</li>
+</ol>
+</li>
+<li class="level1"><div class="li"> <strong>Variabile temporare.</strong>
+ In general, programele folosesc un numar mare de variabile si rezultate
+ partiale; avand in vedere ca exista un numar limitat de registre, este 
+posibil ca la un moment dat, sa nu avem niciun registru disponibil 
+pentru a retine valoarea unei operatii. In cazul acesta, putem memora 
+rezultatul la o adresa de memorie pe care o definim in zona de date. 
+Aceasta metoda are dezavantajul ca vom “polua” tabela de offset-uri cu 
+variabile pe care le folosim o singura data. In loc sa facem aceasta 
+pentru fiecare rezultat partial, este mai usor sa punem pe stiva 
+valoarea unui registru pentru a il putea folosi si a o recupera in 
+momentul in care nu mai folosim variabila temporara.</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit4" id="operatii_asupra_stivei">Operatii asupra stivei</h2>
+<div class="level2">
+
+<p>
+Stiva poate fi modificata in 2 moduri:
+</p>
+<ol>
+<li class="level1"><div class="li"> Prin utilizarea instructiunilor special implementate pentru lucrul cu stiva, dintre care cele mai uzuale sunt <code>push</code> si <code>pop</code>:</div>
+</li>
+</ol>
+<pre class="code">%include "io.asm"
+
+section .text
+global CMAIN
+CMAIN:
+
+    mov eax, 7
+    mov ebx, 8
+    add eax, ebx
+    push eax                 ; pune pe stiva continutul registrului eax
+    mov eax, 10              ; acum putem folosi registrul, intrucat valoarea lui este salvata pe stiva
+    PRINTF32 `%d \n\x0`, eax ; 10
+
+    pop eax                  ; recupereaza valoarea registrului eax
+    PRINTF32 `%d \n\x0`, eax ; 15
+</pre>
+<ol>
+<li class="level1"><div class="li"> Adresand memoria, cu ajutorului registrului in care este tinut pointerul catre capul stivei (“stack pointer”) <code>esp</code>:</div>
+</li>
+</ol>
+<pre class="code">%include "io.asm"
+
+section .text
+global CMAIN
+CMAIN:
+    mov eax, 7
+    mov ebx, 8
+    add eax, ebx
+    sub esp, 4           ; rezerva 4 octeti pe stiva
+    mov [esp], eax       ; muta la noua adresa catre care pointeaza esp continutul registrului eax
+    mov eax, 10
+    PRINTF32 `%d \n\x0`, eax
+
+    mov eax, [esp]       ; recupereaza valoarea de pe stiva
+    add esp, 4           ; restabileste valoarea registrului esp
+    PRINTF32 `%d \n\x0`, eax
+</pre>
+
+<p>
+</p><p></p><div class="noteimportant"> Comentati instructiunile <code>sub esp, 4</code> si <code>add esp, 4</code>. Ce se intampla? De ce? 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Stiva este folosita pentru a memora adresa de retur in momentul in care o functie este apelata 
+</div><p></p>
+<p></p>
+
+<p>
+<strong>Remarcati faptul ca stiva creste de la adrese mari la adrese mici.</strong>
+ Acesta este motivul pentru care alocarea memoriei pe stiva se face 
+folosind instructiunea sub, iar eliberarea se face folosind 
+instructiunea add.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=895c4b&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Fstiva%2Fimages%2Fstack.png" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/stiva/images/stack.png"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/fetch.png" class="media" title="stack_image" alt="stack_image"></a>
+</p>
+
+<p>
+Unele procesoare nu au suport pentru lucrul cu stiva: spre exemplu, procesoarele <a href="https://en.wikipedia.org/wiki/MIPS_architecture" class="urlextern" title="https://en.wikipedia.org/wiki/MIPS_architecture" rel="nofollow">MIPS</a> nu au instructiuni <code>push</code> si <code>pop</code>
+ si nici un registru special pentru stack pointer. Astfel, daca am dori 
+sa implementam operatiile pe stiva in procesorul MIPS aceasta s-ar 
+realiza exact ca in exemplul de mai sus, doar ca am putea sa ne alegem 
+noi orice registru pentru a tine minte stack pointerul.
+</p>
+
+<p>
+Asadar, instructiunea <code>push eax</code>, pe un procesor x86, este echivalenta cu:
+</p>
+<pre class="code">sub esp, 4
+mov [esp], eax
+</pre>
+
+<p>
+Iar instructiunea <code>pop eax</code>:
+</p>
+<pre class="code">mov eax, [esp]
+add esp, 4
+</pre>
+
+<p>
+</p><p></p><div class="noteimportant"> Trebuie sa avem grija cu 
+cantitatea de date alocate pe stiva intrucat dimensiunea acesteia este 
+limitata. Umplerea stivei va duce la cunoscuta eroare de <strong>stack overflow</strong> (mai multe la laboratorul de securitate). 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic"> Stack size-ul default pe Linux pe o arhitectura pe 64 biti este de 8MiB. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit5" id="stiva_in_contextul_spatiului_de_adresa_a_unui_proces">Stiva in contextul spatiului de adresa a unui proces</h2>
+<div class="level2">
+
+<p>
+Spatiul de adresa al unui proces, sau, mai bine spus, spatiul virtual de
+ adresa al unui proces reprezinta zona de memorie virtuala utilizabila 
+de un proces. Fiecare proces are un spatiu de adresa propriu. Chiar in 
+situatiile in care doua procese partajează o zona de memorie, spatiul 
+virtual este distinct, dar se mapeaza peste aceeasi zona de memorie 
+fizica.
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=58256b&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Fstiva%2Fimages%2Fprocess_address_space.jpg" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/stiva/images/process_address_space.jpg"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/fetch.jpeg" class="media" title="stack_image" alt="stack_image"></a>
+</p>
+
+<p>
+In figura alaturata este prezentat un spatiu de adresa tipic pentru un proces.
+</p>
+
+<p>
+Cele 4 zone importante din spatiul de adresa al unui proces sunt zona de
+ date, zona de cod, stiva si heap-ul. După cum se observa si din figura,
+ stiva si heap-ul sunt zonele care pot creste. De fapt, aceste doua zone
+ sunt dinamice si au sens doar in contextul unui proces. De partea 
+cealalta, informatiile din zona de date si din zona de cod sunt descrise
+ in executabil.
+</p>
+
+</div>
+
+<h2 class="sectionedit6" id="tips_and_tricks">Tips and tricks</h2>
+<div class="level2">
+
+<p>
+Regula de aur a utilizarii stivei este : numarul de <code>push</code>-uri == numarul de <code>pop</code>-uri
+ intr-o functie. Avand in vedere ca stiva este folosita pentru apelarea 
+functiilor, este foarte important ca in momentul in care o functie isi 
+termina executia, sa actualizeze esp-ul astfel incat acesta sa indice 
+catre aceeasi zona de memorie (a stivei) catre care indica in momentul 
+intrarii in functie.
+</p>
+
+<p>
+Avand in vedere ca exista situatii in care facem un numar N de <code>push</code>-uri si ajungem la finalul functiei fara sa fi facut <code>pop</code> pentru niciuna dintre valori, putem restabili capul stivei folosind instructiunea <code>add</code>.
+</p>
+<pre class="code">section .text
+global CMAIN
+CMAIN:
+    mov eax, 5
+    mov ebx, 6
+    mov ecx, 7
+
+    push eax
+    push ebx
+    push ecx
+
+    add esp, 12     ; echivalent cu utilizarea a 3 pop-uri consecutive
+    ret</pre>
+
+<p>
+Metoda de mai sus are dezavantajul ca tot trebuie sa cautam prin program cate <code>push</code>-uri
+ am facut (ceea ce poate sa necesite destul de mult timp in programele 
+din viata reala). Daca nu vrem sa nu ne batem deloc capul cu stack 
+pointerul, putem sa folosim urmatoarea constructie:
+</p>
+<pre class="code">section .text
+global CMAIN
+CMAIN:
+
+    mov ebp, esp       ; salveaza stack pointerul curent
+
+    mov eax, 5
+    mov ebx, 6
+    mov ecx, 7
+
+    push eax
+    push ebx
+    push ecx
+
+    mov esp, ebp       ; restaureaza stack pointerul
+    ret
+</pre>
+
+<p>
+</p><p></p><div class="noteimportant"> Care este intrebuintarea principala a registrului <code>ebp</code>? 
+</div><p></p>
+<p></p>
+
+<p>
+Dupa cum putem observa, registrul ebp defineste stack frame-ul fiecarei 
+functii. De altfel, la fel cum putem adresa variabilele locale cu 
+ajutorul registrului esp, acelasi lucru este este posibil si cu ebp. Mai
+ mult de atat, vom vedea ca parametrii functiei apelate sunt adresati cu
+ ajutorul lui ebp.
+</p>
+
+</div>
+
+<h2 class="sectionedit7" id="exercitii">Exercitii</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant"> În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>. Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai 
+recentă.Dacă doriți să descărcați repository-ul în altă locație, 
+folosiți comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>. Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit8" id="recapitularemedia_aritmetica_a_elementelor_dintr-un_vector">0. Recapitulare: Media aritmetică a elementelor dintr-un vector</h3>
+<div class="level3">
+
+<p>
+Pornind de la exercițiul <code>0-recap-mean.asm</code> din arhiva de laborator, implementați codul lipsă, marcat de comentarii de tip <code>TODO</code>,
+ pentru a realiza un program care calculează media aritmetică a 
+elementelor dintr-un vector.  Afișați partea întreagă a mediei (câtul 
+împărțirii) cu primele 5 zecimale exacte din partea fracționară. (pentru
+ a calcula prima cifră din partea fracționară trebuie să înmulțiti 
+restul obținut cu 10, urmat de o împarțire cu același împărțitor). 
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Dacă ați făcut calculul corect, suma elementelor vectorului va fi <code>3735</code> iar media aritmetică a elementelor din vector va fi <code>287.30769</code>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit9" id="max">1. Max</h3>
+<div class="level3">
+
+<p>
+Calculați maximul dintre numerele din 2 registre (<code>eax</code> și <code>ebx</code>) folosind o instrucțiune de comparație, o instrucțiune de salt și instrucțiuni <code>push</code>/<code>pop</code>.
+</p>
+
+<p>
+</p><p></p><div class="notetip"> Gandiți-vă cum puteți să interschimbați două registre folosind stiva. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit10" id="construirea_array-ului_inversat">2. Construirea array-ului inversat</h3>
+<div class="level3">
+
+<p>
+Pornind de la exercițiul <code>reverse-array.asm</code>, implementați <code>TODO</code>-urile <strong>fără a folosi instrucțiunea <code>mov</code> în lucrul cu array-urile</strong> astfel încât în array-ul <code>output</code> la finalul programului să se afle array-ul <code>input</code> inversat.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Dupa o rezolvare corecta programul ar trebui sa printeze:
+<p></p>
+<pre class="code">   Reversed array:
+   911
+   845
+   263
+   242
+   199
+   184
+   122
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit11" id="adresarea_si_printarea_stivei">3. Adresarea si printarea stivei</h3>
+<div class="level3">
+
+<p>
+Programul <code>stack-addressing.asm</code> din arhiva laboratorului alocă și inițializează două variabile locale pe stivă:
+</p>
+<ul>
+<li class="level1"><div class="li"> un array format din numerele naturale de la 1 la <code>NUM</code></div>
+</li>
+<li class="level1"><div class="li"> un string “Ana are mere”.</div>
+</li>
+</ul>
+<ol>
+<li class="level1"><div class="li"> Înlocuiți fiecare instrucțiune <code>push</code> cu o secvență de instrucțiuni echivalentă.</div>
+</li>
+<li class="level1"><div class="li"> Printați adresele și valorile de pe stivă din intervalul <strong>[ESP, EBP]</strong> (de la adrese mici la adrese mari) octet cu octet.</div>
+</li>
+<li class="level1"><div class="li"> Printați string-ul alocat pe stivă 
+octet cu octet și explicați cum arată acesta în memorie. Gândiți-vă de 
+la ce adresă ar trebui să afișați și când ar trebui să vă opriți.</div>
+</li>
+<li class="level1"><div class="li"> Printați vectorul alocat pe stivă 
+element cu element. Gândiți-vă de la ce adresă ar trebui să începeți 
+afișarea și ce dimensiune are un element.</div>
+</li>
+</ol>
+
+<p>
+</p><p></p><div class="noteclassic"> După o implementare cu succes, 
+programul ar trebui să afișeze ceva asemănător cu următorul output (nu 
+fix același lucru, adresele de pe stivă pot să difere):
+<p></p>
+<pre class="code">0xffcf071b: 65
+0xffcf071c: 110
+0xffcf071d: 97
+0xffcf071e: 32
+0xffcf071f: 97
+...
+0xffcf0734: 4
+0xffcf0735: 0
+0xffcf0736: 0
+0xffcf0737: 0
+0xffcf0738: 5
+0xffcf0739: 0
+0xffcf073a: 0
+0xffcf073b: 0
+Ana are mere
+1 2 3 4 5
+</pre>
+
+<p>
+Explicați semnificația fiecărui octet. De ce sunt puși în ordinea respectivă? De ce unii octeți sunt 0?
+
+</p></div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Amintiți-vă ce valoare au caracterele în reprezentarea zecimală(codul <abbr title="American Standard Code for Information Interchange">ASCII</abbr>).
+Amintiți-vă în ce ordine sunt ținuți octeții unui număr: revedeți secțiunea <strong>Ordinea de reprezentare a numerelor mai mari de un octet</strong> din Laboratorul 01. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip"> Citiți sectiunea Operatii asupra stivei. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit12" id="variabile_locale">4. Variabile locale</h3>
+<div class="level3">
+
+<p>
+Programul <code>merge-arrays.asm</code> din cadrul arhivei de laborator, îmbină două array-uri sortate crescător (<code>array_1</code> și <code>array_2</code>) punând array-ul rezultat în <code>array_output</code> definit în secțiunea <code>.data</code>.
+</p>
+
+<p>
+Modificați programul astfel încat <code>array_output</code> să fie alocat pe stivă. Alocarea array-ului se face cu instructiunea sub.
+</p>
+
+</div>
+
+<h3 class="sectionedit13" id="bonusgcd_-_greatest_common_divisor">5. BONUS: GCD - Greatest Common Divisor</h3>
+<div class="level3">
+
+<p>
+Deschideți <code>gcd.asm</code> și rulați programul. Codul calculează 
+cel mai mare divizor comun dintre două numere date ca parametru prin 
+registrele eax și edx, și pune valoarea calculată tot în registrul eax.
+</p>
+<ol>
+<li class="level1"><div class="li"> Faceți modificările necesare astfel încat mesajul de eroare - <code>Segmentation fault (core dumped)</code> - să nu mai apară.</div>
+</li>
+<li class="level1"><div class="li"> În cadrul label-ului <code>print</code> afișați rezultatul sub forma:</div>
+</li>
+</ol>
+<pre class="code">gcd(49,28)=7
+</pre>
+
+</div>
+
+<h2 class="sectionedit14" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-08-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-08-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_188617657862b0bf7088976" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_200827118862b0bf708c80c" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_08lucrul_cu_stiva">Laborator 08: Lucrul cu stiva</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#terminologie">Terminologie</a></div></li>
+<li class="level2"><div class="li"><a href="#utilitatea_stivei">Utilitatea stivei</a></div></li>
+<li class="level2"><div class="li"><a href="#operatii_asupra_stivei">Operatii asupra stivei</a></div></li>
+<li class="level2"><div class="li"><a href="#stiva_in_contextul_spatiului_de_adresa_a_unui_proces">Stiva in contextul spatiului de adresa a unui proces</a></div></li>
+<li class="level2"><div class="li"><a href="#tips_and_tricks">Tips and tricks</a></div></li>
+<li class="level2"><div class="li"><a href="#exercitii">Exercitii</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#recapitularemedia_aritmetica_a_elementelor_dintr-un_vector">0. Recapitulare: Media aritmetică a elementelor dintr-un vector</a></div></li>
+<li class="level3"><div class="li"><a href="#max">1. Max</a></div></li>
+<li class="level3"><div class="li"><a href="#construirea_array-ului_inversat">2. Construirea array-ului inversat</a></div></li>
+<li class="level3"><div class="li"><a href="#adresarea_si_printarea_stivei">3. Adresarea si printarea stivei</a></div></li>
+<li class="level3"><div class="li"><a href="#variabile_locale">4. Variabile locale</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusgcd_-_greatest_common_divisor">5. BONUS: GCD - Greatest Common Divisor</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-08.txt · Last modified: 2022/05/01 22:46 by radu.nichita          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2008%20Lucrul%20cu%20stiva%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

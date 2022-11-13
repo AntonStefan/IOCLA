@@ -1,0 +1,1147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 09: Apeluri de funcții    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-05-06T15:02:51+0300">
+<meta name="keywords" content="iocla,laboratoare,laborator-09">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-09">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09">
+<link rel="stylesheet" type="text/css" href="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-09","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_09apeluri_de_functii">Laborator 09: Apeluri de funcții</h1>
+<div class="level1">
+
+<p>
+În acest laborator vom prezenta modul în care se realizează apeluri de funcții. Vom vedea cum putem folosi instrucțiunile <code>call</code> și <code>ret</code> pentru a realiza apeluri de funcții și cum folosim stiva pentru a transmite parametrii unei funcții.
+</p>
+
+<p>
+Laboratorul este de forma <em>learn by doing</em>, partea practică 
+alternând între secțiuni de tip tutorial, cu parcurgere pas cu pas și 
+prezentarea soluției, și exerciții care trebuie să fie rezolvate.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="cunostinte_si_abilitati_ce_vor_fi_dobandite">Cunoștințe și abilități ce vor fi dobândite</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> Traducerea apelului și implementării unei funcții din limbajul C în limbaj de asamblare</div>
+</li>
+<li class="level1"><div class="li"> Transmiterea parametrilor in diferite arhitecturi.</div>
+</li>
+<li class="level1"><div class="li"> Folosirea instrucțiunilor <code>call</code> și <code>ret</code> pentru a realiza un apel de funcție</div>
+</li>
+<li class="level1"><div class="li"> Implementarea unei funcții în limbaj de asamblare</div>
+</li>
+<li class="level1"><div class="li"> Folosirea stivei pentru a transmite parametrii unei funcții</div>
+</li>
+<li class="level1"><div class="li"> Apelarea unei funcții externe (aflată în biblioteca standard C) din limbaj de asamblare</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit3" id="transmiterea_parametrilor">Transmiterea Parametrilor</h2>
+<div class="level2">
+
+<p>
+Cand vine vorba de a chema o functie cu parametri exista doua mari optiuni de plasare a acestora:
+</p>
+
+<p>
+1. <strong>Plasarea in registre</strong> - aceasta metoda, in mod intuitiv, presupune transmiterea parametrilor cu ajutorul registrelor.
+</p>
+
+<p>
+<strong>Avantaje</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> Este foarte usor de folosit atunci cand numarul parametrilor este mic.</div>
+</li>
+<li class="level1"><div class="li"> Este foarte rapida, intrucat parametrii sunt imediat accesibili din registre.</div>
+</li>
+</ul>
+
+<p>
+<strong>Dezavantaje</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> Din cauza faptului ca exista un numar limitat de registre, numarul de parametri ai unei functii ajunge sa fie limitat.</div>
+</li>
+<li class="level1"><div class="li"> E foarte probabil ca unele registre 
+sa fie folosite in interiorul functiei apelate si devine necesara 
+salvarea temporara a registrelor pe stiva inaintea apeluluide functie. 
+Astfel, cel de-al doilea avantaj enumerat dispare, deoarece accesul la 
+stiva presupune lucru cu memoria, adica latenta crescuta.</div>
+</li>
+</ul>
+
+<p>
+2. <strong>Plasarea pe stivă</strong> - aceasta metoda presupune push-uirea pe stiva a tuturor parametrilor.
+</p>
+
+<p>
+<strong>Avantaje</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> Poate fi transmis un numar mare de parametri.</div>
+</li>
+</ul>
+
+<p>
+<strong>Dezavantaje</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> Este lenta intrucat se face acces la memorie.</div>
+</li>
+<li class="level1"><div class="li"> Mai complicata din punct de vedere al accesului la parametri.</div>
+</li>
+</ul>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru arhitecturiile <strong>32-bit</strong> se foloseste metoda plasarii pe stiva, iar pentru cele <strong>64-bit</strong> se foloseste metoda plasarii in registre. Noi vom folosi conventia de la 32-bit architecture. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit4" id="apelul_unei_functii">Apelul unei funcții</h2>
+<div class="level2">
+
+<p>
+Atunci când apelăm o funcție, pașii sunt următorii:
+</p>
+<ul>
+<li class="level1"><div class="li"> Punem argumentele pe stivă, apelul de tip push fiind în ordinea inversă în care sunt trimiși ca argumente funcției.</div>
+</li>
+<li class="level1"><div class="li"> Apelăm <code>call</code>.</div>
+</li>
+<li class="level1"><div class="li"> Restaurăm stiva la sfârșitul apelului.</div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit5" id="functionarea_stivei">Funcționarea stivei</h3>
+<div class="level3">
+
+<p>
+După cum știm, operațiile pe stivă sunt de două tipuri:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>push val</code> în care valoarea <code>val</code> este plasată pe stivă</div>
+</li>
+<li class="level1"><div class="li"> <code>pop reg/mem</code> în care ce se găsește în vârful stivei se plasează în registru sau într-o zonă de memorie</div>
+</li>
+</ul>
+
+<p>
+În momentul în care se face <code>push</code> spunem că stiva <strong>crește</strong> (se adaugă elemente). Din motive ce vor fi explicate mai bine la SO, pointerul de stivă (indicat de registrul <code>esp</code> pe 32 de biți) scade in valoare atunci cand <strong>stiva creste</strong> (la <code>push</code>).
+ Putem spune totusi ca aceasta contrazicere in numire vine de la faptul 
+ca stiva este deregula reprezentata pe verticala si valorile mici se 
+afla sus, iar valorile mari se afla jos.
+</p>
+
+<p>
+La fel, în momentul în care facem <code>pop</code> spunem că stiva <strong>scade</strong> (se scot elemente). Acum pointer-ul de stivă (indicat de registrul <code>esp</code> pe 32 de biți) crește valoric.
+</p>
+
+<p>
+Un sumar al acestui lucru este explicat foarte bine la acest <a href="https://en.wikibooks.org/wiki/X86_Disassembly/The_Stack" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Disassembly/The_Stack" rel="nofollow">link</a>.
+</p>
+
+<p>
+Spre exemplu, daca avem functia foo cu urmatoarea semnatura (in limbaj C):
+</p>
+<pre class="code">int foo(int a, int b, int c);
+</pre>
+
+<p>
+Apelul acestei functii va arata astfel:
+</p>
+<pre class="code">mov ecx, [c]     ; luam valoarea parametrului c dintr-o zona de memorie
+mov ebx, [b]
+mov eax, [a]
+
+push ecx         ; punem parametrii in ordine inversa, incepand cu c
+push ebx         ; apoi b
+push eax         ; apoi a
+call foo         ; apelam functia
+add esp, 12      ; restauram stiva
+</pre>
+
+</div>
+
+<h2 class="sectionedit6" id="apelantul_si_apelatul">Apelantul si Apelatul</h2>
+<div class="level2">
+
+<p>
+Atunci când apelăm o funcție spunem că funcția care apelează (contextul care apelează) se cheamă <strong>apelant</strong> (sau <strong>caller</strong>), iar funcția apelată se cheamă <strong>apelat</strong> (sau <strong>callee</strong>). In paragraful anterior am discutat despre cum arată lucrurile la nivelul apelantului (cum construim stiva).
+</p>
+
+<p>
+Haideți să urmărim ce se întâmplă si la la nivelul apelatului. Până în momentul instrucțiunii <code>call</code> stiva conține parametrii funcției. Apelul <code>call</code> poate fi echivalat grosier următoarei secvențe:
+</p>
+<pre class="code">push eip
+jmp function_name
+</pre>
+
+<p>
+Adică și apelul <code>call</code> folosește în continuare stiva și salvează adresa următoarei instrucțiuni, cea de după <code>call</code>
+ numită și instrucțiunea de retur sau adresa de retur (return address). 
+Aceasta este necesară pentru a ști, în apelat, unde să revenim în 
+apelant.
+</p>
+
+<p>
+În apelat, la începutul său (numit preambul, preamble) se salvează frame
+ pointer-ul (în arhitectura i386 este vorba de registrul <code>ebp</code>)
+ urmând ca frame pointer-ul să refere adresa curentă de pe stivă (adică 
+tocmai fostul frame pointer). Deși nu este obligatorie, salvarea frame 
+pointer-ului ajută la debugging și este în cele mai multe cazuri 
+folosită. Din aceste motive, orice apel de funcție va avea în general, 
+preambulul:
+</p>
+<pre class="code">push ebp
+mov ebp, esp
+</pre>
+
+<p>
+Aceste modificări au loc în apelat. De aceea este responsabilitatea 
+acestuia să restaureze stiva la vechea sa valoare. De aceea este uzuală 
+existența unui epilog care să readucă stiva la starea sa inițială; acest
+ epilog este:
+</p>
+<pre class="code">leave
+</pre>
+
+<p>
+Dupa aceasta instructiune, stiva este ca la începutul funcției (adică imediat după call).
+</p>
+
+<p>
+Pentru incheierea functiei, este necesar ca executia codului sa se 
+intoarca (return) si sa continue sa execute de la instructiunea de dupa <code>call</code>-ul care a pornit functia. Acest lucru presupune sa influentam registrul <code>eip</code> si sa punem valoarea care a fost salvata pe stiva initial de apelul <code>call</code>. Acest lucru este indeplinit folosind instructiunea:
+</p>
+<pre class="code">ret
+</pre>
+
+<p>
+care este grosier echivalentul instrucțiunii:
+</p>
+<pre class="code">pop eip
+</pre>
+
+<p>
+Spre exemplu, definitia si corpul functiei foo, care realizeaza suma a 3 numere, vor arata astfel:
+</p>
+<pre class="code">foo:
+    push ebp
+    mov ebp, esp
+
+    mov eax, [ebp + 8]
+    mov ebx, [ebp + 12]
+    mov ecx, [ebp + 16]
+
+    add eax, ebx
+    add eax, ecx
+
+    leave
+    ret
+</pre>
+
+</div>
+
+<h3 class="sectionedit7" id="remarcati">Remarcati:</h3>
+<div class="level3">
+
+<p>
+1. O functie se defineste printr-un label.
+2. Dupa preambulul functiei, stiva arata in felul urmator:
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=b29a11&amp;media=https%3A%2F%2Fraw.githubusercontent.com%2Fsystems-cs-pub-ro%2Fiocla%2Fmaster%2Flaborator%2Fcontent%2Fapel-functii%2Fimages%2Ffunction_stack1.jpg" class="media" title="https://raw.githubusercontent.com/systems-cs-pub-ro/iocla/master/laborator/content/apel-functii/images/function_stack1.jpg"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/fetch.jpeg" class="media" title="function_stack1.jpg" alt="function_stack1.jpg" width="650"></a>
+</p>
+
+<p>
+3. De observat că pe parcursul execuției funcției, ceea ce nu se schimbă
+ este poziția frame pointer-ul. Acesta este și motivul denumirii sale: 
+pointează la frame-ul curent al funcției. De aceea este comun ca 
+accesarea parametrilor unei funcții să se realizeze prin intermediul 
+frame pointer-ului. Presupunând un sistem pe 32 de biți și parametri de 
+dimensiunea cuvântului procesorului (32 de biți, 4 octeți) vom avea:
+</p>
+<ul>
+<li class="level1"><div class="li"> primul argument se găsește la adresa <code>ebp+8</code></div>
+</li>
+<li class="level4"><div class="li"> al doilea argument se găsește la adresa <code>ebp+12</code></div>
+</li>
+<li class="level4"><div class="li"> al treilea argument se găsește la adresa <code>ebp+16</code></div>
+</li>
+<li class="level4"><div class="li"> etc.</div>
+</li>
+</ul>
+
+<p>
+Acesta este motivul pentru care, pentru a obține parametrii funcției <code>foo</code> în registrele <code>eax</code>, <code>ebx</code>, <code>ecx</code>, folosim construcțiile:
+</p>
+<pre class="code">    mov eax, dword [ebp+8]   ; primul argument in eax
+    mov ebx, dword [ebp+12]  ; al doilea argument in ebx
+    mov ecx, dword [ebp+16]  ; al treilea argument in ecx</pre>
+
+<p>
+4. Valoare de retur a unei functii se plaseaza in registre (in general in eax).
+</p>
+<ul>
+<li class="level1"><div class="li"> Daca valoarea de retur este pe <strong>8 biti</strong> rezultatul functiei se plaseaza in <code>al</code>.</div>
+</li>
+<li class="level1"><div class="li"> Daca valoarea de retur este pe <strong>16 biti</strong> rezultatul functiei se plaseaza in <code>ax</code>.</div>
+</li>
+<li class="level1"><div class="li"> Daca valoarea de retur este pe <strong>32 biti</strong> rezultatul functiei se plaseaza in <code>eax</code>.</div>
+</li>
+<li class="level1"><div class="li"> Daca valoarea de retur este pe <strong>64 biti</strong> rezultatul se plaseaza in registrele <code>edx</code> si <code>eax</code>. Cei mai semnificativi 32 de biti se plaseaza in <code>edx</code>, iar restul in registrul <code>eax</code>.</div>
+</li>
+</ul>
+
+<p>
+   <em>De asemnea, in unele cazuri, se poate returna o adresa de memorie
+ catre stiva/heap, sau alte zone de memorie, care refera obiectul dorit 
+in urma apelului functiei.</em>
+</p>
+
+<p>
+5. O functie foloseste aceleasi registre hardware, asadar, la iesirea 
+din functie valorile registrelor nu mai sunt aceleasi. Pentru a evita 
+aceasta situatie, se pot salva unele/toate registrele pe stiva.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Deoarece limbajele de asamblare 
+ofera mai multe oportunitati, exista necesitatea de a avea conventii de 
+apelare a functiilor in x86. Diferenta dintre acestea poate consta in 
+ordinea parametrilor, modul cum parametrii sunt pasati functiei, ce 
+registre trebuiesc conservate de apelat sau daca apelantul ori apelatul 
+se ocupa de pregatirea stivei. Mai multe detalii puteti gasi <a href="https://en.wikipedia.org/wiki/X86_calling_conventions" class="urlextern" title="https://en.wikipedia.org/wiki/X86_calling_conventions" rel="nofollow">aici</a> sau <a href="https://levelup.gitconnected.com/x86-calling-conventions-a34812afe097" class="urlextern" title="https://levelup.gitconnected.com/x86-calling-conventions-a34812afe097" rel="nofollow">aici</a> daca wikipedia e prea mainstream pentru voi. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit8" id="exercitii">Exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant"> În cadrul laboratoarelor vom folosi repository-ul de git al materiei <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">IOCLA</a>. Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai 
+recentă.Dacă doriți să descărcați repository-ul în altă locație, 
+folosiți comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>. Pentru mai multe informații despre folosirea utilitarului git, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a> 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit9" id="recapitularesirul_lui_fibonacci">0. Recapitulare: Șirul lui Fibonacci</h3>
+<div class="level3">
+
+<p>
+Completați fișierul <code>fibo.asm</code> din arhivă pentru a realiza un program care afișează primele N numere din șirul lui Fibonacci.
+</p>
+
+<p>
+Aveți voie să folosiți doar memorie alocată pe stivă.
+</p>
+
+</div>
+
+<h3 class="sectionedit10" id="hello_world">1. Hello, world!</h3>
+<div class="level3">
+
+<p>
+Deschideți fișierul <code>hello-world.asm</code>, asamblați-l și rulați-l. Observați afișarea mesajului <em>Hello, world!</em>
+</p>
+
+<p>
+Remarcați că:
+</p>
+<ul>
+<li class="level1"><div class="li"> Programul <code>hello-world.asm</code> folosește apelul funcției <code>puts</code> (funcție externă modulului curent) pentru a efectua afișarea. Pentru aceasta pune argumentul pe stivă și apelează funcția.</div>
+</li>
+<li class="level1"><div class="li"> Variabila <code>msg</code> din programul <code>hello-world.asm</code> conține octetul <code>10</code>. Acesta simbolizează caracterul <em>line-feed</em> (<code>\n</code>), folosit pentru a adăuga o linie nouă pe Linux.</div>
+</li>
+</ul>
+
+<p>
+Încheierea cu <code>\n</code> este, în general, utilă pentru afișarea șirurilor. Funcția <code>puts</code> pune automat o linie nouă după șirul afișat, însă aceasta trebuie adăugată explicit în cazul folosirii funcției <code>printf</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit11" id="dezasamblarea_unui_program_scris_in_c">2. Dezasamblarea unui program scris în C</h3>
+<div class="level3">
+
+<p>
+După cum spuneam, în final, totul ajunge în limbaj de asamblare (ca să 
+fim 100% corecți, totul ajunge cod mașină care are o corespondență 
+destul de bună cu codul asamblare). Adesea ajungem să avem acces doar la
+ codul obiect al unor programe și vrem să inspectăm modul în care arată.
+</p>
+
+<p>
+Pentru a observa acest lucru, haideți să compilăm până la codul obiect 
+un program scris în C și apoi să-l dezasamblăm. Este vorba de programul <code>test.c</code> din arhiva de laborator.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru a compila un fișier cod sursă C/C++ în linia de comandă, urmați pașii:
+<p></p>
+<ol>
+<li class="level1"><div class="li"> Deschideți un terminal. (shortcut <code>Ctrl+Alt+T</code>)</div>
+</li>
+<li class="level1"><div class="li"> Accesați directorul în care aveți codul sursă.</div>
+</li>
+<li class="level1"><div class="li"> Folosiți comanda</div>
+</li>
+</ol>
+<pre class="code">gcc -m32 -o &lt;executabil&gt; &lt;nume-fisier&gt;
+</pre>
+
+<p>
+unde <code>&lt;nume-fisier&gt;</code> este numele fișierului iar <code>&lt;executabil&gt;</code> este executabilul rezultat.
+</p>
+<ol>
+<li class="level1"><div class="li"> Dacă doriți <strong>doar</strong> să compilați fișierul (<strong>fără</strong> să-l link-ați), atunci folosiți comanda</div>
+</li>
+</ol>
+<pre class="code">gcc -m32 -c -o &lt;fisier-obiect&gt; &lt;nume-fisier&gt;
+</pre>
+
+<p>
+unde <code>&lt;nume-fisier&gt;</code> este numele fișierului iar <code>&lt;fisier-obiect&gt;</code> este fișierul obiect rezultat.
+
+</p></div><p></p>
+În cazul nostru, întrucât dorim doar să compilăm fișierul <code>test.c</code> la modulul obiect, vom accesa din terminal directorul în care se găsește fișierul și apoi vom rula comanda
+<p></p>
+<pre class="code">gcc -m32 -c -o test.o test.c
+</pre>
+
+<p>
+În urma rulării comenzii de mai sus în directorul curent vom avea fișierul obiect <code>test.o</code>.
+</p>
+
+<p>
+Putem obține și forma în limbaj de asamblare a acestuia folosind comanda
+</p>
+<pre class="code">gcc -m32 -masm=intel -S -o test.asm test.c
+</pre>
+
+<p>
+În urma rulării comenzii de mai sus obținem fișierul <code>test.asm</code> pe care îl putem vizualiza folosind comanda
+</p>
+<pre class="code">cat test.asm
+</pre>
+
+<p>
+Pentru a dezasambla codul unui modul obiect vom folosi un utilitar frecvent întâlnit în lumea Unix: <code>objdump</code>. Pentru dezasamblare, vom rula comanda
+</p>
+<pre class="code">objdump -M intel -d &lt;path-to-obj-file&gt;
+</pre>
+
+<p>
+unde <code>&lt;path-to-obj-file&gt;</code> este calea către fișierul obiect <code>test.o</code>.
+</p>
+
+<p>
+Veți obține un output similar celui de mai jos
+</p>
+<pre class="code">$ objdump -M intel -d test.o
+
+test.o:     file format elf32-i386
+
+Disassembly of section .text:
+
+0000054d &lt;second_func&gt;:
+ 54d:   55                      push   ebp
+ 54e:   89 e5                   mov    ebp,esp
+ 550:   e8 a6 00 00 00          call   5fb &lt;__x86.get_pc_thunk.ax&gt;
+ 555:   05 ab 1a 00 00          add    eax,0x1aab
+ 55a:   8b 45 08                mov    eax,DWORD PTR [ebp+0x8]
+ 55d:   8b 10                   mov    edx,DWORD PTR [eax]
+ 55f:   8b 45 0c                mov    eax,DWORD PTR [ebp+0xc]
+ 562:   01 c2                   add    edx,eax
+ 564:   8b 45 08                mov    eax,DWORD PTR [ebp+0x8]
+ 567:   89 10                   mov    DWORD PTR [eax],edx
+ 569:   90                      nop
+ 56a:   5d                      pop    ebp
+ 56b:   c3                      ret
+
+0000056c &lt;first_func&gt;:
+ 56c:   55                      push   ebp
+ 56d:   89 e5                   mov    ebp,esp
+ 56f:   53                      push   ebx
+ 570:   83 ec 14                sub    esp,0x14
+ 573:   e8 83 00 00 00          call   5fb &lt;__x86.get_pc_thunk.ax&gt;
+ 578:   05 88 1a 00 00          add    eax,0x1a88
+ 57d:   c7 45 f4 03 00 00 00    mov    DWORD PTR [ebp-0xc],0x3
+ 584:   83 ec 0c                sub    esp,0xc
+ 587:   8d 90 80 e6 ff ff       lea    edx,[eax-0x1980]
+ 58d:   52                      push   edx
+ 58e:   89 c3                   mov    ebx,eax
+ 590:   e8 4b fe ff ff          call   3e0 &lt;puts@plt&gt;
+ 595:   83 c4 10                add    esp,0x10
+ 598:   83 ec 08                sub    esp,0x8
+ 59b:   ff 75 f4                push   DWORD PTR [ebp-0xc]
+ 59e:   8d 45 08                lea    eax,[ebp+0x8]
+ 5a1:   50                      push   eax
+ 5a2:   e8 a6 ff ff ff          call   54d &lt;second_func&gt;
+ 5a7:   83 c4 10                add    esp,0x10
+ 5aa:   8b 45 08                mov    eax,DWORD PTR [ebp+0x8]
+ 5ad:   8b 5d fc                mov    ebx,DWORD PTR [ebp-0x4]
+ 5b0:   c9                      leave
+ 5b1:   c3                      ret
+
+000005b2 &lt;main&gt;:
+ 5b2:   8d 4c 24 04             lea    ecx,[esp+0x4]
+ 5b6:   83 e4 f0                and    esp,0xfffffff0
+ 5b9:   ff 71 fc                push   DWORD PTR [ecx-0x4]
+ 5bc:   55                      push   ebp
+ 5bd:   89 e5                   mov    ebp,esp
+ 5bf:   53                      push   ebx
+ 5c0:   51                      push   ecx
+ 5c1:   e8 8a fe ff ff          call   450 &lt;__x86.get_pc_thunk.bx&gt;
+ 5c6:   81 c3 3a 1a 00 00       add    ebx,0x1a3a
+ 5cc:   83 ec 0c                sub    esp,0xc
+ 5cf:   6a 0f                   push   0xf
+ 5d1:   e8 96 ff ff ff          call   56c &lt;first_func&gt;
+ 5d6:   83 c4 10                add    esp,0x10
+ 5d9:   83 ec 08                sub    esp,0x8
+ 5dc:   50                      push   eax
+ 5dd:   8d 83 8e e6 ff ff       lea    eax,[ebx-0x1972]
+ 5e3:   50                      push   eax
+ 5e4:   e8 e7 fd ff ff          call   3d0 &lt;printf@plt&gt;
+ 5e9:   83 c4 10                add    esp,0x10
+ 5ec:   b8 00 00 00 00          mov    eax,0x0
+ 5f1:   8d 65 f8                lea    esp,[ebp-0x8]
+ 5f4:   59                      pop    ecx
+ 5f5:   5b                      pop    ebx
+ 5f6:   5d                      pop    ebp
+ 5f7:   8d 61 fc                lea    esp,[ecx-0x4]
+ 5fa:   c3                      ret
+</pre>
+
+<p>
+Există multe alte utilitare care permit dezasamblare de module obiect, 
+majoritatea cu interfața grafică și oferind și suport pentru debugging. <code>objdump</code> este un utilitar simplu care poate fi rapid folosit în linia de comandă.
+</p>
+
+<p>
+Este interesant de urmărit, atât în fișierul <code>test.asm</code> cât și în dezasamblarea sa, modul în care se face un apel de funcție, lucru despre care vom discuta în continuare.
+</p>
+
+</div>
+
+<h3 class="sectionedit12" id="afisarea_unui_sir">3. Afișarea unui șir</h3>
+<div class="level3">
+
+<p>
+Pentru afișarea unui string putem folosi macro-ul intern <code>PRINTF32</code>. Sau putem folosi o funcție precum <code>puts</code>. În fișierul <code>print-string.asm</code> este implementată afișarea unui string folosind macro-ul <code>PRINTF32</code>.
+</p>
+
+<p>
+Urmărind fișierul <code>hello-world.asm</code> ca exemplu, implementați afișarea șirului folosind și <code>puts</code>.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Urmăriți și indicațiile din secțiunea <em>“Apelul unei funcții”</em>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit13" id="afisarea_lungimii_unui_sir">4. Afișarea lungimii unui șir</h3>
+<div class="level3">
+
+<p>
+Programul <code>print-string-len.asm</code> afișează lungimea unui șir folosind macro-ul <code>PRINTF32</code>. Calculul lungimii șirului <code>mystring</code> are loc în cadrul programului (este deja implementat).
+</p>
+
+<p>
+Implementați programul pentru a face afișarea lungimii șirului folosind funcția <code>printf</code>.
+</p>
+
+<p>
+La sfârșit veți avea afișată de două ori lungimea șirului: inițial cu apelul macro-ului <code>PRINTF32</code> și apoi cu apelul funcției externe <code>printf</code>.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Gândiți-vă că apelul <code>printf</code> este de forma <code>printf("String length is %u\n", len);</code>. Trebuie să construiți stiva pentru acest apel.
+<p></p>
+
+<p>
+Pașii de urmat sunt:
+</p>
+<ol>
+<li class="level1"><div class="li"> Marcarea simbolului <code>printf</code> ca simbol extern.</div>
+</li>
+<li class="level1"><div class="li"> Definirea șirului de formatare <code>"String length is %u", 10, 0</code>.</div>
+</li>
+<li class="level1"><div class="li"> Realizarea apelului funcției <code>printf</code>, adică:</div>
+<ol>
+<li class="level2"><div class="li"> Punerea celor două argumente pe stivă: șirul de formatarea și lungimea.</div>
+</li>
+<li class="level2"><div class="li"> Apelul <code>printf</code> folosind <code>call</code>.</div>
+</li>
+<li class="level2"><div class="li"> Restaurarea stivei.</div>
+</li>
+</ol>
+</li>
+</ol>
+
+<p>
+Lungimea șirului se găsește în registrul <code>ecx</code>.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit14" id="afisarea_sirului_inversat">5. Afișarea șirului inversat</h3>
+<div class="level3">
+
+<p>
+În soluția de mai sus adăugați funcția <code>reverse_string</code> astfel încât să aveți un listing similar celui de mai jos:
+</p>
+<pre class="code">[...]
+section .text
+global main
+
+reverse_string:
+    push ebp
+    mov ebp, esp
+
+    mov eax, dword [ebp+8]
+    mov ecx, dword [ebp+12]
+    add eax, ecx
+    dec eax
+    mov edx, dword [ebp+16]
+
+copy_one_byte:
+    mov bl, byte [eax]
+    mov byte [edx], bl
+    dec eax
+    inc edx
+    loopnz copy_one_byte
+
+    inc edx
+    mov byte [edx], 0
+
+    leave
+    ret
+
+main:
+    push ebp
+    mov ebp, esp
+[...]
+</pre>
+
+<p>
+</p><p></p><div class="noteimportant"> Când copiați funcția <code>reverse_string</code> în programul vostru, rețineți că fucția începe la eticheta <code>reverse_string</code> și se oprește la eticheta <code>main</code>. Eticheta <code>copy_one_byte</code> este parte a funcției <code>reverse_string</code>. 
+</div><p></p>
+<p></p>
+
+<p>
+Funcția <code>reverse_string</code> inversează un șir și are următoarea signatură: <code>void reverse_string(const char *src, size_t len, char *dst);</code>. Astfel ca primele <code>len</code> caractere și șirul <code>src</code> sunt inversate în șirul <code>dst</code>.
+</p>
+
+<p>
+Realizați inversarea șirului <code>mystring</code> într-un nou șir și afișați acel nou șir.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Pentru a defini un nou șir, recomandăm ca, în secțiunea de date să folosiți construcția
+<p></p>
+<pre class="code">store_string times 64 db 0
+</pre>
+
+<p>
+Construcția creează un șir de 64 de octeți de zero, suficient pentru a stoca inversul șirului.
+Apelul echivalent în C al funcției este <code>reverse_string(mystring, ecx, store_string);</code>. În registrul <code>ecx</code> am presupus că este calculată lungimea șirului.
+</p>
+
+<p>
+Nu puteți folosi direct valoarea <code>ecx</code> în forma ei curentă. După apelul funcției <code>printf</code> pentru afișare numărului valoarea <code>ecx</code> se pierde. Ca să o păstrați, aveți două opțiuni:
+</p>
+<ol>
+<li class="level1"><div class="li"> Stocați valoarea registrului <code>ecx</code> în prealabil pe stivă (folosind <code>push ecx</code> înaintea apelului <code>printf</code>) și apoi să o restaurați după apelul <code>printf</code> (folosind <code>pop ecx</code>).</div>
+</li>
+<li class="level1"><div class="li"> Stocați valoarea registrului <code>ecx</code> într-o variabilă globală, pe care o definiți în secțiunea <code>.data</code>.</div>
+</li>
+</ol>
+
+<p>
+Nu puteți folosi un alt registru pentru că sunt șanse foarte mari ca și acel registru să fie modificat de apelul <code>printf</code> pentru afișarea lungimii șirului.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit15" id="implementarea_functiei_toupper">6. Implementarea funcției toupper</h3>
+<div class="level3">
+
+<p>
+Ne propunem implementarea funcției <code>toupper</code> care traduce literele mici în litere mari. Pentru aceasta, porniți de la fișierul <code>toupper.asm</code> din arhiva de exerciții a laboratorului și completați corpul funcției <code>toupper</code>.
+</p>
+
+<p>
+Șirul folosit este <code>mystring</code> și presupunem că este un șir valid. Acest șir este transmis ca argument funcției <code>toupper</code> în momentul apelului.
+</p>
+
+<p>
+Faceți înlocuirea <em>in place</em>, nu este nevoie de un alt șir.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Ca să traduceți o litera mică în literă mare, trebuie să <strong>scădeți</strong> <code>0x20</code> din valoare. Aceasta este diferența între litere mici și mari; de exemplu <code>a</code> este <code>0x61</code> iar <code>A</code> este <code>0x41</code>. Puteți vedea în <a href="http://man7.org/linux/man-pages/man7/ascii.7.html" class="urlextern" title="http://man7.org/linux/man-pages/man7/ascii.7.html" rel="nofollow">pagina de manual ascii</a>.
+<p></p>
+
+<p>
+a să citiți sau să scrieți octet cu octet folosiți construcția <code>byte [reg]</code> așa cum apare și în implementarea determinării lungimii unui șir în fișierul <code>print-string-len.asm</code>, unde <code>[reg]</code> este registrul de tip pointer în care este stocată adresa șirului în acel punct.
+</p>
+
+<p>
+Vă opriți atunci când ați ajuns la valoarea <code>0</code> (<code>NULL</code> byte). Pentru verificare puteți folosi <code>test</code> așa cum se întâmplă și în implementarea determinării lungimii unui șir în fișierul <code>print-string-len.asm</code>. 
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit16" id="bonustoupper_doar_pentru_litere_mici">Bonus: toupper doar pentru litere mici</h3>
+<div class="level3">
+
+<p>
+Implementați funcția <code>toupper</code> astfel încât translatarea să 
+aibă loc doar pentru caractare reprezentând litere mici, nu litere mari 
+sau alte tipuri de caractere.
+</p>
+
+</div>
+
+<h3 class="sectionedit17" id="bonusrot13">Bonus: rot13</h3>
+<div class="level3">
+
+<p>
+Realizați și folosiți o funcție care face translatarea <a href="https://rot13.com/" class="urlextern" title="https://rot13.com/" rel="nofollow">rot13</a> a unui șir.
+</p>
+
+</div>
+
+<h3 class="sectionedit18" id="bonusrot131">Bonus: rot13++</h3>
+<div class="level3">
+
+<p>
+Implementați <code>rot13</code> pe un array de șiruri: șirurile sunt continue în memorie separate prin terminatorul de șir (<code>NULL</code>-byte, <code>0</code>). De exemplu: <code>ana\0are\0mere\0</code> este un array de trei șiruri.
+</p>
+
+<p>
+Aplicați <code>rot13</code> pe caracterele alfabetice și înlocuiți terminatorul de șir cu spațiu (<code>' '</code>, blank, caracterul <code>32</code> sau <code>0x20</code>). Astfel, șirul inițial <code>ana\0are\0mere\0</code> se va traduce în <code>nan ner zrer</code>.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> Pentru a defini array-ul de șiruri care să conțină terminatorul de șir, folosiți o construcție de forma:
+<p></p>
+<pre class="code">mystring db "ana", 0, "are", 0, "mere", 0
+</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p><div class="noteclassic"> Va trebui să știți când sa vă opriți 
+din parcurgerea array-ului de șiruri. Cel mai simplu este să definiți o 
+variabilă de lungime în secțiunea <code>.data</code>, de forma
+<p></p>
+<pre class="code">len dd 10
+</pre>
+
+<p>
+în care să rețineți fie lungimea totală a șirului (de la începutul până la ultimul <code>NULL</code>-byte), fie numărul de șiruri din array.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit19" id="alte_resurse">Alte resurse</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="http://www.nasm.us/" class="urlextern" title="http://www.nasm.us/" rel="nofollow">nasm</a></div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit20" id="solutii">Soluții</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-09-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-09-sol.zip" rel="nofollow">aici</a>.</div>
+</li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_88084918362b0bf6a408bd" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_12831697062b0bf6a471cb" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_09apeluri_de_functii">Laborator 09: Apeluri de funcții</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#cunostinte_si_abilitati_ce_vor_fi_dobandite">Cunoștințe și abilități ce vor fi dobândite</a></div></li>
+<li class="level2"><div class="li"><a href="#transmiterea_parametrilor">Transmiterea Parametrilor</a></div></li>
+<li class="level2"><div class="li"><a href="#apelul_unei_functii">Apelul unei funcții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#functionarea_stivei">Funcționarea stivei</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#apelantul_si_apelatul">Apelantul si Apelatul</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#remarcati">Remarcati:</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#exercitii">Exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#recapitularesirul_lui_fibonacci">0. Recapitulare: Șirul lui Fibonacci</a></div></li>
+<li class="level3"><div class="li"><a href="#hello_world">1. Hello, world!</a></div></li>
+<li class="level3"><div class="li"><a href="#dezasamblarea_unui_program_scris_in_c">2. Dezasamblarea unui program scris în C</a></div></li>
+<li class="level3"><div class="li"><a href="#afisarea_unui_sir">3. Afișarea unui șir</a></div></li>
+<li class="level3"><div class="li"><a href="#afisarea_lungimii_unui_sir">4. Afișarea lungimii unui șir</a></div></li>
+<li class="level3"><div class="li"><a href="#afisarea_sirului_inversat">5. Afișarea șirului inversat</a></div></li>
+<li class="level3"><div class="li"><a href="#implementarea_functiei_toupper">6. Implementarea funcției toupper</a></div></li>
+<li class="level3"><div class="li"><a href="#bonustoupper_doar_pentru_litere_mici">Bonus: toupper doar pentru litere mici</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusrot13">Bonus: rot13</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusrot131">Bonus: rot13++</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#alte_resurse">Alte resurse</a></div></li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-09.txt · Last modified: 2022/05/06 15:02 by radu.nichita          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2009%20Apeluri%20de%20func%C8%9Bii%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

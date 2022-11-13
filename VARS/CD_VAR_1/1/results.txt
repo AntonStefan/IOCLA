@@ -1,0 +1,4 @@
+Max este 4
+Sum este 7
+Max possible sum este 10
+Missing number este 3

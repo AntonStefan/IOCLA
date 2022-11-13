@@ -1,0 +1,1140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 03: Compilare    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-03-27T12:47:30+0300">
+<meta name="keywords" content="iocla,laboratoare,laborator-03">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-03">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03">
+<link rel="stylesheet" type="text/css" href="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-03","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_03compilare">Laborator 03: Compilare</h1>
+<div class="level1">
+
+<p>
+Etapele prin care trece un program scris în <code>C</code> din momentul în care este scris până când este rulat ca un proces sunt, in ordine:
+</p>
+<ul>
+<li class="level1"><div class="li"> preprocesare</div>
+</li>
+<li class="level1"><div class="li"> compilare</div>
+</li>
+<li class="level1"><div class="li"> asamblare</div>
+</li>
+<li class="level1"><div class="li"> link editare</div>
+</li>
+</ul>
+
+<p>
+În imaginea de mai jos sunt reprezentate si detaliate aceste etape:
+</p>
+
+<p>
+<a href="https://ocw.cs.pub.ro/courses/lib/exe/fetch.php?hash=ee144c&amp;media=https%3A%2F%2Focw.cs.pub.ro%2Fcourses%2F_media%2Fiocla%2Flaboratoare%2Fphases-full.png" class="media" title="https://ocw.cs.pub.ro/courses/_media/iocla/laboratoare/phases-full.png"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/fetch.png" class="media" title="phases-full.png" alt="phases-full.png"></a>
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="preprocesare">Preprocesare</h2>
+<div class="level2">
+
+<p>
+În cadrul primei etape, cea de <code>preprocesare</code> au loc următoarele acțiuni plecând de la fișierul cod sursă:
+</p>
+<ul>
+<li class="level1"><div class="li"> eliminarea comentariilor</div>
+</li>
+<li class="level1"><div class="li"> expandarea directivelor care încep cu simbolul <code>#</code></div>
+<ul>
+<li class="level2"><div class="li"> înlocuirea valorilor corespunzătoare pentru <code>#define ...</code></div>
+</li>
+<li class="level2"><div class="li"> includerea conținutului fișierelor date ca parametru directivei <code>#include</code></div>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit3" id="compilare">Compilare</h2>
+<div class="level2">
+
+<p>
+În etapa de <code>compilare</code> au loc următoarele subetape:
+</p>
+<ul>
+<li class="level1"><div class="li"> analiza lexicală - verificarea limbajului</div>
+</li>
+<li class="level1"><div class="li"> analiza sintactică - verificarea ordinii cuvintelor (<code>;</code> vine la finalul asignării unei variabile)</div>
+</li>
+<li class="level1"><div class="li"> analiza semantică - determinarea sensului codului scris (determinarea contextului variabilelor)</div>
+</li>
+<li class="level1"><div class="li"> generarea de cod în limbaj de asamblare care este o formă human-readable a ce ajunge procesorul să execute efectiv</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit4" id="assemblyasamblare">Assembly / Asamblare</h2>
+<div class="level2">
+
+<p>
+Assembly / Asamblare este penultima etapă a procesului de compilare în 
+sens larg.
+În urma finalizării acestei etape rezultatul va fi crearea a unul sau 
+mai multe fișiere obiect. Fișierele obiect pot conține mai multe 
+lucruri,
+printre care:
+</p>
+<ol>
+<li class="level1"><div class="li"> nume de simboluri</div>
+</li>
+<li class="level1"><div class="li"> constante folosite în cadrul programului</div>
+</li>
+<li class="level1"><div class="li"> cod compilat</div>
+</li>
+<li class="level1"><div class="li"> valori de tip import/export care vor fi „rezolvate” în etapa de linking</div>
+</li>
+</ol>
+
+<p>
+Pentru a crea un fișier obiect în cazul în care se utilizează compilatorul <code>gcc</code> se folosește opțiunea <code>-c</code> așa cum puteți vedea și în secțiunea <a href="#invocarea-linker-ului" title="iocla:laboratoare:laborator-03 ↵" class="wikilink1">Invocarea linker-ului</a> de mai jos.
+</p>
+
+</div>
+
+<h2 class="sectionedit5" id="linkinglegare">Linking / Legare</h2>
+<div class="level2">
+
+<p>
+Linking / Legare este ultima etapă a procesului de compilare în sens 
+larg.
+La finalul acestei etape va rezulta un fișier executabil prin 
+unificarea(„legarea”) mai multor fișiere obiect care pot avea la bază 
+limbaje de
+programare de nivel înalt diferite; tot ceea ce contează este ca 
+fișierele obiect să fie create în mod corespunzător pentru ca linker-ul 
+să le
+poată „interpreta”.
+</p>
+
+<p>
+Pentru a obține un fișier executabil din fișiere obiect, linker-ul realizează următoarele acțiuni:
+</p>
+<ol>
+<li class="level1"><div class="li"> rezolvarea simbolurilor (<em>symbol resolution</em>): localizarea simbolurilor nedefinite ale unui fișier obiect în alte fișiere obiect</div>
+</li>
+<li class="level1"><div class="li"> unificarea secțiunilor: unificarea 
+secțiunilor de același tip din diferite fișiere obiect într-o singură 
+secțiune în fișierul executabil</div>
+</li>
+<li class="level1"><div class="li"> stabilirea adreselor secțiunilor și simbolurilor (<em>address binding</em>): după unificare se pot stabili adresele efective ale simbolurilor în cadrul fișierului executabil</div>
+</li>
+<li class="level1"><div class="li"> relocarea simbolurilor (<em>relocation</em>):
+ odată stabilite adresele simbolurilor, trebuie actualizate, în 
+executabil, instrucțiunile și datele care referă adresele acelor 
+simboluri</div>
+</li>
+<li class="level1"><div class="li"> stabilirea unui punct de intrare în program (<em>entry point</em>): adică adresa primei instrucțiuni ce va fi executată</div>
+</li>
+</ol>
+
+</div>
+
+<h2 class="sectionedit6" id="invocarea_linker-ului">Invocarea linker-ului</h2>
+<div class="level2">
+
+<p>
+Linker-ul este, în general, invocat de utilitarul de compilare (<code>gcc</code>, <code>clang</code>, <code>cl</code>).
+Astfel,
+ invocarea linker-ului este transparentă utilizatorului.
+În cazuri specifice, precum crearea unei imagini de kernel sau imagini 
+pentru sisteme încorporate, utilizatorul va invoca direct linkerul.
+</p>
+
+<p>
+Dacă avem un fișier <code>app.c</code> cod sursă C, vom folosi compilatorul pentru a obține fișierul obiect <code>app.o</code>:
+</p>
+<pre class="code">gcc -c -o app.o app.c
+</pre>
+
+<p>
+Apoi pentru a obține fișierul executabil <code>app</code> din fișierul obiect <code>app.o</code>, folosim tot utilitarul <code>gcc</code>:
+</p>
+<pre class="code">gcc -o app app.o
+</pre>
+
+<p>
+În spate, <code>gcc</code> va invoca linker-ul și va construi executabilul <code>app</code>.
+Linker-ul va face legătura și cu biblioteca standard C (libc).
+</p>
+
+<p>
+Procesul de linking va funcționa doar dacă fișierul <code>app.c</code> are definită funcția <code>main()</code>, funcția principală a programului.
+Fișierele linkate trebuie să aibă o singură funcție <code>main()</code> pentru a putea obține un executabil.
+</p>
+
+<p>
+Dacă avem mai multe fișiere sursă C, invocăm compilatorul pentru fiecare fișier și apoi linker-ul:
+</p>
+<pre class="code">gcc -c -o helpers.o helpers.c
+gcc -c -o app.o app.c
+gcc -o app app.o helpers.o
+</pre>
+
+<p>
+Ultima comandă este comanda de linking, care leagă fișierele obiect <code>app.o</code> și <code>helpers.o</code> în fișierul executabil <code>app</code>.
+</p>
+
+<p>
+În cazul fișierelor sursă C++, vom folosi comanda <code>g++</code>:
+</p>
+<pre class="code">g++ -c -o helpers.o helpers.cpp
+g++ -c -o app.o app.cpp
+g++ -o app app.o helpers.o
+</pre>
+
+<p>
+Putem folosi și comanda <code>gcc</code> pentru linking, cu precizarea linkării cu biblioteca standard C++ (libc++):
+</p>
+<pre class="code">gcc -o app app.o helpers.o -lstdc++
+</pre>
+
+<p>
+Utilitarul de linkare este, în Linux, <code>ld</code> și este invocat în mod transparent de <code>gcc</code> sau <code>g++</code>.
+Pentru a vedea cum este invocat linker-ul, folosim opțiunea <code>-v</code> a utilitarului <code>gcc</code>, care va avea un rezultat asemănător cu:
+</p>
+<pre class="code">/usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so
+-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccwnf5NM.res
+-plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc
+-plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu
+--as-needed -dynamic-linker /lib/ld-linux.so.2 -z relro -o hello
+/usr/lib/gcc/x86_64-linux-gnu/7/../../../i386-linux-gnu/crt1.o
+/usr/lib/gcc/x86_64-linux-gnu/7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/32/crtbegin.o
+-L/usr/lib/gcc/x86_64-linux-gnu/7/32 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../i386-linux-gnu
+-L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib32 -L/lib/i386-linux-gnu -L/lib/../lib32 -L/usr/lib/i386-linux-gnu
+-L/usr/lib/../lib32 -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../i386-linux-gnu
+-L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. -L/lib/i386-linux-gnu -L/usr/lib/i386-linux-gnu hello.o -lgcc --push-state
+--as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state
+/usr/lib/gcc/x86_64-linux-gnu/7/32/crtend.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../i386-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-no-pie' '-m32' '-v' '-o' 'hello' '-mtune=generic' '-march=i686'
+</pre>
+
+<p>
+Utilitarul <code>collect2</code> este, de fapt, un wrapper peste utilitarul <code>ld</code>.
+Rezultatul rulării comeznii este unul complex.
+O invocare “manuală” a comenzii <code>ld</code> ar avea forma:
+</p>
+<pre class="code">ld -dynamic-linker /lib/ld-linux.so.2 -m elf_i386 -o app /usr/lib32/crt1.o /usr/lib32/crti.o app.o helpers.o -lc /usr/lib32/crtn.o
+</pre>
+
+<p>
+Argumentele comenzii de mai sus au semnificația:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>-dynamic-linker /lib/ld-linux.so.2</code>: precizează loaderul / linkerul dinamic folosit pentru încărcarea executabilului dinamic</div>
+</li>
+<li class="level1"><div class="li"> <code>-m elf_i386</code>: se linkează fișiere pentru arhitectura x86 (32 de biți, i386)</div>
+</li>
+<li class="level1"><div class="li"> <code>/usr/lib32/crt1.o</code>, <code>/usr/lib32/crti.o</code>, <code>/usr/lib32/crtn.o</code>: reprezintă biblioteca de runtime C (<code>crt</code> - <em>C runtime</em>) care oferă suportul necesar pentru a putea încărca executabilul</div>
+</li>
+<li class="level1"><div class="li"> <code>-lc</code>: se linkează biblioteca standard C (libc)</div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit7" id="inspectarea_fisierelor">Inspectarea fișierelor</h2>
+<div class="level2">
+
+<p>
+Pentru a urmări procesul de linking, folosim utilitare de analiză statică precum <code>nm</code>, <code>objdump</code>, <code>readelf</code>.
+</p>
+
+<p>
+Folosim utilitarul <code>nm</code> pentru a afișa simbolurile dintr-un fișier obiect sau un fișier executabil:
+</p>
+<pre class="code">$ nm hello.o
+00000000 T main
+         U puts
+
+$ nm hello
+0804a01c B __bss_start
+0804a01c b completed.7283
+0804a014 D __data_start
+0804a014 W data_start
+08048370 t deregister_tm_clones
+08048350 T _dl_relocate_static_pie
+080483f0 t __do_global_dtors_aux
+08049f10 t __do_global_dtors_aux_fini_array_entry
+0804a018 D __dso_handle
+08049f14 d _DYNAMIC
+0804a01c D _edata
+0804a020 B _end
+080484c4 T _fini
+080484d8 R _fp_hw
+08048420 t frame_dummy
+08049f0c t __frame_dummy_init_array_entry
+0804861c r __FRAME_END__
+0804a000 d _GLOBAL_OFFSET_TABLE_
+         w __gmon_start__
+080484f0 r __GNU_EH_FRAME_HDR
+080482a8 T _init
+08049f10 t __init_array_end
+08049f0c t __init_array_start
+080484dc R _IO_stdin_used
+080484c0 T __libc_csu_fini
+08048460 T __libc_csu_init
+         U __libc_start_main@@GLIBC_2.0
+08048426 T main
+         U puts@@GLIBC_2.0
+080483b0 t register_tm_clones
+08048310 T _start
+0804a01c D __TMC_END__
+08048360 T __x86.get_pc_thunk.bx
+</pre>
+
+<p>
+Comanda <code>nm</code> afișează trei coloane:
+</p>
+<ul>
+<li class="level1"><div class="li"> adresa simbolului</div>
+</li>
+<li class="level1"><div class="li"> secțiunea și tipul unde se găsește simbolul</div>
+</li>
+<li class="level1"><div class="li"> numele simbolului</div>
+</li>
+</ul>
+
+<p>
+Un simbol este numele unei variabile globale sau a unei funcții.
+Este folosit de linker pentru a face conexiunile între diferite module obiect.
+Simbolurile nu sunt necesare pentru executabile, de aceea executabilele pot fi stripped.
+</p>
+
+<p>
+Adresa simbolului este, de fapt, offsetul în cadrul unei secțiuni pentru fișierele obiect.
+Și este adresa efectivă pentru executabile.
+</p>
+
+<p>
+A doua coloana precizează secțiunea și tipul simbolului.
+Dacă este vorba de majusculă, atunci simbolul este exportat, este un simbol ce poate fi folosit de un alt modul.
+Dacă este vorba de literă mică, atunci simbolul nu este exportat, este propriu modulului obiect, nefolosibil în alte module.
+Astfel:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>d</code>: simbolul este în zona de date inițializate (<code>.data</code>), neexportat</div>
+</li>
+<li class="level1"><div class="li"> <code>D</code>: simbolul este în zona de date inițializate (<code>.data</code>), exportat</div>
+</li>
+<li class="level1"><div class="li"> <code>t</code>: simbolul este în zona de cod (<code>.text</code>), neexportat</div>
+</li>
+<li class="level1"><div class="li"> <code>T</code>: simbolul este în zona de cod (<code>.text</code>), exportat</div>
+</li>
+<li class="level1"><div class="li"> <code>r</code>: simbolul este în zona de date read-only (<code>.rodata</code>), neexportat</div>
+</li>
+<li class="level1"><div class="li"> <code>R</code>: simbolul este în zona de date read-only (<code>.rodata</code>), exportat</div>
+</li>
+<li class="level1"><div class="li"> <code>b</code>: simbolul este în zona de date neinițializate (<code>.bss</code>), neexportat</div>
+</li>
+<li class="level1"><div class="li"> <code>B</code>: simbolul este în zona de date neinițializate (<code>.bss</code>), exportat</div>
+</li>
+<li class="level1"><div class="li"> <code>U</code>: simbolul este nedefinit (este folosit în modulul curent, dar este definit în alt modul)</div>
+</li>
+</ul>
+
+<p>
+Alte informații se găsesc în pagina de manual a utilitarul <code>nm</code>.
+</p>
+
+<p>
+Cu ajutorul comenzii <code>objdump</code> dezasamblăm codul fișierelor obiect și a fișierelor executabile.
+Putem vedea, astfel, codul în limbaj de asamblare și funcționarea modulelor.
+</p>
+
+<p>
+Comanda <code>readelf</code> este folosită pentru inspectarea fișierelor obiect sau executabile.
+Cu ajutorul comenzii <code>readelf</code> putem să vedem headerul fișierelor.
+O informație importantă în headerul fișierelor executabile o reprezintă entry pointul, adresa primei instrucțiuni executate:
+</p>
+<pre class="code">$ readelf -h hello
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Intel 80386
+  Version:                           0x1
+  Entry point address:               0x8048310
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          8076 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         9
+  Size of section headers:           40 (bytes)
+  Number of section headers:         35
+  Section header string table index: 34
+</pre>
+
+<p>
+Cu ajutorul comenzii <code>readelf</code> putem vedea secțiunile unui executabil / fișier obiect:
+</p>
+<pre class="code">$ readelf -S hello
+There are 35 section headers, starting at offset 0x1f8c:
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        08048154 000154 000013 00   A  0   0  1
+  [ 2] .note.ABI-tag     NOTE            08048168 000168 000020 00   A  0   0  4
+  [ 3] .note.gnu.build-i NOTE            08048188 000188 000024 00   A  0   0  4
+[...]
+</pre>
+
+<p>
+Tot cu ajutorul comenzii <code>readelf</code> putem lista (<em>dump</em>) conținutul unei anumite secțiuni:
+</p>
+<pre class="code">$ readelf -x .rodata hello
+
+Hex dump of section '.rodata':
+  0x080484d8 03000000 01000200 48656c6c 6f2c2057 ........Hello, W
+  0x080484e8 6f726c64 2100                       orld!.
+</pre>
+
+<p>
+Majoritatea compilatoarelor oferă opțiunea de a genera și un fișier cu programul scris în limbaj de asamblare.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic"> În cazul compilatorului <code>gcc</code> este de ajuns să adăugați flag-ul <code>-S</code> și vă va genera un
+fișier <code>*.s</code> cu codul aferent. În arhiva de <code>TODO</code> aveți un exemplu de trecere a unui program
+foarte simplu <code>hello.c</code> prin cele patru faze. Îl puteți testa pe un sistem Unix/Linux și pe un sistem Windows cu suport de MinGW. 
+</div><p></p>
+<p></p>
+<pre class="code">$ make
+cc  -E -o hello.i hello.c
+cc -Wall -S -o hello.s hello.i
+cc  -c -o hello.o hello.s
+cc  -o hello hello.o
+
+$ ls
+Makefile  hello  hello.c  hello.i  hello.o  hello.s
+
+$ ./hello
+Hello, World!
+
+$ tail -10 hello.i
+
+
+# 5 "hello.c"
+int main(void)
+{
+ puts("Hello, World!");
+
+ return 0;
+}
+
+$ cat hello.s
+    .file   "hello.c"
+    .section    .rodata
+.LC0:
+    .string "Hello, World!"
+    .text
+    .globl  main
+    .type   main, @function
+main:
+.LFB0:
+    .cfi_startproc
+    pushq   %rbp
+    .cfi_def_cfa_offset 16
+    .cfi_offset 6, -16
+    movq    %rsp, %rbp
+    .cfi_def_cfa_register 6
+    movl    $.LC0, %edi
+    call    puts
+    movl    $0, %eax
+    popq    %rbp
+    .cfi_def_cfa 7, 8
+    ret
+    .cfi_endproc
+.LFE0:
+    .size   main, .-main
+    .ident  "GCC: (Debian 5.2.1-17) 5.2.1 20150911"
+    .section    .note.GNU-stack,"",@progbits
+
+$ file hello.o
+hello.o: ELF 64-bit LSB relocatable, x86-64, [...]
+
+$ file hello
+hello: ELF 64-bit LSB executable, x86-64, [...]
+
+$ objdump -d hello.o
+
+hello.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 &lt;main&gt;:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   bf 00 00 00 00          mov    $0x0,%edi
+   9:   e8 00 00 00 00          callq  e &lt;main+0xe&gt;
+   e:   b8 00 00 00 00          mov    $0x0,%eax
+  13:   5d                      pop    %rbp
+  14:   c3                      retq
+</pre>
+
+<p>
+Pentru a genera sintaxa intel pe 32 de biți, se pot folosi aceste opțiuni:
+</p>
+<pre class="code">cc -Wall -m32 -S -masm=intel  -o hello.s hello.i
+</pre>
+
+<p>
+Dacă programele scrise în limbaje de nivel înalt ajung să fie portate 
+ușor pentru procesoare diferite (arm, powerpc, x86, etc.), cele scrise 
+în limbaj de asamblare sunt implementări specifice unei anumite 
+arhitecturi. Limbaje de nivel înalt reprezintă o formă mai abstractă de 
+rezolvare a unei probleme, din punctul de vedere al unui procesor, motiv
+ pentru care și acestea trebuie traduse în limbaj de asamblare în cele 
+din urmă, pentru a se putea ajunge la un binar care poate fi rulat. Mai 
+multe detalii în laboratoarele următoare.
+</p>
+
+</div>
+
+<h2 class="sectionedit8" id="exercitii">Exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="notewarning"> În cadrul laboratoarelor vom folosi repository-ul de Git de IOCLA: <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>.
+Repository-ul este clonat pe desktopul mașinii virtuale.
+Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+Recomandarea
+ este să îl actualizați cât mai frecvent, înainte să începeți lucrul, 
+pentru a vă asigura că aveți versiunea cea mai recentă.
+Dacă doriți să descărcați repository-ul în altă locație, folosiți 
+comanda <code>git clone https://github.com/systems-cs-pub-ro/iocla ${target}</code>
+Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow">Git Immersion</a>. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Cele mai multe dintre exerciții se desfășoară pe o arhitectură x86 (32 de biți, i386).
+Pentru a putea compila / linka pe 32 de biți atunci când sistemul vostru este pe 64 de biți, aveți nevoie de pachete specifice.
+Pe o distribuție Debian / Ubuntu, instalați pachetele folosind comanda:
+<p></p>
+<pre class="code">sudo apt install gcc-multilib libc6-dev-i386
+</pre>
+
+<p>
+
+</p></div><p></p>
+<strong>Pentru exersarea informațiilor legate de linking, parcurgem mai multe exerciții.</strong>
+<strong>În cea mai mare parte, acestea sunt dedicate observării procesului de linking, cele marcate cu sufixul <code>-tut</code> sau <code>-obs</code>.</strong>
+<strong>Unele exerciții necesită modificări pentru a repara probleme legate de linking, cele marcate cu sufixul <code>-fix</code>, altele au drept scop exersarea unor noțiuni (cele marcate cu sufixul <code>-diy</code>) sau dezvoltarea / completarea unor fișiere (cele marcate cu sufixul <code>-dev</code>).</strong>
+<strong>Fiecare exercițiu se găsește într-un director indexat; cele mai multe fișiere cod sursă și fișiere <code>Makefile</code> sunt deja prezente.</strong>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit9" id="folosirea_variabilelor">00. Folosirea variabilelor</h3>
+<div class="level3">
+
+<p>
+Accesăm directorul <code>00-vars-obs/</code>.
+Vrem să urmărim folosirea variabilelor globale, exportate și neexportate.
+</p>
+
+<p>
+În fișierul <code>hidden.c</code> avem variabila statică (neexportată) <code>hidden_value</code>.
+Variabila este modificată și citită cu ajutorul unor funcții neexportate: <code>init()</code>, <code>get()</code>, <code>set()</code>.
+</p>
+
+<p>
+În fișierul <code>plain.c</code> avem variabila exportată <code>age</code>.
+Aceasta poate fi modificată și citită direct.
+</p>
+
+<p>
+Aceste variabile sunt folosite direct (<code>age</code>) sau indirect (<code>hidden_value</code>) în fișierul <code>main.c</code>.
+Pentru folosirea lor, se declară funcțiile și variabilele în fișierul <code>ops.h</code>.
+Declararea unei funcții se face prin precizarea antetului; declararea unei variabile se face prin prefixarea cu <code>extern</code>.
+</p>
+
+<p>
+<strong>Compilați și rulați programul obținut pe baza fișierelor de mai sus.</strong>
+</p>
+
+</div>
+
+<h3 class="sectionedit10" id="linkarea_unui_singur_fisier">01. Linkarea unui singur fișier</h3>
+<div class="level3">
+
+<p>
+Accesăm directorul <code>01-one-tut/</code>.
+Vrem să urmărim comenzile de linkare pentru un singur fișier cod sursă C.
+Fișierul sursă este <code>hello.c</code>.
+</p>
+
+<p>
+În cele trei subdirectoare, se găsesc fișierele de suport pentru următoarele scenarii:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>a-dynamic/</code>: crearea unui fișier executabil dinamic</div>
+</li>
+<li class="level1"><div class="li"> <code>b-static/</code>: crearea unui fișier executabil static</div>
+</li>
+<li class="level1"><div class="li"> <code>c-standalone/</code>: creare unui fișier executabil standalone, fără biblioteca standard C</div>
+</li>
+</ul>
+
+<p>
+<strong>În fiecare subdirector folosim comanda <code>make</code> pentru a compila fișierul executabil <code>hello</code>.</strong>
+<strong>Folosim comanda <code>file hello</code> pentru a urmări daca fișierul este compilat dinamic sau static.</strong>
+</p>
+
+<p>
+În fișierele <code>Makefile</code>, comanda de linkare folosește <code>gcc</code>.
+Este comentată o comandă echivalentă care folosește direct <code>ld</code>.
+<strong>Pentru a urmări folosirea directă a <code>ld</code>, putem comenta comanda <code>gcc</code> și decomenta comanda <code>ld</code>. Folosim iarăși comanda <code>file hello</code>.</strong>
+</p>
+
+<p>
+În cazul <code>c-standalone/</code>, pentru că nu folosim biblioteca standard C sau bibliotecă runtime C, trebuie să înlocuim funcționalitățile acestora.
+Funcționalitățile sunt înlocuite în fișierul <code>start.asm</code> și <code>puts.asm</code>.
+Aceste fișiere implementează, respectiv, funcția / simbolul <code>_start</code> și funcția <code>puts</code>.
+Funcția / simbolul <code>_start</code> este, în mod implicit, entry pointul unui program executabil.
+Funcția <code>_start</code> este responsabilă pentru apelul funcției <code>main</code> și încheierea programului.
+Pentru că nu există bibliotecă standard, aceste două fișiere sunt scrise în limbaj de asamblare și folosesc apeluri de sistem.
+</p>
+
+<p>
+<strong>Adăugați, în fișierul <code>Makefile</code> din directorul <code>c-standalone/</code>, o comandă care folosește explicit <code>ld</code> pentru linkare.</strong>
+</p>
+
+<p>
+<strong>Extra</strong>: Accesați directorul <code>01-one-diy/</code>.
+Vrem să compilăm și linkăm fișierele cod sursă din fiecare subdirector, 
+asemănător cu ceea ce am făcut anterior. Copiați fișierele <code>Makefile</code> și actualizați-le în fiecare subdirector pentru a obține fișierul executabil.
+</p>
+
+</div>
+
+<h3 class="sectionedit11" id="linkarea_mai_multor_fisiere">02. Linkarea mai multor fișiere</h3>
+<div class="level3">
+
+<p>
+Accesăm directorul <code>02-multiple-tut/</code>.
+Vrem să urmărim comenzile de linkare din fișiere multiple cod sursă C: <code>main.c</code>, <code>add.c</code>, <code>sub.c</code>.
+</p>
+
+<p>
+La fel ca în exercițiile de mai sus, sunt trei subdirectoare pentru trei scenarii diferite:
+</p>
+<ul>
+<li class="level1"><div class="li"> <code>a-no-header/</code>: declararea funcțiilor externe se face direct în fișierul sursă C (<code>main.c</code>)</div>
+</li>
+<li class="level1"><div class="li"> <code>b-header/</code>: declararea funcțiilor externe se face într-un fișier header separat (<code>ops.h</code>)</div>
+</li>
+<li class="level1"><div class="li"> <code>c-lib/</code>: declararea funcțiilor externe se face într-un fișier header separat, iar linkarea se face folosind o bibliotecă statică</div>
+</li>
+</ul>
+
+<p>
+În fiecare subdirector folosim comanda <code>make</code> pentru a compila fișierul executabil <code>main</code>.
+</p>
+
+<p>
+<strong>Extra</strong>: Accesați directorul <code>02-multiple-diy/</code>.
+Vrem să compilăm și linkăm fișierele cod sursă din fiecare subdirector, 
+asemănător cu ceea ce am făcut anterior. Copiați fișierele <code>Makefile</code> și actualizați-le în fiecare subdirector pentru a obține fișierul executabil.
+</p>
+
+</div>
+
+<h3 class="sectionedit12" id="repararea_entry_pointului">03. Repararea entry pointului</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>03-entry-fix/</code>.
+Vrem să urmărim probleme de definire a funcției <code>main()</code>.
+</p>
+
+<p>
+Accesați subdirectorul <code>a-c/</code>.
+Rulați comanda <code>make</code>, interpretați eroarea întâlnită și rezolvați-o prin editarea fișierului <code>hello.c</code>.
+</p>
+
+<p>
+Accesați subdirectorul <code>b-asm/</code>.
+Rulați comanda <code>make</code>, interpretați eroarea întâlnită și rezolvați-o prin editarea fișierului <code>hello.asm</code>.
+</p>
+
+<p>
+În subdirectoarele <code>c-extra-nolibc/</code> și <code>d-extra-libc/</code> veți găsi soluții care nu modifică codul sursă al <code>hello.c</code>.
+Aceste soluții modifică, în schimb, sistemul de build pentru a folosi altă funcție, diferită de <code>main()</code>, ca prima funcție a programului.
+</p>
+
+<p>
+<strong>Extra</strong>: Accesați directorul <code>03-entry-2-fix/</code>.
+Rulați comanda <code>make</code>, interpretați eroarea întâlnită și rezolvați-o prin editarea fișierului <code>hello.c</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit13" id="folosire_simboluri_variabile_si_functii">04. Folosire simboluri (variabile și funcții)</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>04-var-func-fix/</code>.
+Rulați comanda <code>make</code> și rulați executabilul obținut. 
+Interpretați erorile/eroarea întâlnite/întâlnită și 
+rezolvați-le/rezolvați-o prin editarea fișierelor sursă.
+</p>
+
+</div>
+
+<h3 class="sectionedit14" id="reparare_problema_cu_biblioteca">05. Reparare problemă cu bibliotecă</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>05-lib-fix/</code>.
+Rulați comanda <code>make</code>, interpretați eroarea întâlnită și rezolvați-o prin editarea fișierului <code>Makefile</code>.
+Urmăriți fișierul <code>Makefile</code> din directorul <code>02-multiple-tut/c-lib/</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit15" id="linkare_fisier_obiect_fara_fisier_cod_sursa">06. Linkare fișier obiect (fără fișier cod sursă)</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>06-obj-link-dev/</code>.
+Fișierul <code>shop.o</code> expune o interfață (funcții și variabile) care permite afișarea unor mesaje.
+Editați fișierul <code>main.c</code> pentru a apela corespunzător interfața expusă și pentru a afișa mesajele:
+</p>
+<pre class="code">price is 21
+quantity is 42
+</pre>
+
+<p>
+Explorați interfața și conținutul funcțiilor din fisierul <code>shop.o</code> folosind <code>nm</code> și <code>objdump</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit16" id="bonus_utilizare_cod_python_in_c">Bonus. Utilizare cod python în C</h3>
+<div class="level3">
+
+<p>
+</p><p></p><div class="noteclassic">
+În cadrul acestui exercițiu veți vedea un exemplu de ceea ce se poate 
+face în urma legării unui anumit tip de fișiere obiect, și anume 
+biblioteci; pentru acest exercițiu este vorba de biblioteca 
+<p></p>
+<pre class="code">python$(PYTHON_VERSION)</pre>
+
+<p>
+, unde <strong>PYTHON_VERSION</strong> poate să fie diferit în funcție 
+de soluția propusă de fiecare.
+Pentru a putea să compilați surse veți avea nevoie de versiunea de 
+dezvoltare pentru python; pentru instalare folosiți comanda de mai jos:
+</p>
+<pre class="code">sudo apt-get install python$(PYTHON_VERSION)-dev
+</pre>
+
+<p>
+Înlocuiți $(PYTHON_VERSION) cu versiunea pe care o doriți(<strong>3.8 sau mai recentă</strong>)
+
+</p></div><p></p>
+Accesați directorul <code>bonus-c-python</code>.
+Fișierul main.c are un exemplu de cum se execută o funcție simplă de 
+afișare a unui mesaj scrisă într-un modul python separat. Plecând de la 
+exemplul prezentat, creați o funcție în modulul numit <code>my_module.py</code> aflat în directorul <code>python-modules</code>, care primește doi parametri reprezentând două șiruri de caractere și întoarce <strong>poziția primei apariții a celui de-al doilea șir în cadrul primului</strong>, dacă al doilea șir este un subșir al primului șir și <strong>-1</strong> în caz contrar.
+<p></p>
+
+<pre>Dacă funcția creată este denumită <b>subsir</b> atunci <b>subsir('123456789', '89')</b> va întoarce 7 iar <b>subsir('123', '4')</b> va întoarce -1. Practic semnătura este de forma <b>subsir(haystack, needle)</b>.
+</pre>
+
+
+<p>
+Rezultatul funcției scrisă în python va fi preluat în codul C și se va afișa un mesaj corespunzător. Urmăriți comentariile cu <strong>TODO</strong> din fișierele <code>main.c</code> și <code>my_module.py</code>.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Puteți să urmăriți și exemplele de <a href="https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code" class="urlextern" title="https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code" rel="nofollow">aici</a> și/sau <a href="https://www.xmodulo.com/embed-python-code-in-c.html" class="urlextern" title="https://www.xmodulo.com/embed-python-code-in-c.html" rel="nofollow">aici</a> pentru a vedea cum să preluați rezultatul funcției scrisă în python. De asemenea puteți consulta documentația de <a href="https://docs.python.org/3/c-api/long.html" class="urlextern" title="https://docs.python.org/3/c-api/long.html" rel="nofollow">aici</a> pentru a vedea cum să faceți conversia rezultatului la un tip de date din C. 
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Atenție la versiunea de python pe care o folosiți; nu este recomandată o
+ anumită versiune însă trebuie să aveți în vedere că în funcție de 
+soluția voastră este posibil să fie nevoie să folosiți versiune 
+specifică. Makefile-ul folosește versiunea <strong>3.9</strong>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit17" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-03-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-03-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_104253799262b0bf9617aa5" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_181404106662b0bf961a981" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_03compilare">Laborator 03: Compilare</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#preprocesare">Preprocesare</a></div></li>
+<li class="level2"><div class="li"><a href="#compilare">Compilare</a></div></li>
+<li class="level2"><div class="li"><a href="#assemblyasamblare">Assembly / Asamblare</a></div></li>
+<li class="level2"><div class="li"><a href="#linkinglegare">Linking / Legare</a></div></li>
+<li class="level2"><div class="li"><a href="#invocarea_linker-ului">Invocarea linker-ului</a></div></li>
+<li class="level2"><div class="li"><a href="#inspectarea_fisierelor">Inspectarea fișierelor</a></div></li>
+<li class="level2"><div class="li"><a href="#exercitii">Exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#folosirea_variabilelor">00. Folosirea variabilelor</a></div></li>
+<li class="level3"><div class="li"><a href="#linkarea_unui_singur_fisier">01. Linkarea unui singur fișier</a></div></li>
+<li class="level3"><div class="li"><a href="#linkarea_mai_multor_fisiere">02. Linkarea mai multor fișiere</a></div></li>
+<li class="level3"><div class="li"><a href="#repararea_entry_pointului">03. Repararea entry pointului</a></div></li>
+<li class="level3"><div class="li"><a href="#folosire_simboluri_variabile_si_functii">04. Folosire simboluri (variabile și funcții)</a></div></li>
+<li class="level3"><div class="li"><a href="#reparare_problema_cu_biblioteca">05. Reparare problemă cu bibliotecă</a></div></li>
+<li class="level3"><div class="li"><a href="#linkare_fisier_obiect_fara_fisier_cod_sursa">06. Linkare fișier obiect (fără fișier cod sursă)</a></div></li>
+<li class="level3"><div class="li"><a href="#bonus_utilizare_cod_python_in_c">Bonus. Utilizare cod python în C</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-03.txt · Last modified: 2022/03/27 12:47 by darius.mihai          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2003%20Compilare%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

